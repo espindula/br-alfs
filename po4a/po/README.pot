@@ -1,0 +1,883 @@
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) YEAR Jamenson Ferreira Espindula de Almeida Melo
+# This file is distributed under the same license as the br-alfs package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: br-alfs 1.0\n"
+"Report-Msgid-Bugs-To: jafesp@gmail.com\n"
+"POT-Creation-Date: 2025-12-01 12:35-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: Bullet: '1. '
+#: upstream/README:2
+msgid "INTRODUCTION::"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:8
+#, no-wrap
+msgid ""
+"      The scripts in this directory implement an automation of the building\n"
+"   of a GNU/Linux system, as described in the Linux From Scratch book series.\n"
+"   The name of the project is jhalfs: in that name, \"alfs\" stands for\n"
+"   \"automated linux from scratch\", and the initials \"jh\" have been kept since\n"
+"   the original \"jhalfs-0.2\" code developed by Jeremy Huntwork.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:12
+#, no-wrap
+msgid ""
+"      The list of supported books can be found at\n"
+"   http://wiki.linuxfromscratch.org/alfs/wiki/SupportedBooks (maybe outdated,\n"
+"   current develoment books and latest version are always supported).\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:30
+#, no-wrap
+msgid ""
+"      The documentation is split among various README.* files. Here is a list\n"
+"   of what is in which:\n"
+"      - README (this file): instructions to use the LFS book. This should be\n"
+"        enough if you just want to build a base system as per the LFS book. It\n"
+"        is also a required reading for all the other projects.\n"
+"      - README.BLFS: instructions to install an automated build infrastructure\n"
+"        for the BLFS book. There are two ways to do so: (i) install the\n"
+"        tools at the end of an LFS build, or\n"
+"        (ii) install the tools on an already running system. Both methods are\n"
+"        described in that file.\n"
+"      - README.CUSTOM: instructions to run custom commands either during the LFS\n"
+"        build, or at the end of a LFS build. Note that you will not find\n"
+"        instructions on how to write those commands, but some examples are\n"
+"        available.\n"
+"      - README.PACKAGE_MANAGEMENT: instructions to use package management during\n"
+"        the build (Note: the only package manager that is regularly tested is\n"
+"        porg)\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:33
+#, no-wrap
+msgid ""
+"      Other sources of information are the context help in the menu interface,\n"
+"   and the LFS books themselves (both required readings of course!).\n"
+msgstr ""
+
+#. type: Bullet: '2. '
+#: upstream/README:35
+msgid "PREREQUISITES::"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:38
+#, no-wrap
+msgid ""
+"      It is strongly advised that you first build manually a complete system\n"
+"   before attempting to automate the build.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:41
+#, no-wrap
+msgid ""
+"      In addition to a good knowledge of UNIX (linux), the ability to read,\n"
+"   understand and modify shell scripts may be required at some point.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:44
+#, no-wrap
+msgid ""
+"      Since the XML book sources are used by this tool, and those are kept\n"
+"   in a git repository, a basic knowledge of git may help.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:50
+#, no-wrap
+msgid ""
+"      Of course the \"Host System Requirements\" should be fulfilled. Some\n"
+"   supplementary packages are needed for using jhalfs. They are detailed\n"
+"   at the bottom of the page:\n"
+"   https://www.linuxfromscratch.org/alfs/download.html. In short, you need\n"
+"   wget, sudo, libxml2, libxslt, docbook-4.5-xml, and docbook-xsl-nons.\n"
+msgstr ""
+
+#. type: Bullet: '3. '
+#: upstream/README:52
+msgid "INSTALLATION::"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:55
+#, no-wrap
+msgid ""
+"      No installation is required. You may want to move the files in this\n"
+"   directory to a convenient location, and then follow the instructions below.\n"
+msgstr ""
+
+#. type: Bullet: '4. '
+#: upstream/README:57
+msgid "CONFIGURATION::"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:62
+#, no-wrap
+msgid ""
+"   4.1. CONFIGURATION OF THE TOOLS:\n"
+"         There is no configuration of the tools themselves. The various\n"
+"      parameters for the build are set through a menu driven interface. See\n"
+"      the section RUNNING below for details.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:71
+#, no-wrap
+msgid ""
+"   4.2. PRELIMINARY TASKS:\n"
+"         This tool has no support at all for creating a partition and a mount\n"
+"      point for the built system. You should follow the book up to the section\n"
+"      \"Mounting the new partition\". Note that the default name for the\n"
+"      partition mount point is \"/mnt/build_dir\", instead of /mnt/lfs.\n"
+"      You can change that default to anything you'd like in the menu, so you\n"
+"      may name it /mnt/lfs if you prefer . We'll use the name /mnt/build_dir\n"
+"      in the sequel.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:80
+#, no-wrap
+msgid ""
+"         For downloading packages, you can use the tool or download them\n"
+"      yourself. Even if using the tool, it is recommended to set up a source\n"
+"      repository where you store already downloaded packages. The tool will\n"
+"      automatically search a package in this repository before downloading it\n"
+"      if it is not found there. This repository cannot be the same as\n"
+"      /mnt/build_dir/sources. As an example, we'll use /usr/src. You should\n"
+"      arrange for the user running the tool to have write access to this\n"
+"      directory.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:89
+#, no-wrap
+msgid ""
+"         If you want to build the kernel as part of the automated build,\n"
+"      a configuration file must be provided. In order to do so, it is\n"
+"      recommended to download the kernel tarball, unpack it, run\n"
+"      <make menuconfig> (or any other *config), configure the kernel as per\n"
+"      the book, and save the resulting .config file to a location where it can\n"
+"      be retrieved later on. It is suggested to put it into the source\n"
+"      repository, with a versioned name, e.g.\n"
+"      /usr/src/config-<arch>-<kernel version>-<config details>.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:95
+#, no-wrap
+msgid ""
+"         Another file you may provide is the fstab file. As for the kernel\n"
+"      configuration, this file has to be prepared before running the menu.\n"
+"      You can copy-paste the file from the \"Creating the /etc/fstab File\"\n"
+"      page, then edit to suit the future lfs system layout, then save the\n"
+"      file. A convenient location and name is /usr/src/fstablfs.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:101
+#, no-wrap
+msgid ""
+"         At a more advanced level, you may want to supply custom commands\n"
+"      to be run at the end of LFS build. Scripts containing those commands\n"
+"      are located in the ./custom/config directory. Examples are given in\n"
+"      ./custom/examples. A template is provided as ./custom/template. See\n"
+"      README.CUSTOM for more details.\n"
+msgstr ""
+
+#. type: Bullet: '5. '
+#: upstream/README:103
+msgid "RUNNING::"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:110
+#, no-wrap
+msgid ""
+"   IMPORTANT::\n"
+"         You must be logged as a normal user with sudo privileges to run\n"
+"      the Makefile. Furthermore, you are supposed to have enough privilege\n"
+"      to become any user. If you are not bothered about security issues,\n"
+"      the entry for the user running the tool in /etc/sudoers could be\n"
+"      <user> ALL=(ALL) NOPASSWD:ALL\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:113
+#, no-wrap
+msgid ""
+"      The command <make> will launch a menu based configuration program,\n"
+"   similar to the kernel \"menuconfig\" configuration tool.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:117
+#, no-wrap
+msgid ""
+"      Help on parameter function is available from the on-line help (type the\n"
+"   character `?' after highlighting the parameter). Please do use the help:\n"
+"   it may contain additional information not duplicated in this file.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:119
+#, no-wrap
+msgid "   MENU \"BOOK Settings\"\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:123
+#, no-wrap
+msgid ""
+"      Choose BOOK: You have two choices: \"Linux from scratch\" or\n"
+"      \"Beyond Kinux From Scratch (see help)\"\n"
+"         The BLFS part is described in README.BLFS\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:127
+#, no-wrap
+msgid ""
+"      Init system: You have two choices: \"LFS SysV\" or \"LFS systemd\" (or\n"
+"      same with BLFS if you have chosen it above)\n"
+"         Allows to choose between the two flavours of the books.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:133
+#, no-wrap
+msgid ""
+"      XML source of the Book: Two choices: \"retrieved from git repository\" or\n"
+"      \"Local Copy\"\n"
+"         The first choice is more flexible, since it will allow to choose any\n"
+"      point in git history. But the second one allows to make local changes\n"
+"      to the source.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:139
+#, no-wrap
+msgid ""
+"      Which point in git history? (if you have chosen to retrieve the book\n"
+"      sources from the git repository)\n"
+"         You can use any way of denote a commit known to the \"git\" program.\n"
+"      Most popular ones are \"trunk\" (for the development version) or the\n"
+"      version string of a stable version (such as \"12.1\").\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:143
+#, no-wrap
+msgid ""
+"      Location of local copy (mandatory) (if you have chosen the local\n"
+"      copy)\n"
+"         This is the absolute path to the local copy of the book sources.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:148
+#, no-wrap
+msgid ""
+"      Multilib: Four choices: Normal LFS, Multilib with i686 libraries,\n"
+"      multilib with x32 libraries, multilib with all libraries.\n"
+"         It is recommended to use \"Normal LFS\" unless you know what you\n"
+"      are doing\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:151
+#, no-wrap
+msgid ""
+"      Build method: two choices: chroot (as in book), boot\n"
+"         Presently, the \"boot\" method is not implemented, so keep the default.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:156
+#, no-wrap
+msgid ""
+"      Add blfs-tools support (see README.BLFS)\n"
+"         This will install the blfs tools onto the newly built system. It\n"
+"      is not the same thing as choosing the BLFS book in the menu, which\n"
+"      will install the blfs tools on the currently running system.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:158
+#, no-wrap
+msgid "      Add custom tools support (see README.CUSTOM)\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:160
+#, no-wrap
+msgid "   MENU \"General Settings\"\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:165
+#, no-wrap
+msgid ""
+"      Temporary user for chapters 4, 5, and 6 (should not exist):\n"
+"         the name of the user running the commands in those chapters. In the\n"
+"      book, it is named lfs, and this is the default. You can change it\n"
+"      to any non existing user.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:169
+#, no-wrap
+msgid ""
+"      Group of user for chapters 4, 5, and 6 (should not exist):\n"
+"         this is lfs in the book, but you can rename it to any non existing\n"
+"      group name.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:174
+#, no-wrap
+msgid ""
+"      Build Directory: the name of the root of the LFS system\n"
+"         This is the equivalent of the LFS variable in the book. Set it\n"
+"      to \"/mnt/lfs\" if you have followed the book for creating the LFS\n"
+"      partition and mount point.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:192
+#, no-wrap
+msgid ""
+"      Retrieve source files: Say y to have jhalfs download the packages\n"
+"         If you say no, you must download the packages yourself and put\n"
+"      them into the /mnt/build_dir/sources directory. Follow book's\n"
+"      chapter 3 instructions.\n"
+"         If you say yes, you'll be asked several other questions:\n"
+"         - Package Archive Directory: Repository of downloaded packages\n"
+"            This directory, which is on the host and should be writable\n"
+"         by the user running the tool, is for storing downloaded packages.\n"
+"            If you keep the default \"$SRC_ARCHIVE\", you can set this variable\n"
+"         to the absolute path of the repository and export it. Or if the\n"
+"         variable is not set, jhalfs downloads the sources directly to\n"
+"         /mnt/build_dir/sources.\n"
+"            Instead of using the SRC_ARCHIVE envar, you can also enter the\n"
+"         path of the repository directory into this field.\n"
+"         - Retry on 'connection refused' failure: self explanatory\n"
+"         - Number of retry attempts on download failures: self explanatory\n"
+"         - Download timeout (in seconds): self explanatory\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:199
+#, no-wrap
+msgid ""
+"      Run the makefile: start the build immediately after running the tool\n"
+"         This is not the preferred method: it is recommended to rather\n"
+"      run \"make -C /mnt/build_dir/jhalfs\" after the tool has finished\n"
+"      setting up the build. But this may be handy if you are sure everything\n"
+"      is well, and want to leave the tool and the build run without\n"
+"      supervision.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:206
+#, no-wrap
+msgid ""
+"      Rebuild files: clean up the /mnt/build_dir directory\n"
+"         Say n if you want to rerun the tool (to update generated scripts\n"
+"      for example) without removing what has already been done. Otherwise,\n"
+"      say y. Note that there are some guards against removing a directory\n"
+"      containing useful things, but double check that the /mnt/build_dir\n"
+"      directory is really what you want to erase.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:208
+#, no-wrap
+msgid "   MENU \"Build Settings\"\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:235
+#, no-wrap
+msgid ""
+"      MENU Parallelism settings\n"
+"       - Use all cores:\n"
+"            If you say y, MAKEFLAGS will be set to \"-j$(nproc)\" at the\n"
+"         beginning of each script. Other envars are supposed to be passed\n"
+"         from the environment, as done in new books. Note that for old books,\n"
+"         this means the scripts using make or ninja will be run with all\n"
+"         cores, but not when this needs to set special envars like\n"
+"         TESTSUITEFLAGS. You can still define the number of cores used\n"
+"         in next field.\n"
+"            If you say n, you'll be asked for a static number of threads\n"
+"         to use.\n"
+"       - set of cpus to use, or 'all' for all cpus (only if using all cores):\n"
+"            You can define here the cores you want to use. See help for\n"
+"         details. This is the preferred way of reducing the number of cores\n"
+"         rather than using a static thread number.\n"
+"       - Number of parallel `make' jobs (only if not using all cores):\n"
+"            Every occurrence of $(nproc) in new books will be replaced with\n"
+"         the number entered here. Also MAKEFLAGS will be set to \"-jN\" (where\n"
+"         N is the number entered) at the beginning of each scripts. Furthermore\n"
+"         NINJAJOBS will be set to N in the environment. This allows to run all\n"
+"         books with N threads, except for paarts that need other envars to be\n"
+"         set\n"
+"       - Build Binutils pass1 without parallelism (Real SBU)\n"
+"            The standard SBU is defined as the time to run the binutils-pass1\n"
+"         build with only one thread. Saying y here allows to get a value for\n"
+"         it. If you say n, the value is not meaningful for SBU measurements.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:239
+#, no-wrap
+msgid ""
+"      Run testsuites: say y to run the test suites\n"
+"         You'll have the choice between running all the test suites, or only\n"
+"      those deemed critical (binutils, gmp, mpfr, mpc, and gcc).\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:241
+#, no-wrap
+msgid "      Package management: see README.PACKAGE_MANAGEMENT\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:243
+#, no-wrap
+msgid "      Create a log of installed files for each package: self explanatory\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:246
+#, no-wrap
+msgid ""
+"      Strip Installed Binaries/Libraries: use the book instructions for\n"
+"      stripping\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:248
+#, no-wrap
+msgid "      DO NOT use/display progress_bar (self explanatory)\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:250
+#, no-wrap
+msgid "   MENU System configuration\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:254
+#, no-wrap
+msgid ""
+"      Use a custom fstab file:\n"
+"         If you say y, you'll have to provide a file containing the fstab\n"
+"      for the LFS system. See above \"preliminary tasks\".\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:258
+#, no-wrap
+msgid ""
+"      Build the kernel:\n"
+"         If you say y, you'll be asked for a file containing the kernel\n"
+"      configuration. See above \"preliminary tasks\".\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:262
+#, no-wrap
+msgid ""
+"      Install non-wide-character ncurses (rarely used nowadays):\n"
+"         If you say y, the system will use instructions in the note on the\n"
+"      ncurses page to install those libraries.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:264
+#, no-wrap
+msgid "      TimeZone: set to the result of \"tzselect\"\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:267
+#, no-wrap
+msgid ""
+"      Language: set to the result of the instructions on \"The Bash Shell\n"
+"      Startup Files\" page.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:270
+#, no-wrap
+msgid ""
+"      Install the full set of locales: installs all the locales known to\n"
+"      glibc.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:272
+#, no-wrap
+msgid "      Groff page size: choice between \"A4\" and \"Letter\".\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:274
+#, no-wrap
+msgid "      Hostname: self explanatory\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:277
+#, no-wrap
+msgid ""
+"      Network configuration: various fields for setting network. Look at\n"
+"      chapter 9 for background.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:280
+#, no-wrap
+msgid ""
+"      Console configuration: various fields for setting console, as described\n"
+"      in chapter 9.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:282
+#, no-wrap
+msgid "   MENU Advanced features:\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:287
+#, no-wrap
+msgid ""
+"      Optimization: Optimization settings are done by editing files in the\n"
+"      \"optimize\" directory. The menu just allows you to choose between applying\n"
+"      optimizations only to the final chapter or to all the book. Say n for\n"
+"      a normal build\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:289
+#, no-wrap
+msgid "      Create SBU and disk usage report: self explanatory\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:291
+#, no-wrap
+msgid "      Save temporary system work: self explanatory (see help)\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:295
+#, no-wrap
+msgid ""
+"      Run comparison analysis on final stage: build the system several times\n"
+"      using the preceding one, to test whether it is able to rebuild itself\n"
+"      identically. Don't use normally...\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:297
+#, no-wrap
+msgid "      Internal Settings (WARNING: for jhalfs developers only): says it all\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:312
+#, no-wrap
+msgid ""
+"     Once you have set the parameters and saved the configuration, the script\n"
+"  is launched. Its aim is to extract instructions from the selected book\n"
+"  to generate scripts, and to generate a Makefile, which allows running\n"
+"  the scripts in the right order. The script verifies first that the host\n"
+"  can run itself and build the xLFS system, then validates the configuration\n"
+"  and lists the parameters. At this point, you may choose to quit or to\n"
+"  continue with the listed parameters. The script will then proceed to\n"
+"  generate the Makefile and the build scripts, optionally download\n"
+"  packages, and eventually verify the host prerequisite. If you have\n"
+"  selected \"Run the makefile\", the command <make> is launched in the\n"
+"  adequate directory, and the build begins. If not, you'll have to run\n"
+"  \"make\" manually, for example: \"make -C /mnt/build_dir/jhalfs\", if you\n"
+"  have used the default parameters (see the layout under $BUILDDIR in the\n"
+"  Q&A below).\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:316
+#, no-wrap
+msgid ""
+"  NOTE::\n"
+"      If you run the jhalfs script directly the only function you can select\n"
+"      is to display the version number by running <./jhalfs -v>\n"
+msgstr ""
+
+#. type: Bullet: '6. '
+#: upstream/README:318
+msgid "LAYOUT::"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:320
+#, no-wrap
+msgid "        /BLFS/* (see README.BLFS)\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:323
+#, no-wrap
+msgid ""
+"        /LFS/master.sh\n"
+"            /lfs.xsl\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:334
+#, no-wrap
+msgid ""
+"        /common/chroot.xsl\n"
+"               /common_functions\n"
+"               /create-sbu_du-report.sh\n"
+"               /hostreqs.xsl\n"
+"               /kernfs.xsl\n"
+"               /makefile_functions\n"
+"               /packages.xsl\n"
+"               /progress_bar.sh\n"
+"               /urls.xsl\n"
+"               /libs/func_*\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:339
+#, no-wrap
+msgid ""
+"        /custom/examples/*\n"
+"               /config/* (needs to be created after cloning since it is an\n"
+"                          empty directory initially)\n"
+"               /template\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:343
+#, no-wrap
+msgid ""
+"        /extras/do_copy_files\n"
+"               /do_ica_prep\n"
+"               /do_ica_work\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:345
+#, no-wrap
+msgid "        /menu/*\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:355
+#, no-wrap
+msgid ""
+"        /optimize/opt_config\n"
+"                 /opt_override\n"
+"                 /optimize_functions\n"
+"                 /opt_config.d/noOpt\n"
+"                              /noSymbols\n"
+"                              /O2pipe\n"
+"                              /O3pipe\n"
+"                              /O3pipe_march\n"
+"                              /defOpt_fPIC\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:364
+#, no-wrap
+msgid ""
+"        /pkgmngt/packageManager.xml.dpkg\n"
+"                /packageManager.xml.pacman\n"
+"                /packageManager.xml.porg\n"
+"                /packageManager.xml.template\n"
+"                /packInstall.sh.dpkg\n"
+"                /packInstall.sh.pacman\n"
+"                /packInstall.sh.porg\n"
+"                /packInstall.sh.template\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:373
+#, no-wrap
+msgid ""
+"        CHEATSHEET\n"
+"        FUNCTION_LIST\n"
+"        LICENSE\n"
+"        README\n"
+"        README.BLFS\n"
+"        README.CUSTOM\n"
+"        README.PACKAGE_MANAGEMENT\n"
+"        TODO\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:377
+#, no-wrap
+msgid ""
+"        Config.in\n"
+"        jhalfs\n"
+"        Makefile\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:388
+#, no-wrap
+msgid ""
+"7. FAQ::\n"
+"    Q. \"It doesn't work\"\n"
+"    A. There are several reasons why it may be so. One possibility is the\n"
+"       following: jhalfs was designed to work against the development versions\n"
+"       of the LFS series of books. Consequently changes in a book sometimes\n"
+"       break older versions of jhalfs. Before you start pulling out your hair,\n"
+"       download the latest version of jhalfs to see if that solves your\n"
+"       problem. Note that it may be the other way around. If you want to build\n"
+"       an old version of the book, you may have to downgrade your jhalfs\n"
+"       version.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:394
+#, no-wrap
+msgid ""
+"    Q. \"How do I specify the build location?\"\n"
+"    A. The original LFS document worked against the well known location\n"
+"       /mnt/lfs. This script automates the build of all of the LFS series of\n"
+"       books and uses a generic location $BUILDDIR with a default value of\n"
+"       /mnt/build_dir. You may change this value to suit your needs.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:404
+#, no-wrap
+msgid ""
+"       The layout below $BUILDDIR is as follows.\n"
+"       $BUILDDIR/\n"
+"            jhalfs      (Makefile, cmd scripts, logs, etc..)\n"
+"            sources     (where packages reside)\n"
+"            tools       (temporary cross compiler)\n"
+"                ...\n"
+"            FHS dir structure\n"
+"                ...\n"
+"            blfs_root   (files to use blfs-tool if selected to install it)\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:413
+#, no-wrap
+msgid ""
+"    Q. \"What is the function of the SRC_ARCHIVE variable?\"\n"
+"    A. When jhalfs runs and packages download was selected, it creates a local\n"
+"       copy of the necessary packages in $BUILDDIR/sources by downloading the\n"
+"       files. If the variable SRC_ARCHIVE is defined the software will first\n"
+"       look in this location for the file and, if found, will copy it to\n"
+"       $BUILDDIR/sources.\n"
+"       If the files are not found in SRC_ARCHIVE _and_ you have write priv to\n"
+"       the directory any downloaded files will be mirrored there.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:416
+#, no-wrap
+msgid ""
+"    Q. \"How do I set the SRC_ARCHIVE location?\"\n"
+"    A. The best way to set the value of SRC_ARCHIVE is\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:418
+#, no-wrap
+msgid "       export SRC_ARCHIVE=/wherever/you/store/downloaded/packages\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:420
+#, no-wrap
+msgid "       or you can set the full path in the proper menu entry.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:426
+#, no-wrap
+msgid ""
+"    Q. \"Why have 2 copies of the files?\"\n"
+"    A. The package files must be visible during the chroot phase and this is a\n"
+"       simple and reliable method of doing so. This method also handles the\n"
+"       boot build method where the final build may be done on a separate\n"
+"       machine.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:430
+#, no-wrap
+msgid ""
+"    Q. \"How could I stop the build at a predefined chosen point?\"\n"
+"    A. Launch the Makefile manually passing the last numbered target to be build\n"
+"       as the break point. For example:\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:432
+#, no-wrap
+msgid "          make BREAKPOINT=84-bash\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:435
+#, no-wrap
+msgid ""
+"       The build can be stopped also at the end of a top-level build phase by\n"
+"       calling directly the appropriate mk_* target. For example:\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:437
+#, no-wrap
+msgid "          make mk_LUSER\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:439
+#, no-wrap
+msgid "       See the Makefile to know the proper target names for that book build.\n"
+msgstr ""
+
+#. type: Plain text
+#: upstream/README:443
+#, no-wrap
+msgid ""
+"Authors:\n"
+"  George Boudreau\n"
+"  Manuel Canales Esparcia\n"
+"  Pierre Labastie\n"
+msgstr ""
