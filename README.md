@@ -23,7 +23,7 @@ Espindula de Almeida Melo (<jafesp@gmail.com>).
   Commons Corporation como sendo "Obras Derivadas" dos respectivos 
   originais escritos no idioma inglês do mencionado projeto e estão 
   licenciados sob os termos da Licença da Creative Commons - Atribuição 
-  - Uso não-Comercial - Compartilhamento pela mesma licença 2.0 Brasil 
+  \- Uso não-Comercial - Compartilhamento pela mesma licença 2.0 Brasil 
   (CC-BY-NC-SA 2.0 BR). O texto da Licença pode ser acessado no endereço 
   eletrônico 
   <https://creativecommons.org/licenses/by-nc-sa/2.0/br/legalcode>.
