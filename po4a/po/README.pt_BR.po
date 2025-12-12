@@ -452,6 +452,10 @@ msgid ""
 "      copy)\n"
 "         This is the absolute path to the local copy of the book sources.\n"
 msgstr ""
+"      Local da cópia local (obrigatório) (caso você tenha escolhido a\n"
+"      cópia local).\n"
+"         Esse é o caminho absoluto para a cópia local dos fontes do\n"
+"         livro.\n"
 
 #. type: Plain text
 #: upstream/README:148
@@ -462,6 +466,11 @@ msgid ""
 "         It is recommended to use \"Normal LFS\" unless you know what you\n"
 "      are doing\n"
 msgstr ""
+"      Multilib: Quatro escolhas: LFS normal, Multilib com bibliotecas\n"
+"      i686, multilib com bibliotecas x32, multilib com todas as\n"
+"      bibliotecas.\n"
+"         É recomendado usar \"LFS normal\", a menos que você saiba o\n"
+"         que está fazendo.\n"
 
 #. type: Plain text
 #: upstream/README:151
@@ -471,6 +480,9 @@ msgid ""
 "         Presently, the \"boot\" method is not implemented, so keep the "
 "default.\n"
 msgstr ""
+"      Método de construção: duas escolhas: chroot (como no livro), boot.\n"
+"         Atualmente o método \"boot\" não está implementado, então\n"
+"         mantenha o padrão.\n"
 
 #. type: Plain text
 #: upstream/README:156
@@ -481,6 +493,10 @@ msgid ""
 "      is not the same thing as choosing the BLFS book in the menu, which\n"
 "      will install the blfs tools on the currently running system.\n"
 msgstr ""
+"      Adicionar suporte a blfs-tools (veja-se README.BLFS).\n"
+"         Isso instalará as ferramentas blfs no sistema recém-construído.\n"
+"         Não é a mesma coisa que escolher o livro BLFS no menu, o que\n"
+"         instalará as ferramentas blfs no sistema atualmente executando.\n"
 
 #. type: Plain text
 #: upstream/README:158
