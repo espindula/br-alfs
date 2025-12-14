@@ -503,12 +503,14 @@ msgstr ""
 #, no-wrap
 msgid "      Add custom tools support (see README.CUSTOM)\n"
 msgstr ""
+"     Adicionar suporte a ferramentas personalizadas (veja-se\n"
+"            LEIAME.PERSONALIZAÇÃO)\n"
 
 #. type: Plain text
 #: upstream/README:160
 #, no-wrap
 msgid "   MENU \"General Settings\"\n"
-msgstr ""
+msgstr "  MENU \"Configurações Gerais\"\n"
 
 #. type: Plain text
 #: upstream/README:165
@@ -520,6 +522,10 @@ msgid ""
 "      book, it is named lfs, and this is the default. You can change it\n"
 "      to any non existing user.\n"
 msgstr ""
+"      Usuário(a) temporário(a) para os capítulos 4, 5 e 6 (não deveria\n"
+"      existir): o nome do(a) usuário(a) que executa os comandos naqueles\n"
+"      capítulos. No livro, é nomeado de lfs e esse é o padrão. Você\n"
+"      consegue mudá-lo(a) para qualquer usuário(a) não existente.\n"
 
 #. type: Plain text
 #: upstream/README:169
