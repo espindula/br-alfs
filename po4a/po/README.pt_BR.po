@@ -614,6 +614,13 @@ msgid ""
 "      is well, and want to leave the tool and the build run without\n"
 "      supervision.\n"
 msgstr ""
+"      Execute o makefile: inicie a construção imediatamente depois de\n"
+"      executar a ferramenta. Esse não é o método preferido: é\n"
+"      recomendado executar \"make -C /mnt/build_dir/jhalfs\" depois que\n"
+"      a ferramenta tiver terminado de configurar a construção. Mas isso\n"
+"      possivelmente seja útil se você tiver certeza de que tudo está bem\n"
+"      e quiser deixar a ferramenta e a construção executar sem "
+"supervisão.\n"
 
 #. type: Plain text
 #: upstream/README:206
