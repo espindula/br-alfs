@@ -37,205 +37,209 @@
 
 2. PRÉ-REQUISITOS::
 
-      It is strongly advised that you first build manually a complete system
-   before attempting to automate the build.
+      É fortemente aconselhado que você primeiro construa manualmente
+   um sistema completo antes de tentar automatizar a construção.
 
-      In addition to a good knowledge of UNIX (linux), the ability to read,
-   understand and modify shell scripts may be required at some point.
+      Além de um bom conhecimento de UNIX (Linux), a capacidade de
+   ler, entender e modificar conjuntos de comandos sequenciais de shell
+   possivelmente seja exigida em algum ponto.
 
-      Since the XML book sources are used by this tool, and those are kept
-   in a git repository, a basic knowledge of git may help.
+      Como os fontes XML do livro são usados por esta ferramenta e eles
+   são mantidos em um repositório git, um conhecimento básico de git
+   possivelmente ajude.
 
-      Of course the "Host System Requirements" should be fulfilled. Some
-   supplementary packages are needed for using jhalfs. They are detailed
-   at the bottom of the page:
-   https://www.linuxfromscratch.org/alfs/download.html. In short, you need
-   wget, sudo, libxml2, libxslt, docbook-4.5-xml, and docbook-xsl-nons.
+      Certamente que os “Requisitos do Sistema Anfitrião” deveriam ser
+   atendidos. Alguns pacotes suplementares são necessários para se usar
+   o jhalfs. Eles estão detalhados na parte inferior da página:
+   https://www.linuxfromscratch.org/alfs/download.html. Em resumo, você
+   precisa do wget, sudo, libxml2, libxslt, docbook-4.5-xml e
+   docbook-xsl-nons.
 
 3. INSTALAÇÃO::
 
-      No installation is required. You may want to move the files in this
-   directory to a convenient location, and then follow the instructions below.
+      Nenhuma instalação é exigida. Você pode querer mover os arquivos
+   neste diretório para um local conveniente e então seguir as instruções
+   abaixo.
 
 4. CONFIGURAÇÃO::
 
-   4.1. CONFIGURATION OF THE TOOLS:
-         There is no configuration of the tools themselves. The various
-      parameters for the build are set through a menu driven interface. See
-      the section RUNNING below for details.
+   4.1. CONFIGURAÇÃO DAS FERRAMENTAS:
+         Não existe configuração das ferramentas em si. Os vários
+      parâmetros para a construção são configurados por meio de uma
+      interface controlada por menu. Veja-se a seção EXECUTANDO abaixo
+      para detalhes.
 
-   4.2. PRELIMINARY TASKS:
-         This tool has no support at all for creating a partition and a mount
-      point for the built system. You should follow the book up to the section
-      "Mounting the new partition". Note that the default name for the
-      partition mount point is "/mnt/build_dir", instead of /mnt/lfs.
-      You can change that default to anything you'd like in the menu, so you
-      may name it /mnt/lfs if you prefer . We'll use the name /mnt/build_dir
-      in the sequel.
+   4.2. TAREFAS PRELIMINARES:
+         Esta ferramenta não tem suporte algum para criar uma partição
+      e um ponto de montagem para o sistema construído. Você deveria
+      seguir o livro até a seção "Montando a nova partição". Observe
+      que o nome padrão para o ponto de montagem da partição é
+      "/mnt/build_dir", em vez de /mnt/lfs. Você pode mudar esse padrão
+      para qualquer coisa que gostar no menu, de forma que você pode
+      nomeá-lo /mnt/lfs se preferir. Nós usaremos o nome /mnt/build_dir
+      na sequência.
 
-         For downloading packages, you can use the tool or download them
-      yourself. Even if using the tool, it is recommended to set up a source
-      repository where you store already downloaded packages. The tool will
-      automatically search a package in this repository before downloading it
-      if it is not found there. This repository cannot be the same as
-      /mnt/build_dir/sources. As an example, we'll use /usr/src. You should
-      arrange for the user running the tool to have write access to this
-      directory.
+         Para baixar pacotes, você pode usar a ferramenta ou baixá-los
+      você mesmo(a). Mesmo se usar a ferramenta, é recomendado configurar
+      um repositório fonte onde você armazene os pacotes já baixados. A
+      ferramenta procurará automaticamente um pacote nesse repositório
+      antes de baixá-lo, se ele não for encontrado lá. Esse repositório
+      não pode ser o mesmo que /mnt/build_dir/sources. Como um exemplo,
+      nós usaremos /usr/src. Você deveria providenciar para que o(a)
+      usuário(a) que executa a ferramenta tenha acesso de escrita a esse
+      diretório.
 
-         If you want to build the kernel as part of the automated build,
-      a configuration file must be provided. In order to do so, it is
-      recommended to download the kernel tarball, unpack it, run
-      <make menuconfig> (or any other *config), configure the kernel as per
-      the book, and save the resulting .config file to a location where it can
-      be retrieved later on. It is suggested to put it into the source
-      repository, with a versioned name, e.g.
-      /usr/src/config-<arch>-<kernel version>-<config details>.
+         Se você quiser construir o núcleo como parte da construção
+      automatizada, um arquivo de configuração precisará ser fornecido. 
+      Para a finalidade de fazer isso, é recomendado baixar o tarball do
+      núcleo, desempacotá-lo, executar <make menuconfig> (ou qualquer
+      outro *config), configurar o núcleo conforme o livro e salvar o
+      arquivo .config resultante em um local onde ele possa ser
+      recuperado posteriormente. É sugerido colocá-lo no repositório do
+      fonte, com um nome versionado, por exemplo, 
+      /usr/src/config-<arch>-<versão do núcleo>-<detalhes da configuração>.
 
-         Another file you may provide is the fstab file. As for the kernel
-      configuration, this file has to be prepared before running the menu.
-      You can copy-paste the file from the "Creating the /etc/fstab File"
-      page, then edit to suit the future lfs system layout, then save the
-      file. A convenient location and name is /usr/src/fstablfs.
+         Outro arquivo que você pode fornecer é o arquivo fstab. Quanto
+      à configuração do núcleo, esse arquivo tem de estar preparado antes
+      de se executar o menu. Você pode copiar e colar o arquivo a partir
+      da página "Criando o Arquivo /etc/fstab", então editar para se
+      adequar ao futuro esquema do sistema lfs, então salvar o arquivo. 
+      Um local e um nome convenientes são /usr/src/fstablfs.
 
-         At a more advanced level, you may want to supply custom commands
-      to be run at the end of LFS build. Scripts containing those commands
-      are located in the ./custom/config directory. Examples are given in
-      ./custom/examples. A template is provided as ./custom/template. See
-      README.CUSTOM for more details.
+          Em um nível mais avançado, você possivelmente queira fornecer
+      comandos personalizados para serem executados no final da construção
+      do LFS. Conjuntos de comandos sequenciais contendo esses comandos
+      estão localizados no diretório ./custom/config. Exemplos são
+      fornecidos em ./custom/examples. Um modelo é fornecido como
+      ./custom/template. Veja-se LEIAME.PERSONALIZAÇÃO para mais
+      detalhes.
 
 5. EXECUTANDO::
 
-   IMPORTANT::
-         You must be logged as a normal user with sudo privileges to run
-      the Makefile. Furthermore, you are supposed to have enough privilege
-      to become any user. If you are not bothered about security issues,
-      the entry for the user running the tool in /etc/sudoers could be
-      <user> ALL=(ALL) NOPASSWD:ALL
+   IMPORTANTE::
+         Você precisa estar logado(a) como um(a) usuário(a) normal com
+      privilégios de sudo para executar o Makefile. Além disso, presume-se
+      que você tenha privilégios suficientes para se tornar qualquer
+      usuário(a). Se você não estiver preocupado(a) com problemas de
+      segurança, a entrada para o(a) usuário(a) que executa a ferramenta
+      em /etc/sudoers poderia ser <user> ALL=(ALL) NOPASSWD:ALL
 
-      The command <make> will launch a menu based configuration program,
-   similar to the kernel "menuconfig" configuration tool.
+      O comando <make> iniciará um programa de configuração baseado em
+   menu, semelhante à ferramenta de configuração "menuconfig" do núcleo.
 
-      Help on parameter function is available from the on-line help (type the
-   character `?' after highlighting the parameter). Please do use the help:
-   it may contain additional information not duplicated in this file.
+      A ajuda sobre a função de parâmetro está disponível na ajuda
+   on-line (digite o caracter `?' após destacar o parâmetro). Por favor,
+   use a ajuda: ela pode conter informações adicionais não duplicadas
+   neste arquivo.
 
-   MENU "BOOK Settings"
+    MENU "Configurações do LIVRO"
 
-      Choose BOOK: You have two choices: "Linux from scratch" or
-      "Beyond Kinux From Scratch (see help)"
-         The BLFS part is described in README.BLFS
+      Escolha LIVRO: Você tem duas escolhas: "Linux From Scratch" ou
+      "Beyond Linux From Scratch (veja-se ajuda)"
+         A parte do BLFS está descrita no LEIAME.BLFS
 
-      Init system: You have two choices: "LFS SysV" or "LFS systemd" (or
-      same with BLFS if you have chosen it above)
-         Allows to choose between the two flavours of the books.
+      Sistema de iniciação: Você tem duas escolhas: "LFS SysV" ou
+      "LFS systemd" (ou o mesmo com BLFS, se você o tiver escolhido
+      acima)
+         Permite escolher entre os dois sabores dos livros.
 
-      XML source of the Book: Two choices: "retrieved from git repository" or
-      "Local Copy"
-         The first choice is more flexible, since it will allow to choose any
-      point in git history. But the second one allows to make local changes
-      to the source.
+      Fonte XML do livro: Duas escolhas: "recuperado a partir do
+      repositório git" ou "Cópia Local"
+         A primeira escolha é mais flexível, pois ela permitirá
+         escolher-se algum ponto no histórico do git. Porém, a segunda
+         permite fazer-se mudanças locais para o fonte.
 
-      Which point in git history? (if you have chosen to retrieve the book
-      sources from the git repository)
-         You can use any way of denote a commit known to the "git" program.
-      Most popular ones are "trunk" (for the development version) or the
-      version string of a stable version (such as "12.1").
+      Qual ponto no histórico do git? (se você tiver escolhido recuperar
+      os fontes do livro a partir do repositório git)
+         Você consegue usar qualquer meio de denotar uma submissão
+         conhecida pelo programa "git".
+      As mais populares são "trunk" (para a versão de desenvolvimento)
+      ou a sequência de caracteres da versão de uma versão estável
+      (como "12.1").
 
-      Location of local copy (mandatory) (if you have chosen the local
-      copy)
-         This is the absolute path to the local copy of the book sources.
+      Local da cópia local (obrigatório) (caso você tenha escolhido a
+      cópia local).
+         Esse é o caminho absoluto para a cópia local dos fontes do
+         livro.
 
-      Multilib: Four choices: Normal LFS, Multilib with i686 libraries,
-      multilib with x32 libraries, multilib with all libraries.
-         It is recommended to use "Normal LFS" unless you know what you
-      are doing
+      Multilib: Quatro escolhas: LFS normal, Multilib com bibliotecas
+      i686, multilib com bibliotecas x32, multilib com todas as
+      bibliotecas.
+         É recomendado usar "LFS normal", a menos que você saiba o
+         que está fazendo.
 
-      Build method: two choices: chroot (as in book), boot
-         Presently, the "boot" method is not implemented, so keep the default.
+      Método de construção: duas escolhas: chroot (como no livro), boot.
+         Atualmente o método "boot" não está implementado, então
+         mantenha o padrão.
 
-      Add blfs-tools support (see README.BLFS)
-         This will install the blfs tools onto the newly built system. It
-      is not the same thing as choosing the BLFS book in the menu, which
-      will install the blfs tools on the currently running system.
+      Adicionar suporte a blfs-tools (veja-se README.BLFS).
+         Isso instalará as ferramentas blfs no sistema recém-construído.
+         Não é a mesma coisa que escolher o livro BLFS no menu, o que
+         instalará as ferramentas blfs no sistema atualmente executando.
 
-      Add custom tools support (see README.CUSTOM)
+     Adicionar suporte a ferramentas personalizadas (veja-se
+            LEIAME.PERSONALIZAÇÃO)
 
-   MENU "General Settings"
+  MENU "Configurações Gerais"
 
-      Temporary user for chapters 4, 5, and 6 (should not exist):
-         the name of the user running the commands in those chapters. In the
-      book, it is named lfs, and this is the default. You can change it
-      to any non existing user.
+      Usuário(a) temporário(a) para os capítulos 4, 5 e 6 (não deveria
+      existir): o nome do(a) usuário(a) que executa os comandos naqueles
+      capítulos. No livro, é nomeado de lfs e esse é o padrão. Você
+      consegue mudá-lo(a) para qualquer usuário(a) não existente.
 
-      Group of user for chapters 4, 5, and 6 (should not exist):
-         this is lfs in the book, but you can rename it to any non existing
-      group name.
+      Grupo de usuário(a) para os capítulos 4, 5 e 6 (não deveria
+      existir): esse é lfs no livro, mas você consegue renomeá-lo para
+      qualquer nome de grupo não existente.
 
-      Build Directory: the name of the root of the LFS system
-         This is the equivalent of the LFS variable in the book. Set it
-      to "/mnt/lfs" if you have followed the book for creating the LFS
-      partition and mount point.
+      Diretório de Construção: o nome da raiz do sistema LFS.
+      Isso é o equivalente da variável LFS do livro. Configure-o como
+      "/mnt/lfs" se você tiver seguido o livro para criar a partição
+      e o ponto de montagem do LFS.
 
-      Retrieve source files: Say y to have jhalfs download the packages
-         If you say no, you must download the packages yourself and put
-      them into the /mnt/build_dir/sources directory. Follow book's
-      chapter 3 instructions.
-         If you say yes, you'll be asked several other questions:
-         - Package Archive Directory: Repository of downloaded packages
-            This directory, which is on the host and should be writable
-         by the user running the tool, is for storing downloaded packages.
-            If you keep the default "$SRC_ARCHIVE", you can set this variable
-         to the absolute path of the repository and export it. Or if the
-         variable is not set, jhalfs downloads the sources directly to
-         /mnt/build_dir/sources.
-            Instead of using the SRC_ARCHIVE envar, you can also enter the
-         path of the repository directory into this field.
-         - Retry on 'connection refused' failure: self explanatory
-         - Number of retry attempts on download failures: self explanatory
-         - Download timeout (in seconds): self explanatory
+      Recuperar arquivos fonte: Diga y para que o jhalfs baixe os
+         pacotes. Se você disser não, você mesmo(a) precisará baixar
+         os pacotes e colocá-los no diretório /mnt/build_dir/sources.
+         Siga as instruções do capítulo 3 do livro.
+         Se disser sim, várias outras perguntas te seão feitas:
 
-      Run the makefile: start the build immediately after running the tool
-         This is not the preferred method: it is recommended to rather
-      run "make -C /mnt/build_dir/jhalfs" after the tool has finished
-      setting up the build. But this may be handy if you are sure everything
-      is well, and want to leave the tool and the build run without
-      supervision.
+         - Diretório de Arquivamento de Pacotes: Repositório de pacotes
+         baixados. Esse diretório, que está no anfitrião e deveria ser
+         escrevível pelo(a) usuário(a) que executa a ferramenta, é para
+         armazenar pacotes baixados. Se mantiver o padrão
+         "$SRC_ARCHIVE", você poderá configurar essa variável para o
+         caminho absoluto do repositório e exportá-la. Ou se a variável
+         não estiver configurada, o jhalfs baixará os fontes diretamente
+         para /mnt/build_dir/sources. Em vez de usar a variável de
+         ambiente SRC_ARCHIVE, você também pode inserir o caminho do
+         diretório do repositório nesse campo.
 
-      Rebuild files: clean up the /mnt/build_dir directory
-         Say n if you want to rerun the tool (to update generated scripts
-      for example) without removing what has already been done. Otherwise,
-      say y. Note that there are some guards against removing a directory
-      containing useful things, but double check that the /mnt/build_dir
-      directory is really what you want to erase.
+          - Novas tentativas em caso de falha de 'conexão recusada':
+         autoexplicativo
 
-   MENU "Build Settings"
+         - Número de novas tentativas em caso de falhas de
+         transferência: autoexplicativo
 
-      MENU Parallelism settings
-       - Use all cores:
-            If you say y, MAKEFLAGS will be set to "-j$(nproc)" at the
-         beginning of each script. Other envars are supposed to be passed
-         from the environment, as done in new books. Note that for old books,
-         this means the scripts using make or ninja will be run with all
-         cores, but not when this needs to set special envars like
-         TESTSUITEFLAGS. You can still define the number of cores used
-         in next field.
-            If you say n, you'll be asked for a static number of threads
-         to use.
-       - set of cpus to use, or 'all' for all cpus (only if using all cores):
-            You can define here the cores you want to use. See help for
-         details. This is the preferred way of reducing the number of cores
-         rather than using a static thread number.
-       - Number of parallel `make' jobs (only if not using all cores):
-            Every occurrence of $(nproc) in new books will be replaced with
-         the number entered here. Also MAKEFLAGS will be set to "-jN" (where
-         N is the number entered) at the beginning of each scripts. Furthermore
-         NINJAJOBS will be set to N in the environment. This allows to run all
-         books with N threads, except for paarts that need other envars to be
-         set
-       - Build Binutils pass1 without parallelism (Real SBU)
-            The standard SBU is defined as the time to run the binutils-pass1
-         build with only one thread. Saying y here allows to get a value for
-         it. If you say n, the value is not meaningful for SBU measurements.
+         - Tempo limite de transferência (em segundos):
+         autoexplicativo
+
+      Execute o makefile: inicie a construção imediatamente depois de
+      executar a ferramenta. Esse não é o método preferido: é
+      recomendado executar "make -C /mnt/build_dir/jhalfs" depois que
+      a ferramenta tiver terminado de configurar a construção. Mas isso
+      possivelmente seja útil se você tiver certeza de que tudo está bem
+      e quiser deixar a ferramenta e a construção executar sem supervisão.
+
+      Reconstruir arquivos: organize o diretório /mnt/build_dir
+         Diga n se você quiser executar novamente a ferramenta (para
+      atualizar conjuntos gerados de comandos sequenciais, por exemplo)
+      sem remover o que já tenha sido feito. Caso contrário, diga y.
+      Observe que existem algumas proteções contra a remoção de um
+      diretório que contém coisas úteis, mas verifique novamente se o
+      diretório /mnt/build_dir é realmente o que você quer eliminar.
+
+   MENU "Configurações de Construção"
+
+      MENU Configurações de paralelismo
 
       Run testsuites: say y to run the test suites
          You'll have the choice between running all the test suites, or only
