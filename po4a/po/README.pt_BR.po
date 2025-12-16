@@ -633,12 +633,19 @@ msgid ""
 "      containing useful things, but double check that the /mnt/build_dir\n"
 "      directory is really what you want to erase.\n"
 msgstr ""
+"      Reconstruir arquivos: organize o diretório /mnt/build_dir\n"
+"         Diga n se você quiser executar novamente a ferramenta (para\n"
+"      atualizar conjuntos gerados de comandos sequenciais, por exemplo)\n"
+"      sem remover o que já tenha sido feito. Caso contrário, diga y.\n"
+"      Observe que existem algumas proteções contra a remoção de um\n"
+"      diretório que contém coisas úteis, mas verifique novamente se o\n"
+"      diretório /mnt/build_dir é realmente o que você quer eliminar.\n"
 
 #. type: Plain text
 #: upstream/README:208
 #, no-wrap
 msgid "   MENU \"Build Settings\"\n"
-msgstr ""
+msgstr "   MENU \"Configurações de Construção\"\n"
 
 #. type: Plain text
 #: upstream/README:235
@@ -679,7 +686,7 @@ msgid ""
 "for\n"
 "         it. If you say n, the value is not meaningful for SBU "
 "measurements.\n"
-msgstr ""
+msgstr "      MENU Configurações de paralelismo\n"
 
 #. type: Plain text
 #: upstream/README:239
