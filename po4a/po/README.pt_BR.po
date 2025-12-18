@@ -692,7 +692,7 @@ msgstr ""
 #: README:227
 msgid "Retry on 'connection refused' failure: self explanatory"
 msgstr ""
-"Novas tentativas em caso de falha de 'conexão recusada': autoexplicativo\n"
+"Novas tentativas em caso de falha de 'conexão recusada': autoexplicativo"
 
 #. type: Plain text
 #: README:230
@@ -707,7 +707,7 @@ msgstr ""
 #. type: Bullet: '         - '
 #: README:232
 msgid "Download timeout (in seconds): self explanatory"
-msgstr "Tempo limite de transferência (em segundos): autoexplicativo\n"
+msgstr "Tempo limite de transferência (em segundos): autoexplicativo"
 
 #. type: Plain text
 #: README:235
@@ -855,7 +855,7 @@ msgstr ""
 "         início de cada conjunto de comandos sequenciais. Além disso,\n"
 "         NINJAJOBS será configurada como N no ambiente. Isso permite\n"
 "         executar todos os livros com N camadas, exceto para partes que\n"
-"         precisem que outras variáveis de ambiente sejam configuradas\n"
+"         precisem que outras variáveis de ambiente sejam configuradas.\n"
 
 #. type: Bullet: '       - '
 #: README:284
