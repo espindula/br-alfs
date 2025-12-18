@@ -773,7 +773,7 @@ msgstr "      MENU Configurações de paralelismo\n"
 #. type: Bullet: '       - '
 #: README:255
 msgid "Use all cores:"
-msgstr ""
+msgstr "Usar todos os núcleos"
 
 #. type: Plain text
 #: README:263
@@ -787,6 +787,16 @@ msgid ""
 "         envars like TESTSUITEFLAGS. You can still define the number of \n"
 "         cores used in next field.\n"
 msgstr ""
+"            Se você disser y, MAKEFLAGS será configurada como\n"
+"         \"-j$(nproc)\" no início de cada conjunto de comandos\n"
+"         sequenciais. É presumido que outras variáveis de ambiente\n"
+"         sejam passadas a partir do ambiente, como é feito em novos\n"
+"         livros. Observe que para livros antigos, isso significa que\n"
+"         os conjuntos de comandos sequenciais que usam make ou ninja\n"
+"         serão executados com todos os núcleos, mas não quando isso\n"
+"         precisar configurar variáveis especiais de ambiente como\n"
+"         TESTSUITEFLAGS. Você ainda consegue definir o número de\n"
+"         núcleos usados no próximo campo.\n"
 
 #. type: Plain text
 #: README:266
@@ -795,6 +805,8 @@ msgid ""
 "            If you say n, you'll be asked for a static number of threads \n"
 "         to use.\n"
 msgstr ""
+"            Se disser n, a você será solicitado um número estático de\n"
+"         camadas para usar.\n"
 
 #. type: Plain text
 #: README:269
@@ -803,6 +815,8 @@ msgid ""
 "       - set of cpus to use, or 'all' for all cpus (only if using all \n"
 "       cores):\n"
 msgstr ""
+"       - conjunto de UCPs a se usar ou 'all' para todas as UCPs\n"
+"       (somente se usar todos os núcleos):\n"
 
 #. type: Plain text
 #: README:273
@@ -812,11 +826,17 @@ msgid ""
 "         details. This is the preferred way of reducing the number of \n"
 "         cores rather than using a static thread number.\n"
 msgstr ""
+"            Você consegue definir aqui os núcleos que quer usar.\n"
+"         Veja-se a ajuda para detalhes. Essa é a maneira preferida de\n"
+"         se reduzir o número de núcleos, em vez de usar um número\n"
+"         estático de camadas.\n"
 
 #. type: Bullet: '       - '
 #: README:275
 msgid "Number of parallel `make' jobs (only if not using all cores):"
 msgstr ""
+"Número de tarefas paralelas do `make' (somente se não se usar todos os "
+"núcleos):"
 
 #. type: Plain text
 #: README:282
@@ -829,6 +849,13 @@ msgid ""
 "         environment. This allows to run all books with N threads, \n"
 "         except for paarts that need other envars to be set\n"
 msgstr ""
+"            Cada ocorrência de $(nproc) em novos livros será\n"
+"         substituída pelo número inserido aqui. Também, MAKEFLAGS\n"
+"         será configurada como \"-jN\" (onde N é o número inserido) no\n"
+"         início de cada conjunto de comandos sequenciais. Além disso,\n"
+"         NINJAJOBS será configurada como N no ambiente. Isso permite\n"
+"         executar todos os livros com N camadas, exceto para partes que\n"
+"         precisem que outras variáveis de ambiente sejam configuradas\n"
 
 #. type: Bullet: '       - '
 #: README:284
