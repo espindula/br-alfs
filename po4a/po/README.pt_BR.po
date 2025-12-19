@@ -860,7 +860,7 @@ msgstr ""
 #. type: Bullet: '       - '
 #: README:284
 msgid "Build Binutils pass1 without parallelism (Real SBU)"
-msgstr ""
+msgstr "Contruir Binutils passagem 1 sem paralelismo (UPC Real)"
 
 #. type: Plain text
 #: README:289
@@ -871,6 +871,10 @@ msgid ""
 "         to get a value for it. If you say n, the value is not \n"
 "         meaningful for SBU measurements.\n"
 msgstr ""
+"            O UPC padrão é definido como o tempo para executar a\n"
+"         construção do binutils passagem 1 com somente uma camada. Dizer\n"
+"         y aqui permite obter um valor para isso. Se você disser n, o\n"
+"         valor não será significativo para medições de UPC.\n"
 
 #. type: Plain text
 #: README:291
