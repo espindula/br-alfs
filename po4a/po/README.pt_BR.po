@@ -881,6 +881,8 @@ msgstr ""
 #, no-wrap
 msgid "      Run testsuites: say y to run the test suites\n"
 msgstr ""
+"      Executar suítes de teste: diga y para executar as suítes de\n"
+"      teste\n"
 
 #. type: Plain text
 #: README:294
@@ -889,12 +891,15 @@ msgid ""
 "         You'll have the choice between running all the test suites, or \n"
 "      only those deemed critical (binutils, gmp, mpfr, mpc, and gcc).\n"
 msgstr ""
+"         Você terá a escolha entre executar todas as suítes de teste ou\n"
+"      somente aquelas consideradas críticas (binutils, gmp, mpfr, mpc e\n"
+"      gcc).\n"
 
 #. type: Plain text
 #: README:296
 #, no-wrap
 msgid "      Package management: see README.PACKAGE_MANAGEMENT\n"
-msgstr ""
+msgstr "      Gerenciamento de pacotes: veja-se LEIAME.GERENCIAMENTO_PACOTES\n"
 
 #. type: Plain text
 #: README:298
@@ -902,6 +907,8 @@ msgstr ""
 msgid ""
 "      Create a log of installed files for each package: self explanatory\n"
 msgstr ""
+"      Criar um registro dos arquivos instalados para cada pacote:\n"
+"      autoexplicativo\n"
 
 #. type: Plain text
 #: README:301
@@ -910,24 +917,26 @@ msgid ""
 "      Strip Installed Binaries/Libraries: use the book instructions for \n"
 "      stripping\n"
 msgstr ""
+"      Despojar Binários/Bibliotecas instalados(as): usar as instruções\n"
+"      do livro para despojamento\n"
 
 #. type: Plain text
 #: README:303
 #, no-wrap
 msgid "      DO NOT use/display progress_bar (self explanatory)\n"
-msgstr ""
+msgstr "      NÃO usar/exibir barra de progresso (autoexplicativo)\n"
 
 #. type: Plain text
 #: README:305
 #, no-wrap
 msgid "   MENU System configuration\n"
-msgstr ""
+msgstr "   MENU Configuração do sistema\n"
 
 #. type: Plain text
 #: README:307
 #, no-wrap
 msgid "      Use a custom fstab file:\n"
-msgstr ""
+msgstr "      Usar um arquivo personalizado fstab:\n"
 
 #. type: Plain text
 #: README:310
@@ -936,12 +945,15 @@ msgid ""
 "         If you say y, you'll have to provide a file containing the \n"
 "      fstab for the LFS system. See above \"preliminary tasks\".\n"
 msgstr ""
+"         Se você disser y, terá que fornecer um arquivo contendo o\n"
+"      fstab para o sistema LFS. Veja-se acima \"tarefas\n"
+"      preliminares\".\n"
 
 #. type: Plain text
 #: README:312
 #, no-wrap
 msgid "      Build the kernel:\n"
-msgstr ""
+msgstr "      Construir o núcleo:\n"
 
 #. type: Plain text
 #: README:315
@@ -950,12 +962,16 @@ msgid ""
 "         If you say y, you'll be asked for a file containing the kernel \n"
 "      configuration. See above \"preliminary tasks\".\n"
 msgstr ""
+"         Se disser y, a você será solicitado um arquivo contendo a\n"
+"      configuração do núcleo. Veja-se acima \"tarefas preliminares\".\n"
 
 #. type: Plain text
 #: README:317
 #, no-wrap
 msgid "      Install non-wide-character ncurses (rarely used nowadays):\n"
 msgstr ""
+"      Instalar ncurses de caracteres não largos (raramente usados hoje\n"
+"      em dia):"
 
 #. type: Plain text
 #: README:320
@@ -964,12 +980,15 @@ msgid ""
 "         If you say y, the system will use instructions in the note on \n"
 "      the ncurses page to install those libraries.\n"
 msgstr ""
+"         Se você disser y, o sistema usará as instruções na "
+"observação\n"
+"      na página do ncurses para instalar essas bibliotecas.\n"
 
 #. type: Plain text
 #: README:322
 #, no-wrap
 msgid "      TimeZone: set to the result of \"tzselect\"\n"
-msgstr ""
+msgstr "      TimeZone: configurado como o resultado de \"tzselect\"\n"
 
 #. type: Plain text
 #: README:325
@@ -978,6 +997,8 @@ msgid ""
 "      Language: set to the result of the instructions on \"The Bash Shell \n"
 "      Startup Files\" page.\n"
 msgstr ""
+"      Idioma: configurado como o resultado das instruções na página\n"
+"      \"Arquivos de Iniciação do Shell Bash\".\n"
 
 #. type: Plain text
 #: README:328
@@ -986,18 +1007,21 @@ msgid ""
 "      Install the full set of locales: installs all the locales known to \n"
 "      glibc.\n"
 msgstr ""
+"      Instalar o conjunto completo de localidades: instala todas as\n"
+"      localidades conhecidas pela glibc.\n"
 
 #. type: Plain text
 #: README:330
 #, no-wrap
 msgid "      Groff page size: choice between \"A4\" and \"Letter\".\n"
 msgstr ""
+"      Tamanho da página do Groff: escolha entre \"A4\" e \"Letter\".\n"
 
 #. type: Plain text
 #: README:332
 #, no-wrap
 msgid "      Hostname: self explanatory\n"
-msgstr ""
+msgstr "      Nome do dispositivo: autoexplicativo\n"
 
 #. type: Plain text
 #: README:335
