@@ -1030,6 +1030,9 @@ msgid ""
 "      Network configuration: various fields for setting network. Look at \n"
 "      chapter 9 for background.\n"
 msgstr ""
+"      Configuração de rede de intercomunicação: vários campos para\n"
+"      configuração de rede de intercomunicação. Veja-se o capítulo 9\n"
+"      para informações básicas.\n"
 
 #. type: Plain text
 #: README:338
@@ -1038,12 +1041,14 @@ msgid ""
 "      Console configuration: various fields for setting console, as \n"
 "      described in chapter 9.\n"
 msgstr ""
+"      Configuração do console: vários campos para configuração do\n"
+"      console, conforme descrito no capítulo 9.\n"
 
 #. type: Plain text
 #: README:340
 #, no-wrap
 msgid "   MENU Advanced features:\n"
-msgstr ""
+msgstr "   MENU Recursos avançados:\n"
 
 #. type: Plain text
 #: README:345
@@ -1054,18 +1059,24 @@ msgid ""
 "      between applying optimizations only to the final chapter or to all \n"
 "      the book. Say n for a normal build\n"
 msgstr ""
+"      Otimização: Configurações de otimização são feitas editando-se\n"
+"      arquivos no diretório \"optimize\". O menu permite somente que\n"
+"      você escolha entre aplicar otimizações somente para o capítulo\n"
+"      final ou para todo o livro. Diga n para uma construção normal.\n"
 
 #. type: Plain text
 #: README:347
 #, no-wrap
 msgid "      Create SBU and disk usage report: self explanatory\n"
-msgstr ""
+msgstr "      Criar informe de UPC e de uso de disco: autoexplicativo\n"
 
 #. type: Plain text
 #: README:349
 #, no-wrap
 msgid "      Save temporary system work: self explanatory (see help)\n"
 msgstr ""
+"       Salvar trabalho do sistema temporário: autoexplicativo (veja-se a\n"
+"       ajuda)\n"
 
 #. type: Plain text
 #: README:353
@@ -1075,6 +1086,9 @@ msgid ""
 "      times using the preceding one, to test whether it is able to \n"
 "      rebuild itself identically. Don't use normally...\n"
 msgstr ""
+"      Execute a análise de comparação na fase final: construir o sistema\n"
+"      várias vezes usando o anterior, para testar se ele está apto a\n"
+"      reconstruir a si próprio identicamente. Não use normalmente ...\n"
 
 #. type: Plain text
 #: README:356
@@ -1083,6 +1097,8 @@ msgid ""
 "      Internal Settings (WARNING: for jhalfs developers only): says it \n"
 "      all\n"
 msgstr ""
+"      Configurações Internas (AVISO: somente para desenvolvedores(as) do\n"
+"      jhalfs): diz tudo.\n"
 
 #. type: Plain text
 #: README:371
@@ -1103,12 +1119,30 @@ msgid ""
 "  /mnt/build_dir/jhalfs\", if you have used the default parameters (see \n"
 "  the layout under $BUILDDIR in the Q&A below).\n"
 msgstr ""
+"     Depois que você tenha configurado os parâmetros e salvo a\n"
+"   configuração, o conjunto de comandos sequenciais será iniciado. O\n"
+"   objetivo deles é o de extrair instruções a partir do livro\n"
+"   selecionado para gerar conjuntos de comandos sequenciais, e gerar um\n"
+"   Makefile, que permite executar os conjuntos de comandos sequenciais\n"
+"   na ordem correta. O conjunto de comandos sequenciais verifica\n"
+"   primeiro se o anfitrião consegue executar a si próprio e construir o\n"
+"   sistema xLFS, depois valida a configuração e lista os parâmetros.\n"
+"   Neste ponto, você pode escolher sair ou continuar com os parâmetros\n"
+"   listados. O conjunto de comandos sequenciais irá então gerar o\n"
+"   Makefile e os conjuntos de comandos sequenciais de construção,\n"
+"   opcionalmente baixar pacotes e, eventualmente, verificar o\n"
+"   pré-requisito do anfitrião. Se você tiver selecionado \"Executar o\n"
+"   makefile\", o comando <make> será iniciado no diretório adequado e a\n"
+"   construção começará. Se não, você terá que executar \"make\"\n"
+"   manualmente, por exemplo: \"make -C /mnt/build_dir/jhalfs\", se você\n"
+"   tiver usado os parâmetros padrão (veja-se o esquema sob $BUILDDIR nas\n"
+"   perguntas e respostas abaixo).\n"
 
 #. type: Plain text
 #: README:373
 #, no-wrap
 msgid "  NOTE::\n"
-msgstr ""
+msgstr "  OBSERVAÇÃO::\n"
 
 #. type: Plain text
 #: README:376
@@ -1117,17 +1151,20 @@ msgid ""
 "      If you run the jhalfs script directly the only function you can \n"
 "      select is to display the version number by running <./jhalfs -v>\n"
 msgstr ""
+"      Se você executar o conjunto de comandos sequenciais jhalfs\n"
+"      diretamente, a única função que conseguirá selecionar será a de\n"
+"      exibir o número da versão executando <./jhalfs -v>\n"
 
 #. type: Bullet: '6. '
 #: README:378
 msgid "LAYOUT::"
-msgstr ""
+msgstr "ESQUEMA::"
 
 #. type: Plain text
 #: README:380
 #, no-wrap
 msgid "        /BLFS/* (see README.BLFS)\n"
-msgstr ""
+msgstr "        /BLFS/* (veja-se LEIAME.BLFS)\n"
 
 #. type: Plain text
 #: README:383
@@ -1136,6 +1173,8 @@ msgid ""
 "        /LFS/master.sh\n"
 "            /lfs.xsl\n"
 msgstr ""
+"        /LFS/master.sh\n"
+"            /lfs.xsl\n"
 
 #. type: Plain text
 #: README:394
@@ -1152,6 +1191,16 @@ msgid ""
 "               /urls.xsl\n"
 "               /libs/func_*\n"
 msgstr ""
+"        /common/chroot.xsl\n"
+"               /common_functions\n"
+"               /create-sbu_du-report.sh\n"
+"               /hostreqs.xsl\n"
+"               /kernfs.xsl\n"
+"               /makefile_functions\n"
+"               /packages.xsl\n"
+"               /progress_bar.sh\n"
+"               /urls.xsl\n"
+"               /libs/func_*\n"
 
 #. type: Plain text
 #: README:399
@@ -1162,6 +1211,10 @@ msgid ""
 "                          an empty directory initially)\n"
 "               /template\n"
 msgstr ""
+"        /custom/examples/*\n"
+"               /config/* (precisa ser criado depois da clonagem, pois,\n"
+"			  inicialmente, ele é um diretório vazio)\n"
+"               /template\n"
 
 #. type: Plain text
 #: README:403
@@ -1171,12 +1224,15 @@ msgid ""
 "               /do_ica_prep\n"
 "               /do_ica_work\n"
 msgstr ""
+"        /extras/do_copy_files\n"
+"               /do_ica_prep\n"
+"               /do_ica_work\n"
 
 #. type: Plain text
 #: README:405
 #, no-wrap
 msgid "        /menu/*\n"
-msgstr ""
+msgstr "        /menu/*\n"
 
 #. type: Plain text
 #: README:415
@@ -1192,6 +1248,15 @@ msgid ""
 "                              /O3pipe_march\n"
 "                              /defOpt_fPIC\n"
 msgstr ""
+"        /optimize/opt_config\n"
+"                 /opt_override\n"
+"                 /optimize_functions\n"
+"                 /opt_config.d/noOpt\n"
+"                              /noSymbols\n"
+"                              /O2pipe\n"
+"                              /O3pipe\n"
+"                              /O3pipe_march\n"
+"                              /defOpt_fPIC\n"
 
 #. type: Plain text
 #: README:424
@@ -1206,6 +1271,14 @@ msgid ""
 "                /packInstall.sh.porg\n"
 "                /packInstall.sh.template\n"
 msgstr ""
+"        /pkgmngt/packageManager.xml.dpkg\n"
+"                /packageManager.xml.pacman\n"
+"                /packageManager.xml.porg\n"
+"                /packageManager.xml.template\n"
+"                /packInstall.sh.dpkg\n"
+"                /packInstall.sh.pacman\n"
+"                /packInstall.sh.porg\n"
+"                /packInstall.sh.template\n"
 
 #. type: Plain text
 #: README:433
@@ -1220,6 +1293,14 @@ msgid ""
 "        README.PACKAGE_MANAGEMENT\n"
 "        TODO\n"
 msgstr ""
+"        CHEATSHEET\n"
+"        LISTA_FUNÇÕES\n"
+"        LICENÇA\n"
+"        LEIAME\n"
+"        LEIAME.BLFS\n"
+"        LEIAME.PERSONALIZAÇÃO\n"
+"        LEIAME.GERENCIAMENTO_PACOTE\n"
+"        TODO\n"
 
 #. type: Plain text
 #: README:437
@@ -1229,6 +1310,9 @@ msgid ""
 "        jhalfs\n"
 "        Makefile\n"
 msgstr ""
+"        Config.in\n"
+"        jhalfs\n"
+"        Makefile\n"
 
 #. type: Plain text
 #: README:440
