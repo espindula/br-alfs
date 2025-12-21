@@ -98,8 +98,8 @@ msgid ""
 "build, or at the end of a LFS build. Note that you will not find "
 "instructions on how to write those commands, but some examples are available."
 msgstr ""
-"LEIAME.CUSTOM: instruções para executar comandos personalizados seja "
-"durante a construção do LFS seja no final de uma construção do LFS. "
+"LEIAME.PERSONALIZAÇÃO: instruções para executar comandos personalizados "
+"seja durante a construção do LFS seja no final de uma construção do LFS. "
 "Observe que você não encontrará instruções acerca de como escrever "
 "esses comandos, mas alguns exemplos estão disponíveis."
 
@@ -971,7 +971,7 @@ msgstr ""
 msgid "      Install non-wide-character ncurses (rarely used nowadays):\n"
 msgstr ""
 "      Instalar ncurses de caracteres não largos (raramente usados hoje\n"
-"      em dia):"
+"      em dia):\n"
 
 #. type: Plain text
 #: README:320
@@ -1213,7 +1213,7 @@ msgid ""
 msgstr ""
 "        /custom/examples/*\n"
 "               /config/* (precisa ser criado depois da clonagem, pois,\n"
-"			  inicialmente, ele é um diretório vazio)\n"
+"\t\t\t  inicialmente, ele é um diretório vazio)\n"
 "               /template\n"
 
 #. type: Plain text
