@@ -1319,7 +1319,7 @@ msgid ""
 "    Q. \"It doesn't work\"\n"
 msgstr ""
 "7. PERGUNTAS FREQUENTES::\n"
-"    P. \"não funciona\"\n"
+"    P. \"Não funciona\"\n"
 
 #. type: Plain text
 #: README:450
@@ -1416,7 +1416,7 @@ msgid ""
 "       found in SRC_ARCHIVE _and_ you have write priv to the directory \n"
 "       any downloaded files will be mirrored there.\n"
 msgstr ""
-"    P. Quando jhalfs executa e a transferência de pacotes foi\n"
+"    R. Quando jhalfs executa e a transferência de pacotes foi\n"
 "       selecionada, ele cria uma cópia local dos pacotes necessários em\n"
 "       $BUILDDIR/sources baixando os arquivos. Se a variável SRC_ARCHIVE\n"
 "       estiver definida, o software primeiro procurará nesse local pelo\n"
