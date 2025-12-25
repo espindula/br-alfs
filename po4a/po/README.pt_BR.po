@@ -354,13 +354,12 @@ msgid ""
 "      /etc/sudoers could be <user> ALL=(ALL) NOPASSWD:ALL\n"
 msgstr ""
 "         Você precisa estar logado(a) como um(a) usuário(a) normal com\n"
-"      privilégios de sudo para executar o Makefile. Além disso, \n"
-"      presume-se que você tenha privilégios suficientes para se tornar \n"
-"      qualquer usuário(a). Se você não estiver preocupado(a) com "
-"problemas \n"
-"      de segurança, a entrada para o(a) usuário(a) que executa a "
-"ferramenta\n"
-"      em /etc/sudoers poderia ser <usuário(a)> ALL=(ALL) NOPASSWD:ALL\n"
+"      privilégios de sudo para executar o Makefile. Além disso,\n"
+"      presume-se que você tenha privilégios suficientes para se tornar\n"
+"      qualquer usuário(a). Se você não estiver preocupado(a) com\n"
+"      problemas de segurança, a entrada para o(a) usuário(a) que executa\n"
+"      a ferramenta em /etc/sudoers poderia ser <usuário(a)> ALL=(ALL)\n"
+"      NOPASSWD:ALL\n"
 
 #. type: Plain text
 #: README:128
@@ -669,12 +668,11 @@ msgid ""
 "         Or if the variable is not set, jhalfs downloads the sources \n"
 "         directly to /mnt/build_dir/sources.\n"
 msgstr ""
-"            Se mantiver o padrão \"$SRC_ARCHIVE\", você poderá configurar "
-"\n"
-"         essa variável para o caminho absoluto do repositório e "
-"exportá-la. \n"
-"         Ou se a variável não estiver configurada, o jhalfs baixará os \n"
-"         fontes diretamente para /mnt/build_dir/sources.\n"
+"            Se mantiver o padrão \"$SRC_ARCHIVE\", você poderá\n"
+"         configurar essa variável para o caminho absoluto do repositório\n"
+"         e exportá-la. Ou se a variável não estiver configurada, o\n"
+"         jhalfs baixará os fontes diretamente para\n"
+"         /mnt/build_dir/sources.\n"
 
 #. type: Plain text
 #: README:225
@@ -684,8 +682,7 @@ msgid ""
 "         the path of the repository directory into this field.\n"
 msgstr ""
 "            Em vez de usar a variável de ambiente SRC_ARCHIVE, você \n"
-"         também pode inserir o caminho do diretório do repositório nesse "
-"\n"
+"         também pode inserir o caminho do diretório do repositório nesse\n"
 "         campo.\n"
 
 #. type: Bullet: '         - '
@@ -980,9 +977,9 @@ msgid ""
 "         If you say y, the system will use instructions in the note on \n"
 "      the ncurses page to install those libraries.\n"
 msgstr ""
-"         Se você disser y, o sistema usará as instruções na "
-"observação\n"
-"      na página do ncurses para instalar essas bibliotecas.\n"
+"         Se você disser y, o sistema usará as instruções na\n"
+"      observação na página do ncurses para instalar essas\n"
+"      bibliotecas.\n"
 
 #. type: Plain text
 #: README:322
@@ -1365,10 +1362,10 @@ msgid ""
 "       suit your needs.\n"
 msgstr ""
 "    R. O documento original do LFS funcionou contra o local bem\n"
-"       conhecido /mnt/lfs. Esse script automatiza a construção de toda a\n"
-"       série de livros do LFS e usa um local genérico $BUILDDIR com um\n"
-"       valor padrão de /mnt/build_dir. Você pode mudar esse valor para\n"
-"       atender às tuas necessidades.\n"
+"       conhecido /mnt/lfs. Esse conjunto de comandos sequenciais\n"
+"       automatiza a construção de toda a série de livros do LFS e usa um\n"
+"       local genérico $BUILDDIR com um valor padrão de /mnt/build_dir.\n"
+"       Você pode mudar esse valor para atender às tuas necessidades.\n"
 
 #. type: Plain text
 #: README:467
@@ -1399,7 +1396,7 @@ msgid ""
 "            blfs_root   (files to use blfs-tool if selected to install it)\n"
 msgstr ""
 "            blfs_root   (arquivos para se usar blfs-tool se selecionada\n"
-"			 para instalá-las)\n"
+"\t\t\t para instalá-las)\n"
 
 #. type: Plain text
 #: README:471
