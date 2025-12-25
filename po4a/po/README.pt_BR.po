@@ -1321,6 +1321,8 @@ msgid ""
 "7. FAQ::\n"
 "    Q. \"It doesn't work\"\n"
 msgstr ""
+"7. PERGUNTAS FREQUENTES::\n"
+"    P. \"não funciona\"\n"
 
 #. type: Plain text
 #: README:450
@@ -1336,12 +1338,21 @@ msgid ""
 "       version of the book, you may have to downgrade your jhalfs \n"
 "       version.\n"
 msgstr ""
+"    R. Existem várias razões pelas quais isso pode acontecer. Uma\n"
+"       possibilidade é a seguinte: jhalfs foi projetado para funcionar\n"
+"       contra as versões de desenvolvimento da série de livros do LFS.\n"
+"       Conseqüentemente, mudanças em um livro às vezes quebram versões\n"
+"       mais antigas do jhalfs. Antes de começar a arrancar os cabelos,\n"
+"       baixe a versão mais recente do jhalfs para ver se isso resolve\n"
+"       teu problema. Observe que possivelmente seja o contrário. Se\n"
+"       quiser construir uma versão antiga do livro, você possivelmente\n"
+"       tenha que desatualizar tua versão do jhalfs.\n"
 
 #. type: Plain text
 #: README:452
 #, no-wrap
 msgid "    Q. \"How do I specify the build location?\"\n"
-msgstr ""
+msgstr "    P. \"Como eu especifico o local da construção?\"\n"
 
 #. type: Plain text
 #: README:458
@@ -1353,6 +1364,11 @@ msgid ""
 "       default value of /mnt/build_dir. You may change this value to \n"
 "       suit your needs.\n"
 msgstr ""
+"    R. O documento original do LFS funcionou contra o local bem\n"
+"       conhecido /mnt/lfs. Esse script automatiza a construção de toda a\n"
+"       série de livros do LFS e usa um local genérico $BUILDDIR com um\n"
+"       valor padrão de /mnt/build_dir. Você pode mudar esse valor para\n"
+"       atender às tuas necessidades.\n"
 
 #. type: Plain text
 #: README:467
@@ -1367,6 +1383,14 @@ msgid ""
 "            FHS dir structure\n"
 "                ...\n"
 msgstr ""
+"       O esquema abaixo de $BUILDDIR é como segue.\n"
+"       $BUILDDIR/\n"
+"            jhalfs   (Makefile, scripts de comandos, registros, etc..)\n"
+"            sources  (onde pacotes residem)\n"
+"            tools    (compilador cruzado temporário)\n"
+"                ...\n"
+"            estrutura de diretórios da FHS\n"
+"                ...\n"
 
 #. type: Plain text
 #: README:469
@@ -1374,12 +1398,14 @@ msgstr ""
 msgid ""
 "            blfs_root   (files to use blfs-tool if selected to install it)\n"
 msgstr ""
+"            blfs_root   (arquivos para se usar blfs-tool se selecionada\n"
+"			 para instalá-las)\n"
 
 #. type: Plain text
 #: README:471
 #, no-wrap
 msgid "    Q. \"What is the function of the SRC_ARCHIVE variable?\"\n"
-msgstr ""
+msgstr "    P. \"Qual é a função da variável SRC_ARCHIVE?\"\n"
 
 #. type: Plain text
 #: README:479
@@ -1393,36 +1419,46 @@ msgid ""
 "       found in SRC_ARCHIVE _and_ you have write priv to the directory \n"
 "       any downloaded files will be mirrored there.\n"
 msgstr ""
+"    P. Quando jhalfs executa e a transferência de pacotes foi\n"
+"       selecionada, ele cria uma cópia local dos pacotes necessários em\n"
+"       $BUILDDIR/sources baixando os arquivos. Se a variável SRC_ARCHIVE\n"
+"       estiver definida, o software primeiro procurará nesse local pelo\n"
+"       arquivo e, se encontrado, irá copiá-lo para $BUILDDIR/sources. Se\n"
+"       os arquivos não forem encontrados em SRC_ARCHIVE _e_ você tiver\n"
+"       previlégio de escrita no diretório, quaisquer arquivos baixados\n"
+"       serão espelhados lá.\n"
 
 #. type: Plain text
 #: README:481
 #, no-wrap
 msgid "    Q. \"How do I set the SRC_ARCHIVE location?\"\n"
-msgstr ""
+msgstr "    P. \"Como eu configuro o local da SRC_ARCHIVE?\"\n"
 
 #. type: Plain text
 #: README:483
 #, no-wrap
 msgid "    A. The best way to set the value of SRC_ARCHIVE is\n"
-msgstr ""
+msgstr "    R. A melhor maneira de se configurar o valor da SRC_ARCHIVE é\n"
 
 #. type: Plain text
 #: README:485
 #, no-wrap
 msgid "       export SRC_ARCHIVE=/wherever/you/store/downloaded/packages\n"
-msgstr ""
+msgstr "       export SRC_ARCHIVE=/onde/você/armazenar/arquivos/baixados\n"
 
 #. type: Plain text
 #: README:487
 #, no-wrap
 msgid "       or you can set the full path in the proper menu entry.\n"
 msgstr ""
+"       ou você pode configurar o caminho completo na entrada adequada de\n"
+"       menu.\n"
 
 #. type: Plain text
 #: README:489
 #, no-wrap
 msgid "    Q. \"Why have 2 copies of the files?\"\n"
-msgstr ""
+msgstr "    P. \"Por que ter duas cópias dos arquivos?\"\n"
 
 #. type: Plain text
 #: README:494
@@ -1433,12 +1469,19 @@ msgid ""
 "       also handles the boot build method where the final build may be \n"
 "       done on a separate machine.\n"
 msgstr ""
+"    R. Os arquivos do pacote precisam estar visíveis durante a fase de\n"
+"       chroot e esse é um método simples e confiável de fazer isso. Esse\n"
+"       método também lida com o método de construção de "
+"inicialização,\n"
+"       onde a construção final pode ser feita em uma máquina separada.\n"
 
 #. type: Plain text
 #: README:496
 #, no-wrap
 msgid "    Q. \"How could I stop the build at a predefined chosen point?\"\n"
 msgstr ""
+"    P. \"Como eu poderia parar a construção em um ponto escolhido\n"
+"    predefinido?\"\n"
 
 #. type: Plain text
 #: README:499
@@ -1447,12 +1490,14 @@ msgid ""
 "    A. Launch the Makefile manually passing the last numbered target to \n"
 "       be build as the break point. For example:\n"
 msgstr ""
+"    R. Inicie o Makefile manualmente, passando o último alvo numerado\n"
+"       para ser construído como o ponto de interrupção. Por exemplo:\n"
 
 #. type: Plain text
 #: README:501
 #, no-wrap
 msgid "          make BREAKPOINT=84-bash\n"
-msgstr ""
+msgstr "          make BREAKPOINT=84-bash\n"
 
 #. type: Plain text
 #: README:505
@@ -1462,12 +1507,15 @@ msgid ""
 "       phase by calling directly the appropriate mk_* target. For \n"
 "       example:\n"
 msgstr ""
+"       A construção também pode ser parada no final de uma fase de\n"
+"       construção de nível superior chamando-se diretamente o alvo mk_*\n"
+"       apropriado. Por exemplo:\n"
 
 #. type: Plain text
 #: README:507
 #, no-wrap
 msgid "          make mk_LUSER\n"
-msgstr ""
+msgstr "          make mk_LUSER\n"
 
 #. type: Plain text
 #: README:510
@@ -1476,6 +1524,8 @@ msgid ""
 "       See the Makefile to know the proper target names for that book \n"
 "       build.\n"
 msgstr ""
+"       Veja-se o Makefile para saber os nomes adequados de alvos para\n"
+"       essa construção do livro.\n"
 
 #. type: Plain text
 #: README:514
@@ -1486,3 +1536,7 @@ msgid ""
 "  Manuel Canales Esparcia\n"
 "  Pierre Labastie\n"
 msgstr ""
+"Autores:\n"
+"  George Boudreau\n"
+"  Manuel Canales Esparcia\n"
+"  Pierre Labastie\n"
