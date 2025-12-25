@@ -479,7 +479,7 @@
         Makefile
 
 7. PERGUNTAS FREQUENTES::
-    P. "não funciona"
+    P. "Não funciona"
 
     R. Existem várias razões pelas quais isso pode acontecer. Uma
        possibilidade é a seguinte: jhalfs foi projetado para funcionar
@@ -513,7 +513,7 @@
 
     P. "Qual é a função da variável SRC_ARCHIVE?"
 
-    P. Quando jhalfs executa e a transferência de pacotes foi
+    R. Quando jhalfs executa e a transferência de pacotes foi
        selecionada, ele cria uma cópia local dos pacotes necessários em
        $BUILDDIR/sources baixando os arquivos. Se a variável SRC_ARCHIVE
        estiver definida, o software primeiro procurará nesse local pelo
