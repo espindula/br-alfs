@@ -39,7 +39,7 @@
    claro!).
 
       E para o(a) impaciente: os procedimentos passo a passo são
-      fornecidos no CHEATSHEET.
+      fornecidos na FOLHADICAS.
    Esses procedimentos levam o(a) usuário(a) até uma construção completa
    do LFS e instalação de ferramentas para construir pacotes do BLFS.
    Mas deveria ser óbvio remover etapas sérias somente para construir o
@@ -428,7 +428,7 @@
                 /packInstall.sh.porg
                 /packInstall.sh.template
 
-        CHEATSHEET
+        FOLHADICAS
         LISTA_FUNÇÕES
         LICENÇA
         LEIAME
