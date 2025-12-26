@@ -14,25 +14,21 @@
 
       A documentação está dividida entre vários arquivos LEIAME.*. Aqui
    está uma lista do que está no que:
-
       - LEIAME (este arquivo): instruções para usar o livro LFS. Isso
         deveria ser suficiente se você quiser somente construir um
         sistema básico conforme o livro do LFS. Também é uma leitura
         obrigatória para todos os outros projetos.
-
       - LEIAME.BLFS: instruções para instalar uma infra-estrutura de
         construção automatizada para o livro do BLFS. Existem duas
         maneiras de fazer isso: (i) instalar as ferramentas no final de
         uma construção do LFS; ou (ii) instalar as ferramentas em um
         sistema já em execução. Ambos os métodos estão descritos neste
         arquivo.
-
       - LEIAME.PERSONALIZAÇÃO: instruções para executar comandos
         personalizados seja durante a construção do LFS seja no final de
         uma construção do LFS. Observe que você não encontrará
         instruções acerca de como escrever esses comandos, mas alguns
         exemplos estão disponíveis.
-
       - LEIAME.GERENCIAMENTO_PACOTE: instruções para usar o
         gerenciamento de pacote durante a construção (Observação: o
         único gerenciador de pacote que está testado regularmente é o
@@ -41,6 +37,14 @@
       Outras fontes de informação são a ajuda de contexto na interface 
    do menu e os próprios livros do LFS (ambas leituras obrigatórias, é 
    claro!).
+
+      E para o(a) impaciente: os procedimentos passo a passo são
+      fornecidos no CHEATSHEET.
+   Esses procedimentos levam o(a) usuário(a) até uma construção completa
+   do LFS e instalação de ferramentas para construir pacotes do BLFS.
+   Mas deveria ser óbvio remover etapas sérias somente para construir o
+   LFS.
+   
 
 2. PRÉ-REQUISITOS::
 
@@ -71,14 +75,12 @@
 4. CONFIGURAÇÃO::
 
    4.1. CONFIGURAÇÃO DAS FERRAMENTAS:
-
          Não existe configuração das ferramentas em si. Os vários
       parâmetros para a construção são configurados por meio de uma
       interface controlada por menu. Veja-se a seção EXECUTANDO abaixo
       para detalhes.
 
    4.2. TAREFAS PRELIMINARES:
-
          Esta ferramenta não tem suporte algum para criar uma partição
       e um ponto de montagem para o sistema construído. Você deveria
       seguir o livro até a seção "Montando a nova partição". Observe
@@ -125,8 +127,6 @@
 
 5. EXECUTANDO::
 
-   IMPORTANTE::
-
          Você precisa estar logado(a) como um(a) usuário(a) normal com
       privilégios de sudo para executar o Makefile. Além disso,
       presume-se que você tenha privilégios suficientes para se tornar
@@ -148,51 +148,42 @@
 
       Escolha LIVRO: Você tem duas escolhas: "Linux From Scratch" ou
       "Beyond Linux From Scratch (veja-se ajuda)"
-
          A parte do BLFS está descrita no LEIAME.BLFS
 
       Sistema de iniciação: Você tem duas escolhas: "LFS SysV" ou
       "LFS systemd" (ou o mesmo com BLFS, se você o tiver escolhido
       acima)
+         Permite escolher-se entre os dois sabores dos livros.
 
-         Permite escolher entre os dois sabores dos livros.
-
-      Fonte XML do livro: Duas escolhas: "recuperado a partir do
+      Fonte XML do Livro: Duas escolhas: "recuperado a partir de
       repositório git" ou "Cópia Local"
-
          A primeira escolha é mais flexível, pois ela permitirá
          escolher-se algum ponto no histórico do git. Porém, a segunda
          permite fazer-se mudanças locais no fonte.
 
-      Qual ponto no histórico do git? (se você tiver escolhido recuperar
-      os fontes do livro a partir do repositório git)
-
+      Qual ponto no histórico git? (se você tiver escolhido recuperar os
+      fontes do livro a partir de repositório git)
          Você consegue usar qualquer meio de denotar uma submissão
          conhecida pelo programa "git".
       As mais populares são "trunk" (para a versão de desenvolvimento)
       ou a sequência de caracteres da versão de uma versão estável
       (como "12.1").
 
-      Local da cópia local (obrigatório) (caso você tenha escolhido a
+      Local da cópia local (obrigatório) (se você tiver escolhido a
       cópia local).
-
-         Esse é o caminho absoluto para a cópia local dos fontes do
-         livro.
+         Isso é o caminho absoluto para a cópia local dos fontes do livro.
 
       Multilib: Quatro escolhas: LFS normal, Multilib com bibliotecas
       i686, multilib com bibliotecas x32, multilib com todas as
       bibliotecas.
+         É recomendado usar-se "Normal LFS", a menos que você o que
+         está fazendo
 
-         É recomendado usar "LFS normal", a menos que você saiba o
-         que está fazendo.
-
-      Método de construção: duas escolhas: chroot (como no livro), boot.
-
+      Método de Construção: duas escolhas: chroot (como no livro), boot
          Atualmente o método "boot" não está implementado, então
          mantenha o padrão.
 
-      Adicionar suporte a blfs-tools (veja-se README.BLFS).
-
+      Adicionar suporte blfs-tools (veja-se LEIAME.BLFS)
          Isso instalará as ferramentas blfs no sistema recém-construído.
          Não é a mesma coisa que escolher o livro BLFS no menu, o que
          instalará as ferramentas blfs no sistema atualmente executando.
@@ -202,21 +193,18 @@
 
   MENU "Configurações Gerais"
 
-      Usuário(a) temporário(a) para os capítulos 4, 5 e 6 (não deveria
+      Usuário(a) temporário(a) para os capítulos 4, 5 e 6 (deveria não
       existir):
-
       o nome do(a) usuário(a) que executa os comandos naqueles
       capítulos. No livro, é nomeado de lfs e esse é o padrão. Você
       consegue mudá-lo(a) para qualquer usuário(a) não existente.
 
-      Grupo de usuário(a) para os capítulos 4, 5 e 6 (não deveria
+      Grupo do usário para os capítulos 4, 5 e 6 (deveria não
       existir):
-
          esse é lfs no livro, mas você consegue renomeá-lo para
       qualquer nome de grupo não existente.
 
-      Diretório de Construção: o nome da raiz do sistema LFS.
-
+      Diretório da Construção: o nome da raiz do sistema LFS
          Isso é o equivalente da variável LFS do livro. Configure-o como
       "/mnt/lfs" se você tiver seguido o livro para criar a partição
       e o ponto de montagem do LFS.
@@ -225,45 +213,35 @@
          pacotes. Se você disser não, você mesmo(a) precisará baixar
          os pacotes e colocá-los no diretório /mnt/build_dir/sources.
          Siga as instruções do capítulo 3 do livro.
-
          Se você disser sim, várias outras perguntas te serão feitas:
-
          - Diretório de Arquivamento de Pacotes: Repositório de pacotes
            baixados
-
             Esse diretório, que está no anfitrião e deveria ser
          escrevível pelo(a) usuário(a) que executa a ferramenta, é para
          armazenar pacotes baixados.
-
             Se mantiver o padrão "$SRC_ARCHIVE", você poderá
          configurar essa variável para o caminho absoluto do repositório
          e exportá-la. Ou se a variável não estiver configurada, o
          jhalfs baixará os fontes diretamente para
          /mnt/build_dir/sources.
-
             Em vez de usar a variável de ambiente SRC_ARCHIVE, você 
          também pode inserir o caminho do diretório do repositório nesse
          campo.
-
          - Novas tentativas em caso de falha de 'conexão recusada':
            autoexplicativo
-
          - Número de novas tentativas em caso de falhas de
          transferência: autoexplicativo
-
          - Tempo limite de transferência (em segundos): autoexplicativo
 
       Executar o makefile: iniciar a construção imediatamente depois de
       executar a ferramenta
-
          Esse não é o método preferido: é recomendado executar 
       "make -C /mnt/build_dir/jhalfs" depois que a ferramenta tiver 
       terminado de configurar a construção. Mas isso possivelmente seja 
       útil se você tiver certeza de que tudo está bem e quiser deixar a 
       ferramenta e a construção executar sem supervisão.
 
-      Reconstruir arquivos: organize o diretório /mnt/build_dir
-
+      Reconstruir arquivos: organizar o diretório /mnt/build_dir
          Diga n se você quiser executar novamente a ferramenta (para
       atualizar conjuntos gerados de comandos sequenciais, por exemplo)
       sem remover o que já tenha sido feito. Caso contrário, diga y.
@@ -274,9 +252,7 @@
    MENU "Configurações de Construção"
 
       MENU Configurações de paralelismo
-
        - Usar todos os núcleos
-
             Se você disser y, MAKEFLAGS será configurada como
          "-j$(nproc)" no início de cada conjunto de comandos
          sequenciais. É presumido que outras variáveis de ambiente
@@ -287,21 +263,16 @@
          precisar configurar variáveis especiais de ambiente como
          TESTSUITEFLAGS. Você ainda consegue definir o número de
          núcleos usados no próximo campo.
-
             Se disser n, a você será solicitado um número estático de
          camadas para usar.
-
        - conjunto de UCPs a se usar ou 'all' para todas as UCPs
        (somente se usar todos os núcleos):
-
             Você consegue definir aqui os núcleos que quer usar.
          Veja-se a ajuda para detalhes. Essa é a maneira preferida de
          se reduzir o número de núcleos, em vez de usar um número
          estático de camadas.
-
        - Número de tarefas paralelas do `make' (somente se não se usar
          todos os núcleos):
-
             Cada ocorrência de $(nproc) em novos livros será
          substituída pelo número inserido aqui. Também, MAKEFLAGS
          será configurada como "-jN" (onde N é o número inserido) no
@@ -309,17 +280,13 @@
          NINJAJOBS será configurada como N no ambiente. Isso permite
          executar todos os livros com N camadas, exceto para partes que
          precisem que outras variáveis de ambiente sejam configuradas.
-
        - Contruir Binutils passagem 1 sem paralelismo (UPC Real)
-
             O UPC padrão é definido como o tempo para executar a
          construção do binutils passagem 1 com somente uma camada. Dizer
          y aqui permite obter um valor para isso. Se você disser n, o
          valor não será significativo para medições de UPC.
 
-      Executar suítes de teste: diga y para executar as suítes de
-      teste
-
+      Executar suítes de teste: diga y para executar as suítes de teste
          Você terá a escolha entre executar todas as suítes de teste ou
       somente aquelas consideradas críticas (binutils, gmp, mpfr, mpc e
       gcc).
@@ -336,20 +303,17 @@
 
    MENU Configuração do sistema
 
-      Usar um arquivo personalizado fstab:
-
+      Usar um arquivo fstab personalizado:
          Se você disser y, terá que fornecer um arquivo contendo o
       fstab para o sistema LFS. Veja-se acima "tarefas
       preliminares".
 
       Construir o núcleo:
-
          Se disser y, a você será solicitado um arquivo contendo a
       configuração do núcleo. Veja-se acima "tarefas preliminares".
 
-      Instalar ncurses de caracteres não largos (raramente usados hoje
-      em dia):
-
+      Instalar ncurses de caracteres não largos (raramente usado
+      atualmente):
          Se você disser y, o sistema usará as instruções na
       observação na página do ncurses para instalar essas
       bibliotecas.
@@ -412,7 +376,6 @@
    perguntas e respostas abaixo).
 
   OBSERVAÇÃO::
-
       Se você executar o conjunto de comandos sequenciais jhalfs
       diretamente, a única função que conseguirá selecionar será a de
       exibir o número da versão executando <./jhalfs -v>
@@ -437,7 +400,7 @@
 
         /custom/examples/*
                /config/* (precisa ser criado depois da clonagem, pois,
-			  inicialmente, ele é um diretório vazio)
+               inicialmente, ele é um diretório vazio)
                /template
 
         /extras/do_copy_files
@@ -480,7 +443,6 @@
 
 7. PERGUNTAS FREQUENTES::
     P. "Não funciona"
-
     R. Existem várias razões pelas quais isso pode acontecer. Uma
        possibilidade é a seguinte: jhalfs foi projetado para funcionar
        contra as versões de desenvolvimento da série de livros do LFS.
@@ -492,7 +454,6 @@
        tenha que desatualizar tua versão do jhalfs.
 
     P. "Como eu especifico o local da construção?"
-
     R. O documento original do LFS funcionou contra o local bem
        conhecido /mnt/lfs. Esse conjunto de comandos sequenciais
        automatiza a construção de toda a série de livros do LFS e usa um
@@ -501,18 +462,15 @@
 
        O esquema abaixo de $BUILDDIR é como segue.
        $BUILDDIR/
-            jhalfs   (Makefile, scripts de comandos, registros, etc..)
-            sources  (onde pacotes residem)
-            tools    (compilador cruzado temporário)
+            jhalfs       (Makefile, scripts de comandos, registros, etc..)
+            sources      (onde pacotes residem)
+            tools        (compilador cruzado temporário)
                 ...
             estrutura de diretórios da FHS
                 ...
-
-            blfs_root   (arquivos para se usar blfs-tool se selecionada
-			 para instalá-las)
+            blfs_root   (arquivos para usar-se blfs-tool se selecionada para instalá-la)
 
     P. "Qual é a função da variável SRC_ARCHIVE?"
-
     R. Quando jhalfs executa e a transferência de pacotes foi
        selecionada, ele cria uma cópia local dos pacotes necessários em
        $BUILDDIR/sources baixando os arquivos. Se a variável SRC_ARCHIVE
@@ -523,7 +481,6 @@
        serão espelhados lá.
 
     P. "Como eu configuro o local da SRC_ARCHIVE?"
-
     R. A melhor maneira de se configurar o valor da SRC_ARCHIVE é
 
        export SRC_ARCHIVE=/onde/você/armazenar/arquivos/baixados
@@ -531,16 +488,14 @@
        ou você pode configurar o caminho completo na entrada adequada de
        menu.
 
-    P. "Por que ter duas cópias dos arquivos?"
-
+    P. "Por que ter-se 2 cópias dos arquivos?"
     R. Os arquivos do pacote precisam estar visíveis durante a fase de
        chroot e esse é um método simples e confiável de fazer isso. Esse
        método também lida com o método de construção de inicialização,
        onde a construção final pode ser feita em uma máquina separada.
 
-    P. "Como eu poderia parar a construção em um ponto escolhido
-    predefinido?"
-
+    P. "Como eu poderia parar a construção em um ponto escolhido pré
+    definido?"
     R. Inicie o Makefile manualmente, passando o último alvo numerado
        para ser construído como o ponto de interrupção. Por exemplo:
 
