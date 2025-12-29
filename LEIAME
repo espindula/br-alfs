@@ -18,7 +18,7 @@
         deveria ser suficiente se você quiser somente construir um
         sistema básico conforme o livro do LFS. Também é uma leitura
         obrigatória para todos os outros projetos.
-      - LEIAME.BLFS: instruções para instalar uma infra-estrutura de
+      - LEIAME.BLFS: instruções para instalar uma infraestrutura de
         construção automatizada para o livro do BLFS. Existem duas
         maneiras de fazer isso: (i) instalar as ferramentas no final de
         uma construção do LFS; ou (ii) instalar as ferramentas em um
@@ -140,7 +140,7 @@
    núcleo.
 
       A ajuda sobre a função de parâmetro está disponível na ajuda
-   on-line (digite o caracter `?' após destacar o parâmetro). Por favor,
+   on-line (digite o carácter `?' após destacar o parâmetro). Por favor,
    use a ajuda: ela pode conter informações adicionais não duplicadas
    neste arquivo.
 
@@ -199,7 +199,7 @@
       capítulos. No livro, é nomeado de lfs e esse é o padrão. Você
       consegue mudá-lo(a) para qualquer usuário(a) não existente.
 
-      Grupo do usário para os capítulos 4, 5 e 6 (deveria não
+      Grupo do(a) usuário(a) para os capítulos 4, 5 e 6 (deveria não
       existir):
          esse é lfs no livro, mas você consegue renomeá-lo para
       qualquer nome de grupo não existente.
@@ -280,7 +280,7 @@
          NINJAJOBS será configurada como N no ambiente. Isso permite
          executar todos os livros com N camadas, exceto para partes que
          precisem que outras variáveis de ambiente sejam configuradas.
-       - Contruir Binutils passagem 1 sem paralelismo (UPC Real)
+       - Construir Binutils passagem 1 sem paralelismo (UPC Real)
             O UPC padrão é definido como o tempo para executar a
          construção do binutils passagem 1 com somente uma camada. Dizer
          y aqui permite obter um valor para isso. Se você disser n, o
@@ -446,7 +446,7 @@
     R. Existem várias razões pelas quais isso pode acontecer. Uma
        possibilidade é a seguinte: jhalfs foi projetado para funcionar
        contra as versões de desenvolvimento da série de livros do LFS.
-       Conseqüentemente, mudanças em um livro às vezes quebram versões
+       Consequentemente, mudanças em um livro às vezes quebram versões
        mais antigas do jhalfs. Antes de começar a arrancar os cabelos,
        baixe a versão mais recente do jhalfs para ver se isso resolve
        teu problema. Observe que possivelmente seja o contrário. Se
@@ -477,7 +477,7 @@
        estiver definida, o software primeiro procurará nesse local pelo
        arquivo e, se encontrado, irá copiá-lo para $BUILDDIR/sources. Se
        os arquivos não forem encontrados em SRC_ARCHIVE _e_ você tiver
-       previlégio de escrita no diretório, quaisquer arquivos baixados
+       privilégio de escrita no diretório, quaisquer arquivos baixados
        serão espelhados lá.
 
     P. "Como eu configuro o local da SRC_ARCHIVE?"
