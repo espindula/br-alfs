@@ -1,0 +1,738 @@
+# Portuguese translations for br-alfs package
+# Copyright (C) 2025 Jamenson Ferreira Espindula de Almeida Melo
+# This file is distributed under the same license as the br-alfs package.
+# Automatically generated, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: br-alfs 1.0\n"
+"Report-Msgid-Bugs-To: jafesp@gmail.com\n"
+"POT-Creation-Date: 2025-12-29 04:27-0300\n"
+"PO-Revision-Date: 2025-12-29 04:27-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. type: Bullet: '1. '
+#: README.BLFS:2
+msgid "INTRODUCTION::"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:8
+#, no-wrap
+msgid ""
+"     To automate package builds from the BLFS book instructions is a huge\n"
+"  task. Some of the issues are: the BLFS book isn't linear; some package\n"
+"  pages use a custom layout; there are circular dependencies; several\n"
+"  packages can be installed on a non-default prefix; build commands can\n"
+"  change based on what dependencies will be used, etc.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:13
+#, no-wrap
+msgid ""
+"     That being said, the goal of the blfs-tool is to help you solve package\n"
+"  dependencies, create build scripts and a Makefile. Not all the auto-generated\n"
+"  build scripts and Makefile will work \"as is\", thus, as a general rule,\n"
+"  you will need to review and edit the scripts while reading the book.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:19
+#, no-wrap
+msgid ""
+"     The blfs tools allow also to update packages from the LFS book. LFS\n"
+"  packages which may be updated appear in the menu interface. When selected,\n"
+"  their scriptlet is generated in the same manner as for BLFS packages.\n"
+"  (TODO: presently, when an LFS package needs a patch, you'll have to\n"
+"  donwload it manually to your $SRC_ARCHIVE directory (usually /sources)).\n"
+msgstr ""
+
+#. type: Bullet: '2. '
+#: README.BLFS:21
+msgid "PREREQUISITES::"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:32
+#, no-wrap
+msgid ""
+"     In addition to a full LFS system, the following packages and their\n"
+"  dependencies are needed by this tool:\n"
+"    - required: libxml2, libxslt, DocBook XML DTD\n"
+"    - recommended: wget (to download the package tarballs) and sudo (to build\n"
+"      as a user)\n"
+"    - optional: lynx (allows to read the generated linearized book), GPM (to\n"
+"      cut and paste commands from the book), git (to update the book\n"
+"      sources)\n"
+"  Note that the optional dependencies are recommended for ease of use of the\n"
+"  tool.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:44
+#, no-wrap
+msgid ""
+"     You should also have the following personal skills:\n"
+"    - Ability to write and debug shell scripts: as said in the introduction,\n"
+"      not all the generated scripts can be used directly. They need to be\n"
+"      edited to produce an error free build.\n"
+"    - Ability to debug build failures, like missing dependencies or\n"
+"      installation directories not known to the system (when you install in\n"
+"      /opt for example).\n"
+"    - Ability to choose the tools you need to configure and administrate\n"
+"      your system: in the BLFS book, nothing is mandatory, nothing is\n"
+"      useless. You are on your own in choosing what to build, but wrong\n"
+"      decisions may lead to a non functional system...\n"
+msgstr ""
+
+#. type: Bullet: '3. '
+#: README.BLFS:46
+msgid "INSTALL::"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:49
+#, no-wrap
+msgid ""
+"     There are two ways to install the BLFS tools on an LFS system, described\n"
+"  in paragraphs 3.1 and 3.2, respectively:\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:51
+#, no-wrap
+msgid "  3.1 INSTALLATION ON A RUNNING LFS SYSTEM\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:60
+#, no-wrap
+msgid ""
+"     Select \"Use Book --> Beyond Linux From Scratch\" in the jhalfs menu:\n"
+"  The tools are installed in $HOME$BLFS_ROOT (the default for $BLFS_ROOT\n"
+"  is /blfs_root). The BLFS book is downloaded or copied to its directory.\n"
+"  The tracking directory (see below) is created (if it does not already\n"
+"  exist) and initialized. Before running \"make\", you should ensure the\n"
+"  tracking directory (default location /var/lib/jhalfs/BLFS) can be:\n"
+"    - either created by the user running \"make\", if it does not exist\n"
+"    - or that it is writable by the user running \"make\", if it exists.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:81
+#, no-wrap
+msgid ""
+"  After the intallation, you should perform the following additional steps:\n"
+"    - Configure sudo, adding the needed privileges for the user (a possible\n"
+"      /etc/sudoers entry is given in README).\n"
+"    - Although it is not strictly necessary, it is recommended to install\n"
+"      the bash shell startup files (as per `3. After LFS Configuration\n"
+"      Issues' of the BLFS book), as some instructions in BLFS rely on\n"
+"      their being present. Note that they can be installed using the tool\n"
+"      by selecting them in the menu.\n"
+"    - At this point, the tool has no way to know which versions of {B}LFS\n"
+"      packages are installed, so that the menu interface will show all the\n"
+"      packages, as if they were not installed.\n"
+"      You can make them known to the system by running the\n"
+"      update-installed.sh script and entering the installed packages with\n"
+"      their version in the menu. Note that normally all LFS packages are\n"
+"      supposed to be installed, and you can use <A> in the menu tick box\n"
+"      to select them all.\n"
+"    - Another way to make the system aware of installed packages is to\n"
+"      create empty files with names <package>-<installed-version> in the\n"
+"      tracking directory, and run the tool. This may be convenient for\n"
+"      just a few packages.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:83
+#, no-wrap
+msgid "  3.2 INSTALLATION WHEN BUILDING LFS\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:90
+#, no-wrap
+msgid ""
+"  When running the LFS menu, there is an option to install the BLFS tools\n"
+"  right after building\n"
+"  the LFS system: just tick `BOOK Settings/Add blfs-tool support' in\n"
+"  jhalfs configuration menu. The tools are installed in $BLFS_ROOT\n"
+"  (default /blfs_root) on the LFS system, and the dependencies are built\n"
+"  at the end of the jhalfs run, before the custom tools.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:95
+#, no-wrap
+msgid ""
+"  After booting the new LFS system some steps are needed to finish\n"
+"  the installation of the automated tools (a custom tool example\n"
+"  \"950-userconf\" in custom/examples allows to perform all the steps until\n"
+"  the setting of /etc/sudoers):\n"
+msgstr ""
+
+#. type: Bullet: '    - '
+#: README.BLFS:100
+msgid ""
+"A user account must be created. You must be logged on that user account to "
+"use blfs-tool. This is not strictly necessary, since the packages can be "
+"built as root, too, but it is never a good idea to build packages as root."
+msgstr ""
+
+#. type: Bullet: '    - '
+#: README.BLFS:103
+msgid ""
+"Move /blfs-root to that user's home and change ownership of the directory "
+"and files to the user."
+msgstr ""
+
+#. type: Bullet: '    - '
+#: README.BLFS:106
+msgid ""
+"Give the user read and write privileges over the $TRACKING_DIR directory and "
+"the files that it contains."
+msgstr ""
+
+#. type: Bullet: '    - '
+#: README.BLFS:109
+msgid ""
+"Also all files under /sources should be readable and writable by the user."
+msgstr ""
+
+#. type: Bullet: '    - '
+#: README.BLFS:115
+msgid ""
+"All occurrences of /blfs_root in the tracking file (default /var/lib/jhalfs/"
+"BLFS/instplg.xml) should be replaced with /home/<user>/blfs_root after the "
+"move. This should also be done in the \"configuration\" file in ~/blfs_root, "
+"unless this file is completely removed to start anew."
+msgstr ""
+
+#. type: Bullet: '    - '
+#: README.BLFS:118
+msgid ""
+"Configure sudo and add the bash shell startup files, as described above (the "
+"tool can be used for the bash shell statup files)"
+msgstr ""
+
+#. type: Bullet: '    - '
+#: README.BLFS:122
+msgid ""
+"Note that the versions of all installed packages are automatically known to "
+"the tool in this case, and there is no need to run the update-installed.sh "
+"script."
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:126
+#, no-wrap
+msgid ""
+"  We assume that the BLFS tools will be used on a booted LFS system.\n"
+"  Using them to build BLFS packages in a chroot jail is also possible,\n"
+"  but not supported.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:128
+#, no-wrap
+msgid "  3.3 DIRECTORY LAYOUT IN THE $BLFS_ROOT DIRECTORY\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:171
+#, no-wrap
+msgid ""
+"    README.BLFS                 this file\n"
+"    TODO                        developers notes (well, not updated often)\n"
+"    blfs-menu.patch             patch for menu/menuconfig.py to display more\n"
+"                                explicit letters for menus\n"
+"    gen_pkg_book.sh             resolves dependencies, generates a linear BLFS\n"
+"                                book, and finally generates build scripts\n"
+"    gen-makefile.sh             generates the target Makefile\n"
+"    progress_bar.sh             the target Makefile progress bar\n"
+"    gen-special.sh              Helper script for generating the package\n"
+"                                database\n"
+"    Makefile                    Used by make to update the package database\n"
+"                                from the GIT tree, then launch the menuconfig\n"
+"                                interface, and run gen_pkg_book.sh based on\n"
+"                                configuration settings\n"
+"    packdesc.dtd                a simple DTD describing the format of the\n"
+"                                package database and the tracking file\n"
+"    update-installed.sh         Run it to update the installed packages\n"
+"                                database without updating them\n"
+"    blfs-xml/*                  GIT tree of the selected BLFS book version\n"
+"    lfs-xml/*                   GIT tree of the selected LFS book version\n"
+"    lib/constants.inc           functions libraries\n"
+"       /func_dependencies         for building the dependency tree\n"
+"    menu/*                      menuconfig source code\n"
+"    xsl/gen_pkg_list.xsl        XSL stylesheet to generate the package database\n"
+"       /gen_config.xsl          XSL stylesheet to generate the Config.in file\n"
+"                                for use in the menuconfig system\n"
+"       /gen_newpack.xsl         XSL stylesheet to generate the newpack.in file\n"
+"                                for use in the menuconfig system, when updating\n"
+"                                installed packages\n"
+"       /dependencies.xsl        XSL stylesheet to generate the dependency list\n"
+"                                of a package\n"
+"       /make_book.xsl           XSL stylesheet to generate the linear book.xml\n"
+"       /lfs_make_book.xsl       XSL stylesheet to incoporate LFS pages into the\n"
+"                                linear book.xml\n"
+"       /scripts.xsl             XSL stylesheet to generate the scriptlets from\n"
+"                                book.xml\n"
+"       /bump.xsl                XSL stylesheet to update the tracking file\n"
+"       /process-install.xsl     XSL stylesheet included by scripts.xsl, for\n"
+"                                outputting cleanly install instructions\n"
+"       /process-replaceable.xsl XSL stylesheet included by scripts.xsl, for\n"
+"                                generating correct instructions when a\n"
+"                                <replaceable> tag is encountered.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:173
+#, no-wrap
+msgid "  Working files: several files are generated when first running the tool:\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:181
+#, no-wrap
+msgid ""
+"    packages.xml            auto-generated package database\n"
+"    Config.in               input file for the menu driven choices\n"
+"    configuration           file generated by the menuconfig process\n"
+"    dependencies/*          files recording the dependency tree\n"
+"    book.xml                the linearized book\n"
+"    book-html/*             the linearized book rendered in html\n"
+"    scripts/*               the scriptlets\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:183
+#, no-wrap
+msgid "  3.4 INSTALLED PACKAGES TRACKING SYSTEM:\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:189
+#, no-wrap
+msgid ""
+"       This tool includes a very simple tracking system to log which packages\n"
+"    have been installed using the tool. It is used to skip installed packages\n"
+"    from target selection menu and to test if an installed package has been\n"
+"    updated in the BLFS book. Do not rely on this feature as a package\n"
+"    management tool.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:197
+#, no-wrap
+msgid ""
+"       The tracking system itself is an XML file: instpkg.xml. It is\n"
+"    initialized when <make> is first run in blfs_root. It resides in a\n"
+"    directory, which is created when needed during the process of building\n"
+"    custom tools or blfs dependencies, right after LFS. You can specify\n"
+"    that directory location in the blfs-tools sub-menu of jhalfs. You may\n"
+"    need to update permissions and/or ownership of this directory before\n"
+"    using the blfs tool (see README in jhalfs).\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:204
+#, no-wrap
+msgid ""
+"       The default location of the tracking directory is /var/lib/jhalfs/BLFS.\n"
+"    NB : after the initial build, that directory is only used to contain\n"
+"    instpkg.xml, unless custom tools have been built. In the latter case,\n"
+"    it also contains empty files whose name are \"$PKG-$VERSION\" for each\n"
+"    versionned package built. The information about those packages is\n"
+"    included into instpkg.xml the next time the tool is run.\n"
+msgstr ""
+
+#. type: Bullet: '4. '
+#: README.BLFS:206
+msgid "USAGE::"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:209
+#, no-wrap
+msgid ""
+"       From now on, all the work must be done from inside the installation\n"
+"    root directory.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:212
+#, no-wrap
+msgid ""
+"       Due to the complexity of the BLFS book, the scripts and Makefile\n"
+"    generation is done in several steps:\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:214
+#, no-wrap
+msgid "  4.1  UPDATING BOOK SOURCES::\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:220
+#, no-wrap
+msgid ""
+"       If you are using the development book version and you want to update\n"
+"    installed packages to the latest version found in that book, you need to\n"
+"    update the XML sources and packages database. To do that, run\n"
+"    \"make update\". This is not necessary if you just built LFS, and you\n"
+"    can skip to step 4.2.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:224
+#, no-wrap
+msgid ""
+"       On the next configuration run, packages already installed but listed\n"
+"    with a new version in the book will be available for target selection\n"
+"    and used to solve dependencies.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:226
+#, no-wrap
+msgid "  4.2  CONFIGURING AND PARSING THE BOOK::\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:229
+#, no-wrap
+msgid ""
+"       The next step is to create a book and build scripts in dependency\n"
+"    build order for one or several packages.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:233
+#, no-wrap
+msgid ""
+"       Run <make> to launch the configuration interface. The main menu contains\n"
+"    four blocks: individual package selection, Build settings, Build layout,\n"
+"    and Optimization.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:240
+#, no-wrap
+msgid ""
+"       In the package selection block, menus and submenus are organized\n"
+"    as the book's parts, chapters and sections. You can navigate those menus\n"
+"    and select as many targets as you want. But we suggest to not select\n"
+"    too many at a time to be able to sort issues! Note that all the packages\n"
+"    under a submenu may be selected at once when \"<A>\" is selected in the\n"
+"    tick box.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:248
+#, no-wrap
+msgid ""
+"       In the \"Build settings\" submenu, the dependency level and default\n"
+"    packages used to solve alternatives are set (currently, only for the MTA).\n"
+"    You can also select whether the build will be made as a normal user or as\n"
+"    root, whether to use \"porg style\" package management, whether to remove\n"
+"    \".la\" files, and whether statistics for the package are generated (build\n"
+"    time, memory footprint and \"DESTDIR\" install). If you use package\n"
+"    management, you have to enter the path to the packInstall.sh script too.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:252
+#, no-wrap
+msgid ""
+"       In the \"Build layout\" submenu, you can select where the source tarballs\n"
+"    reside and are downloaded, where the packages are built, and whether to\n"
+"    keep the build tree after installation.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:256
+#, no-wrap
+msgid ""
+"       In the \"Optimization\" submenu, you can select the number of parallel\n"
+"    jobs, and set the usual CFLAGS, CXXFLAGS, and LDFLAGS. the special\n"
+"    keyword \"EMPTY\" can be used for those flags to ensure they are unset.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:259
+#, no-wrap
+msgid ""
+"       Note that there are help strings associated to those menus. Please\n"
+"    read them for details!\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:261
+#, no-wrap
+msgid "       Those settings are saved to be reused in future configuration runs.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:272
+#, no-wrap
+msgid ""
+"       When you are done with the menu, a few checks occur, and the dependency\n"
+"    chain is generated. Each dependency appears with its priority (required,\n"
+"    recommended, optional, or external), and it's level. There is a root level\n"
+"    1. The selected packages have level 2. The dependencies of selected packages\n"
+"    have level 3, the dependencies of the dependencies have level 4, and so on.\n"
+"    When circular dependencies are found, they appear with a priority of\n"
+"    \"circular\". This means that two (or more) dependency chains arrive at the\n"
+"    same package. The algorithm chooses the chain with the highest priority and\n"
+"    reorders dependencies to remove the other chain(s). This is not always the\n"
+"    solution an user would prefer, but we have found no way to do it better.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:276
+#, no-wrap
+msgid ""
+"       You end up with a book.xml file which contains the linearized book,\n"
+"    and a rendered HTML, in the directory book-html, which you can browse with\n"
+"    \"lynx book-html/index.html\" (or with any other browser).\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:279
+#, no-wrap
+msgid ""
+"       Furthermore, there is a directory \"scripts\", which contains the generated\n"
+"    scriptlets.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:282
+#, no-wrap
+msgid ""
+"       There is yet another directory, \"dependencies\" that contains files\n"
+"    generated while resolving dependencies.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:284
+#, no-wrap
+msgid "  4.3  EDITING BUILD SCRIPTS::\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:288
+#, no-wrap
+msgid ""
+"       Now it is time to review the generated book and scripts, making any\n"
+"    changes to the scripts necessary to fix generation bugs or to suit your\n"
+"    needs.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:293
+#, no-wrap
+msgid ""
+"       Scripts for additional packages (i.e., for non-BLFS packages) can be\n"
+"    easily inserted. For example, if you want to install the external dependency\n"
+"    \"bar\" before \"foo\" package and the \"foo\" script is named \"064-z-foo\", you\n"
+"    just need to create a \"064-y-bar\" build script.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:296
+#, no-wrap
+msgid ""
+"       Remember, the package tracking system isn't a package management tool\n"
+"    and knows nothing about packages not in the BLFS book.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:298
+#, no-wrap
+msgid "  4.4  CREATING THE MAKEFILE::\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:305
+#, no-wrap
+msgid ""
+"       When the build scripts are ready to be run, the Makefile can be\n"
+"    created. Create an empty subdirectory (for example \"mkdir work\") and cd\n"
+"    to that directory. Then run ../gen-makefile.sh. Note that the directory\n"
+"    is completely emptied before generating the Makefile, so to prevent\n"
+"    erasing useful data, the script ensures that the name of the current\n"
+"    working directory starts with \"work\".\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:308
+#, no-wrap
+msgid ""
+"    Review the Makefile, and, if all looks sane, start the build by running\n"
+"    \"make\".\n"
+msgstr ""
+
+#. type: Bullet: '5. '
+#: README.BLFS:310
+msgid "GENERATED BUILD SCRIPTS ISSUES::"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:324
+#, no-wrap
+msgid ""
+"      In this section, known issues with the generated build scripts are\n"
+"   discussed. They are due to build procedures and/or BLFS layout\n"
+"   particularities that we can't handle. In several cases, editing the\n"
+"   build scripts is mandatory.\n"
+"      You may also need to insert some build scripts created by you to resolve\n"
+"   unhandled dependencies and/or to remove some script installing an unneeded\n"
+"   package (unneeded packages may be pulled in the dependency chain, if\n"
+"   they occur as an \"or\" with another package).\n"
+"      When there are circular dependencies not known to the book (this occurs\n"
+"   only for optional dependencies), you may need to move around scripts so\n"
+"   that they run in the order script-A script-B script-A. This involves\n"
+"   copying script-A to another name (using the xxx-a- fields). Note that this\n"
+"   should be done before generating the Makefile in the \"work\" directory.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:326
+#, no-wrap
+msgid "   5.1  BLFS BOOTSCRIPTS::\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:331
+#, no-wrap
+msgid ""
+"        Normally, bootscript installation should work. On the other hand, the\n"
+"     book does not give instruction for running them, so you might have to\n"
+"     manually insert \"/etc/init.d/rc.d/<initscript> start\" at some place during\n"
+"     the build.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:333
+#, no-wrap
+msgid "   5.2  PACKAGE CONFIGURATION::\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:341
+#, no-wrap
+msgid ""
+"        For those packages that have a \"Configuration\" section, you should\n"
+"     edit the build script to fit the needs of your system. Presently, only\n"
+"     network configuration files have to be edited (wpa_supplicant,\n"
+"     dhcpcd, ...).\n"
+"        Sometimes, the bash startup files are modified. The scriptlets contain\n"
+"     a line 'source /etc/profile', which ensures that the most recent startup\n"
+"     files are sourced.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:343
+#, no-wrap
+msgid "   5.3  XORG7\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:347
+#, no-wrap
+msgid ""
+"        The book has special page layouts for the Xorg7 packages. The tool\n"
+"     breaks those pages into individual pages for each packages in the linear\n"
+"     book. Also, the menu gives the choice to select each package individually.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:350
+#, no-wrap
+msgid ""
+"        To build the whole Xorg7 chapter, select xinit. The (recommended)\n"
+"     dependency chain brings in the whole set of Xorg packages.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:352
+#, no-wrap
+msgid "   5.4  PATCHES\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:356
+#, no-wrap
+msgid ""
+"        Please, make sure that all scripts have the commands to download/apply\n"
+"     the required patches. Due to book layout issues, some patches may be\n"
+"     missing (as of BLFS 8.0, all the patches seem to be downloaded).\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:358
+#, no-wrap
+msgid "   5.5  ROOT COMMANDS\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:364
+#, no-wrap
+msgid ""
+"        If building as a normal user (the default setting), be sure that all\n"
+"     commands that require root privileges are run using sudo. Also make sure\n"
+"     necessary root privilege commands are visible in your PATH. The scripts\n"
+"     ensure that /usr/sbin is appended to the user's PATH when running\n"
+"     privileged commands.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:380
+#, no-wrap
+msgid ""
+"        For commands necessitating root privileges, the generated scripts wrap\n"
+"     them with the construct:\n"
+"       sudo -E sh -e << ROOT_EOF\n"
+"         <commands to be executed as root with `$', ``', and `\\' escaped>\n"
+"       ROOT_EOF\n"
+"     The \"-e\" switch to sh ensures the command block exits with error if an\n"
+"     error occurs. The \"-E\" switch to sudo ensures the whole environment is\n"
+"     passed to the commands to be run with root privileges. It is effective\n"
+"     only if the /etc/sudoers file contains `Defaults setenv', or SETENV in\n"
+"     the user attributes (this is implicit if the command the user is allowed\n"
+"     to run is `ALL'). If you think it is a security issue, you may forbid\n"
+"     this flag in /etc/sudoers, but then, you have to un-escape `$' for\n"
+"     variables coming from the environment in the instructions. Although this\n"
+"     construct is rather strong, it can fail in some corner cases, so\n"
+"     carefully review those instructions.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:382
+#, no-wrap
+msgid "        Due to book layout issues, some sudo commands may be missing.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:384
+#, no-wrap
+msgid "   5.7  OTHERS\n"
+msgstr ""
+
+#. type: Plain text
+#: README.BLFS:387
+#, no-wrap
+msgid ""
+"        There may be other issues that we are not aware of. If you find\n"
+"     any, please report it to <alfs-discuss@linuxfromscratch.org>.\n"
+msgstr ""
