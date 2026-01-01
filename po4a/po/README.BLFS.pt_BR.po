@@ -475,6 +475,8 @@ msgstr ""
 #, no-wrap
 msgid "  Working files: several files are generated when first running the tool:\n"
 msgstr ""
+"  Arquivos de trabalho: vários arquivos são gerados na primeira execução\n"
+"  da ferramenta:\n"
 
 #. type: Plain text
 #: README.BLFS:181
@@ -488,12 +490,23 @@ msgid ""
 "    book-html/*             the linearized book rendered in html\n"
 "    scripts/*               the scriptlets\n"
 msgstr ""
+"    packages.xml            base de dados de pacotes gerada\n"
+"\t\t\t     automaticamente\n"
+"    Config.in               arquivo de entrada para as escolhas\n"
+"\t\t\t     controladas por menu\n"
+"    configuration           arquivo gerado pelo processo menuconfig\n"
+"    dependencies/*          arquivos registrando a árvore de\n"
+"\t\t\t     dependências\n"
+"    book.xml                o livro linearizado\n"
+"    book-html/*             o livro linearizado renderizado em HTML\n"
+"    scripts/*               os fragmentos de conjuntos de comandos\n"
+"\t\t\t     sequenciados\n"
 
 #. type: Plain text
 #: README.BLFS:183
 #, no-wrap
 msgid "  3.4 INSTALLED PACKAGES TRACKING SYSTEM:\n"
-msgstr ""
+msgstr "  3.4 SISTEMA DE RASTREAMENTO DE PACOTES INSTALADOS:\n"
 
 #. type: Plain text
 #: README.BLFS:189
@@ -505,6 +518,12 @@ msgid ""
 "    updated in the BLFS book. Do not rely on this feature as a package\n"
 "    management tool.\n"
 msgstr ""
+"       Essa ferramenta inclui um sistema de rastreamento muito simples\n"
+"    para registrar quais pacotes foram instalados usando a ferramenta.\n"
+"    Ele é usado para ignorar pacotes instalados a partir do menu de\n"
+"    seleção de alvo e para testar se um pacote instalado foi atualizado\n"
+"    no livro BLFS. Não confie nesse recurso como uma ferramenta de\n"
+"    gerenciamento de pacotes.\n"
 
 #. type: Plain text
 #: README.BLFS:197
