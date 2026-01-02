@@ -12,7 +12,7 @@ git clone https://salsa.debian.org/jamenson/br-alfs.git
 Chave pix para doações: jafesp@gmail.com
 
 Direitos autorais (Copyright) da Obra Derivada traduzida para o idioma 
-português escrito e falado no Brasil: (c) 2025 Jamenson Ferreira 
+português escrito e falado no Brasil: (c) 2025, 2026 Jamenson Ferreira 
 Espindula de Almeida Melo (<jafesp@gmail.com>).
 
 # Atenção: todos os documentos aqui publicados são distribuídos sem qualquer garantia, implícita e (ou) explícita.
