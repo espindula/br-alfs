@@ -656,7 +656,7 @@ msgstr ""
 #: README.BLFS:226
 #, no-wrap
 msgid "  4.2  CONFIGURING AND PARSING THE BOOK::\n"
-msgstr ""
+msgstr "  4.2  CONFIGURANDO E ANALISANDO O LIVRO::\n"
 
 #. type: Plain text
 #: README.BLFS:229
@@ -665,6 +665,8 @@ msgid ""
 "       The next step is to create a book and build scripts in dependency\n"
 "    build order for one or several packages.\n"
 msgstr ""
+"       A próxima etapa é a de criar um livro e construir scripts na\n"
+"    ordem de construção das dependências para um ou vários pacotes.\n"
 
 #. type: Plain text
 #: README.BLFS:233
@@ -676,6 +678,10 @@ msgid ""
 "layout,\n"
 "    and Optimization.\n"
 msgstr ""
+"       Execute <make> para iniciar a interface de configuração. O menu\n"
+"    principal contém quatro blocos: seleção individual de pacotes,\n"
+"    Configurações de construção, Esquema de construção e "
+"Otimização.\n"
 
 #. type: Plain text
 #: README.BLFS:240
@@ -690,6 +696,13 @@ msgid ""
 "    under a submenu may be selected at once when \"<A>\" is selected in the\n"
 "    tick box.\n"
 msgstr ""
+"       No bloco de seleção de pacotes, os menus e os submenus estão\n"
+"    organizados como partes, capítulos e seções do livro. Você consegue\n"
+"    navegar nesses menus e selecionar quantos alvos quiser. Mas nós\n"
+"    sugerimos não selecionar muitos de uma vez para estar apto(a) a\n"
+"    classificar problemas! Observe que todos os pacotes em um submenu\n"
+"    podem ser selecionados de uma vez quando \"<A>\" estiver selecionado\n"
+"    na caixa de seleção.\n"
 
 #. type: Plain text
 #: README.BLFS:248
