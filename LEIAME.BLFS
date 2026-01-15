@@ -1,0 +1,479 @@
+1. INTRODUÇÃO::
+
+     Automatizar a construção de pacotes a partir das instruções do
+  livro BLFS é uma tarefa enorme. Algumas das questões são: o livro BLFS
+  não é linear; algumas páginas de pacotes usam um esquema
+  personalizado; existem dependências circulares; vários pacotes podem
+  ser instalados em um prefixo não padrão; os comandos de construção
+  podem mudar baseados em quais dependências serão usadas, etc.
+
+     Dito isso, o objetivo da blfs-tool é o de ajudá-lo(a) a resolver
+  dependências de pacotes, criar conjuntos de comandos sequenciais de
+  construção e um Makefile. Nem todos os conjuntos de comandos
+  sequenciais de construção gerados automaticamente e Makefile
+  funcionarão "como estão"; portanto, como regra geral, você
+  precisará revisar e editar os conjuntos de comandos sequenciais
+  enquanto lê o livro.
+
+     As ferramentas blfs também permitem atualizar pacotes originários
+  do livro LFS. Pacotes do LFS que podem ser atualizados aparecem na
+  interface do menu. Quando selecionados, o fragmento do conjunto de
+  comandos sequenciais deles será gerado da mesma maneira que para os
+  pacotes do BLFS. (PARA FAZER: atualmente, quando um pacote do LFS
+  precisar de um remendo, você terá que baixá-lo manualmente para o teu
+  diretório $SRC_ARCHIVE (normalmente /sources)).
+
+2. PRERREQUISITOS::
+
+     Além de um sistema completo LFS, os seguintes pacotes e as
+  dependências deles são necessários para essa ferramenta:
+     - obrigatório: libxml2, libxslt, DocBook XML DTD
+     - recomendado: wget (para baixar os tarballs dos pacotes) e sudo
+       (para construir como um(a) usuário(a))
+     - opcional: lynx (permite ler o livro linearizado gerado), GPM
+       (para recortar e colar comandos a partir do livro), git (para
+       atualizar os fontes do livro)
+  Observe que as dependências opcionais são recomendadas para facilitar
+  o uso da ferramenta.
+
+     Você também deveria ter as seguintes habilidades pessoais:
+    - Capacidade de escrever e de depurar conjuntos de comandos
+      sequenciais de shell: como dito na introdução, nem todos os
+      conjuntos de comandos sequenciais gerados podem ser usados
+      diretamente. Eles precisam ser editados para produzir uma
+      construção livre de erros.
+    - Capacidade de depurar falhas de construção, como dependências
+      ausentes ou diretórios de instalação não conhecidos pelo sistema
+      (quando você instalar em /opt, por exemplo).
+    - Capacidade de escolher as ferramentas que você necessitar para
+      configurar e administrar teu sistema: no livro BLFS nada é
+      obrigatório, nada é inútil. Você está sozinho(a) na escolha do
+      que construir, mas decisões erradas possivelmente levem a um
+      sistema não funcional ...
+
+3. INSTALAR::
+
+     Existem duas maneiras de instalar as ferramentas BLFS em um sistema
+     LFS, descritas nos parágrafos 3.1 e 3.2, respectivamente:
+
+  3.1 INSTALAÇÃO EM UM SISTEMA LFS EXECUTANDO
+
+     Selecione "Use Book --> Beyond Linux From Scratch" no menu do
+     jhalfs:
+  As ferramentas serão instaladas em $HOME$BLFS_ROOT (o padrão para
+  $BLFS_ROOT é /blfs_root). O livro BLFS será baixado ou copiado para o
+  diretório dele. O diretório de rastreamento (veja-se abaixo) será
+  criado (se ainda não existir) e inicializado. Antes de executar
+  "make", você deveria garantir que o diretório de rastreamento (local
+  padrão /var/lib/jhalfs/BLFS) possa ser:
+    - ou criado pelo(a) usuário(a) executando "make", se não existir
+    - ou que seja escrevível pelo(a) usuário(a) executando "make", se
+      existir.
+
+  Depois da instalação, você deveria realizar os seguintes passos
+  adicionais:
+    - Configurar o sudo, adicionando os privilégios necessários para
+      o(a) usuário(a) (uma possível entrada do /etc/sudoers é fornecida
+      no LEIAME).
+    - Embora não seja estritamente necessário, é recomendado instalar os
+      arquivos de iniciação do shell bash (conforme `3. Problemas Depois
+      da Configuração do LFS' do livro BLFS), pois algumas instruções
+      no BLFS dependem de eles estarem presentes. Observe que eles podem
+      ser instalados usando-se a ferramenta selecionando-os no menu.
+    - Neste ponto, a ferramenta não tem como saber quais versões dos
+      pacotes do {B}LFS estão instaladas, de modo que a interface do
+      menu mostrará todos os pacotes, como se não estivessem instalados.
+      Você pode torná-los conhecidos pelo sistema executando o conjunto
+      de comandos sequenciais update-installed.sh e inserindo os pacotes
+      instalados com a versão deles no menu. Observe que normalmente
+      supõe-se que todos os pacotes do LFS estejam instalados, e você
+      pode usar <A> na caixa de seleção do menu para selecionar todos
+      eles.
+    - Outra maneira de tornar o sistema ciente acerca dos pacotes
+      instalados é a de criar arquivos vazios com nomes
+      <pacote>-<versão-instalada> no diretório de rastreamento e
+      executar a ferramenta. Isso possivelmente seja conveniente para
+      apenas alguns pacotes.
+
+  3.2 INSTALAÇÃO AO SE CONSTRUIR O LFS
+
+  Ao executar o menu LFS, existe uma opção para instalar as ferramentas
+  BLFS logo depois de construir o sistema LFS: apenas marque `BOOK
+  Settings/Add blfs-tool support' no menu de configuração do jhalfs. As
+  ferramentas serão instaladas em $BLFS_ROOT (padrão /blfs_root) no
+  sistema LFS, e as dependências serão construídas no final da
+  execução do jhalfs, antes das ferramentas personalizadas.
+
+  Depois de inicializar o novo sistema LFS, alguns passos são
+  necessários para finalizar a instalação das ferramentas automatizadas
+  (um exemplo de ferramenta personalizada "950-userconf" em
+  custom/examples permite realizar todos os passos até a configuração do
+  /etc/sudoers):
+
+    - Uma conta de usuário(a) precisa ser criada. Você precisa estar
+      logado(a) nessa conta de usuário(a) para usar a blfs-tool. Isso
+      não é estritamente necessário, já que os pacotes também podem ser
+      construídos como root, mas nunca é uma boa ideia construir pacotes
+      como root.
+
+    - Mova /blfs-root para o home desse(a) usuário(a) e mude a
+      titularidade da propriedade do diretório e dos arquivos para o(a)
+      usuário(a).
+
+    - Conceda para o(a) usuário(a) privilégios de leitura e de escrita
+      sobre o diretório $TRACKING_DIR e sobre os arquivos que ele
+      contiver.
+
+    - Além disso, todos os arquivos sob /sources deveriam ser legíveis e
+      escrevíveis pelo(a) usuário(a).
+
+    - Todas as ocorrências de /blfs_root no arquivo de rastreamento
+      (padrão /var/lib/jhalfs/BLFS/instpkg.xml) deveriam ser
+      substituídas por /home/<usuário(a)>/blfs_root depois da
+      movimentação. Isso também deveria ser feito no arquivo
+      "configuration" em ~/blfs_root, a menos que esse arquivo seja
+      completamente removido para iniciar novamente.
+
+    - Configure o sudo e adicione os arquivos de iniciação do shell
+      bash, conforme descrito acima (a ferramenta pode ser usada para os
+      arquivos de iniciação do shell bash).
+
+    - Observe que as versões de todos os pacotes instalados são
+      automaticamente conhecidas pela ferramenta nesse caso e não existe
+      necessidade de executar o conjunto de comandos sequenciados
+      update-installed.sh.
+
+  Nós assumimos que as ferramentas BLFS serão usadas em um sistema LFS
+  inicializado. Usá-las para construir pacotes do BLFS em uma jaula chroot
+  também é possível, mas não suportado.
+
+  3.3 ESQUEMA DE DIRETÓRIO NO DIRETÓRIO $BLFS_ROOT
+
+    LEIAME.BLFS                 este arquivo
+    PARAFAZER                   observações dos(as) desenvolvedores(as)
+				 (bem, não atualizado frequentemente)
+    blfs-menu.patch             remendo para menu/menuconfig.py exibir
+				 letras mais explícitas para menus
+    gen_pkg_book.sh             resolve dependências, gera um livro
+				 BLFS linear e, finalmente, gera
+				 conjuntos de comandos sequenciados de
+				 construção
+    gen-makefile.sh             gerar o Makefile alvo
+    progress_bar.sh             a barra de progresso do Makefile alvo
+    gen-special.sh              Conjunto de comandos sequenciados
+				 auxiliares para gerar a base de dados
+				 de pacotes
+    Makefile                    Usado pelo make para atualizar a base
+				 de dados de pacotes a partir da árvore
+				 GIT, em seguida, iniciar a interface
+				 menuconfig e executar gen_pkg_book.sh
+				 baseado nas configurações do
+				 configuration
+    packdesc.dtd                um DTD simples descrevendo o formato da
+				 base de dados de pacotes e do arquivo
+				 de rastreamento
+    update-installed.sh         Execute-o para atualizar a base de
+				 dados de pacotes instalados sem
+				 atualizá-los
+    blfs-xml/*                  Árvore GIT da versão selecionada do
+				 livro BLFS
+    lfs-xml/*                   Árvore GIT da versão selecionada do
+				 livro LFS
+    lib/constants.inc           bibliotecas de funções
+    /func_dependencies          para construir a árvore de dependências
+    menu/*                      código fonte do menuconfig
+    xsl/gen_pkg_list.xsl        Folha de estilos XSL para gerar a base
+				 de dados de pacotes
+    /gen_config.xsl             Folha de estilos XSL para gerar o
+				 arquivo Config.in para uso no sistema
+				 menuconfig
+    /gen_newpack.xsl            Folha de estilos XSL para gerar o
+				 arquivo newpack.in para uso no sistema
+				 menuconfig, ao atualizar pacotes
+				 instalados
+    /dependencies.xsl           Folha de estilos XSL para gerar a lista
+				 de dependências de um pacote
+    /make_book.xsl              Folha de estilos XSL para gerar o
+				 book.xml linear
+    /lfs_make_book.xsl          Folha de estilos XSL para incorporar
+				 páginas do LFS no book.xml linear
+    /scripts.xsl                Folha de estilos XSL para gerar os
+				 fragmentos de conjuntos de comandos
+				 sequenciados a partir do book.xml
+    /bump.xsl                   Folha de estilos XSL para atualizar o
+				 arquivo de rastreamento
+    /process-install.xsl        Folha de estilos XSL incluída por
+				 scripts.xsl, para gerar instruções
+				 limpas de instalação
+    /process-replaceable.xsl    Folha de estilos XSL incluída por
+				 scripts.xsl, para gerar instruções
+				 corretas quando uma etiqueta
+				 <replaceable> for encontrada.
+
+  Arquivos de trabalho: vários arquivos são gerados na primeira
+  execução da ferramenta:
+
+    packages.xml            base de dados de pacotes gerada
+			     automaticamente
+    Config.in               arquivo de entrada para as escolhas
+			     controladas por menu
+    configuration           arquivo gerado pelo processo menuconfig
+    dependencies/*          arquivos registrando a árvore de
+			     dependências
+    book.xml                o livro linearizado
+    book-html/*             o livro linearizado renderizado em HTML
+    scripts/*               os fragmentos de conjuntos de comandos
+			     sequenciados
+
+  3.4 SISTEMA DE RASTREAMENTO DE PACOTES INSTALADOS:
+
+       Essa ferramenta inclui um sistema de rastreamento muito simples
+    para registrar quais pacotes foram instalados usando a ferramenta.
+    Ele é usado para ignorar pacotes instalados a partir do menu de
+    seleção de alvo e para testar se um pacote instalado foi atualizado
+    no livro BLFS. Não confie nesse recurso como uma ferramenta de
+    gerenciamento de pacotes.
+
+       O próprio sistema de rastreamento é um arquivo XML: instpkg.xml.
+    Ele é inicializado quando <make> for executado pela primeira vez em
+    blfs_root. Ele reside em um diretório, que é criado quando
+    necessário durante o processo de construção de ferramentas
+    personalizadas ou dependências do blfs, logo depois do LFS. Você
+    consegue especificar o local desse diretório no submenu blfs-tools
+    do jhalfs. Você possivelmente precise atualizar as permissões e(ou)
+    a titularidade da propriedade desse diretório antes de usar a
+    ferramenta blfs (veja-se LEIAME no jhalfs).
+
+       O local padrão do diretório de rastreamento é
+    /var/lib/jhalfs/BLFS. NB: depois da construção inicial, esse
+    diretório será usado somente para conter o instpkg.xml, a menos que
+    ferramentas personalizadas tenham sido construídas. Nesse último
+    caso, ele também conterá arquivos vazios cujo nome é
+    "$PKG-$VERSION" para cada pacote versionado construído. As
+    informações acerca desses pacotes serão incluídas no instpkg.xml na
+    próxima vez que a ferramenta for executada.
+
+4. USO::
+
+       A partir de agora, todo o trabalho precisará ser feito dentro do
+    diretório raiz da instalação.
+
+       Devido à complexidade do livro BLFS, a geração de conjuntos de
+    comandos sequenciados e do Makefile é feita em diversas etapas:
+
+  4.1  ATUALIZANDO OS FONTES DO LIVRO::
+
+       Se estiver usando a versão de desenvolvimento do livro e quiser
+    atualizar os pacotes instalados para a versão mais recente
+    encontrada nesse livro, você precisa atualizar os fontes XML e a
+    base de dados de pacotes. Para fazer isso, execute "make update".
+    Isso não é necessário se acabou de construir o LFS e você pode
+    avançar para o passo 4.2.
+
+       Na próxima execução de configuração, os pacotes já instalados,
+    mas listados com uma nova versão no livro, estarão disponíveis para
+    seleção de alvo e serão usados para resolver dependências.
+
+  4.2  CONFIGURANDO E ANALISANDO O LIVRO::
+
+       A próxima etapa é a de criar um livro e construir scripts na
+    ordem de construção das dependências para um ou vários pacotes.
+
+       Execute <make> para iniciar a interface de configuração. O menu
+    principal contém quatro blocos: seleção individual de pacotes,
+    Configurações de construção, Esquema de construção e
+    Otimização.
+
+       No bloco de seleção de pacotes, os menus e os submenus estão
+    organizados como partes, capítulos e seções do livro. Você consegue
+    navegar nesses menus e selecionar quantos alvos quiser. Mas nós
+    sugerimos não selecionar muitos de uma vez para estar apto(a) a
+    classificar problemas! Observe que todos os pacotes em um submenu
+    podem ser selecionados de uma vez quando "<A>" estiver selecionado
+    na caixa de seleção.
+
+       No submenu "Configurações de Construção" o nível de
+    dependência e os pacotes padrão usados para resolver alternativas
+    são configurados (atualmente, somente para o MTA). Você também
+    consegue selecionar se a construção será feita como um(a) usuário(a)
+    normal ou como root; se usará o gerenciamento de pacotes "estilo
+    porg"; se removerá arquivos ".la"; e se as estatísticas para o
+    pacote serão geradas (tempo de construção, consumo de memória e
+    instalação "DESTDIR"). Se você usar o gerenciamento de pacotes,
+    também terá que inserir o caminho para o conjunto de comandos
+    sequenciais packInstall.sh.
+
+       No submenu "Esquema de construção", você consegue selecionar
+    onde os tarballs de fontes residem e estão baixados; onde os pacotes
+    serão construídos; e se manterá a árvore de construção depois da
+    instalação.
+
+       No submenu "Otimização", você consegue selecionar o número de
+    tarefas paralelas e configurar os CFLAGS, CXXFLAGS e LDFLAGS usuais.
+    a palavra-chave especial "EMPTY" pode ser usada para esses
+    sinalizadores para garantir que eles estejam desconfigurados.
+
+       Observe que existem sequências de caracteres de ajuda associadas
+    a esses menus. Por favor, leia-as para detalhes!
+
+       Essas configurações são salvas para serem reusadas em futuras
+    execuções de configuração.
+
+       Quando você terminar com o menu, algumas verificações ocorrerão e
+    a cadeia de dependências será gerada. Cada dependência aparecerá com
+    a prioridade dela (exigida, recomendada, opcional ou externa) e o
+    nível dela. Existe um nível raiz 1. Os pacotes selecionados tem
+    nível 2. As dependências dos pacotes selecionados tem nível 3; as
+    dependências das dependências tem nível 4 e assim por diante. Quando
+    dependências circulares forem encontradas, elas aparecerão com a
+    prioridade "circular". Isso significa que duas (ou mais) cadeias
+    de dependências chegam ao mesmo pacote. O algoritmo escolhe a cadeia
+    com maior prioridade e reordena as dependências para remover a(s)
+    outra(s) cadeia(s). Essa nem sempre é a solução que um(a) usuário(a)
+    preferiria, no entanto nós não encontramos nenhuma maneira de
+    fazê-la melhor.
+
+       Você acaba com um arquivo book.xml que contém o livro
+    linearizado, e um HTML renderizado, no diretório book-html, que você
+    consegue navegar com "lynx book-html/index.html" (ou com qualquer
+    outro navegador).
+
+       Além disso, existe um diretório "scripts", que contém os
+    fragmentos de conjuntos de comandos sequenciados gerados.
+
+       Existe ainda outro diretório, "dependencies", que contém
+    arquivos gerados durante a resolução de dependências.
+
+  4.3  EDITANDO CONJUNTOS DE COMANDOS SEQUENCIADOS DE CONSTRUÇÃO::
+
+       Agora é hora de revisar o livro e os conjuntos de comandos
+    sequenciados gerados, fazendo quaisquer mudanças nos conjuntos de
+    comandos sequenciados necessárias para corrigir defeitos de geração
+    ou para atender às tuas necessidades.
+
+       Conjuntos de comandos sequenciados para pacotes adicionais (ou
+    seja, para pacotes não-BLFS) podem ser facilmente inseridos. Por
+    exemplo, se você quiser instalar a dependência externa "bar" antes
+    do pacote "foo" e o conjunto de comandos sequenciados "foo" for
+    nomeado de "064-z-foo", você só precisa criar um conjunto de
+    comandos sequenciados de construção "064-y-bar".
+
+       Lembre-se: o sistema de rastreamento de pacotes não é uma
+    ferramenta de gerenciamento de pacotes e não sabe nada acerca de
+    pacotes fora do livro BLFS.
+
+  4.4  CRIANDO O ARQUIVO MAKE::
+
+       Quando os conjuntos de comandos sequenciados de construção
+    estiverem prontos para serem executados, o Makefile poderá ser
+    criado. Crie um subdiretório vazio (por exemplo "mkdir work") e
+    mude para esse diretório. Em seguida, execute ../gen-makefile.sh.
+    Observe que o diretório será completamente esvaziado antes de gerar
+    o Makefile, de forma que, para evitar a eliminação de dados úteis, o
+    conjunto de comandos sequenciados garante que o nome do atual
+    diretório de trabalho comece com "work".
+
+    Revise o Makefile e, se tudo parecer são, inicie a construção
+    executando "make".
+
+5. PROBLEMAS DOS CONJUNTOS DE COMANDOS SEQUENCIADOS DE CONSTRUÇÃO
+   GERADOS::
+
+      Nesta seção, problemas conhecidos com os conjuntos de comandos
+   sequenciados de construção gerados são discutidos. Eles são devidos a
+   procedimentos de construção e(ou) particularidades de esquema do BLFS
+   com as quais nós não conseguimos lidar. Em vários casos, editar os
+   conjuntos de comandos sequenciados de construção é obrigatório. Você
+   também possivelmente precise inserir alguns conjuntos de comandos
+   sequenciados de construção criados por você para resolver
+   dependências não tratadas e(ou) remover algum conjunto de comandos
+   sequenciados que instala um pacote desnecessário (pacotes
+   desnecessários podem ser puxados na cadeia de dependências, se eles
+   ocorrerem como um "ou" com outro pacote). Quando existirem
+   dependências circulares não conhecidas no livro (isso ocorre somente
+   para dependências opcionais), você possivelmente precise mover os
+   conjuntos de comandos sequenciados, de forma que eles sejam
+   executados na ordem conjunto-A conjunto-B conjunto-A. Isso envolve
+   copiar conjunto-A para outro nome (usando os campos xxx-a-). Observe
+   que isso deveria ser feito antes de se gerar o Makefile no diretório
+   "work".
+
+   5.1  CONJUNTOS DE COMANDOS SEQUENCIADOS DE INICIALIZAÇÃO DO BLFS::
+
+        Normalmente, a instalação do conjunto de comandos sequenciados
+     de inicialização deveria funcionar. Por outro lado, o livro não
+     fornece instruções para executá-los, de forma que você pode ter que
+     inserir manualmente
+     "/etc/init.d/rc.d/<conjunto_de_comandos_sequenciados_de_iniciação>
+     start" em algum lugar durante a construção.
+
+   5.2  CONFIGURAÇÃO DE PACOTE::
+
+        Para aqueles pacotes que tenham uma seção "Configuração", você
+     deveria editar o conjunto de comandos sequenciados de construção
+     para atender às necessidades do teu sistema. Atualmente, somente os
+     arquivos de configuração de rede de intercomunicação tem de ser
+     editados (wpa_supplicant, dhcpcd, ...). Às vezes, os arquivos de
+     iniciação do Bash são modificados. Os fragmentos de conjuntos de
+     comandos sequenciados contêm uma linha 'source /etc/profile', que
+     garante que os arquivos de iniciação mais recentes sejam
+     carregados.
+
+   5.3  XORG7
+
+        O livro tem esquemas especiais de páginas para os pacotes do
+     Xorg7. A ferramenta quebra essas páginas em páginas individuais
+     para cada pacote no livro linear. Além disso, o menu fornece a
+     escolha de selecionar cada pacote individualmente.
+
+        Para construir o capítulo inteiro do Xorg7, selecione xinit. A
+     cadeia de dependências (recomendada) traz o conjunto inteiro dos
+     pacotes do Xorg.
+
+   5.4  REMENDOS
+
+        Por favor, certifique-se de que todos os conjuntos de comandos
+     sequenciados tenham os comandos para baixar/aplicar os remendos
+     exigidos. Devido a problemas de esquema do livro, alguns remendos
+     possivelmente estejam ausentes (a partir do BLFS 8.0, todos os
+     remendos parecem ser baixados).
+
+   5.5  COMANDOS DO(A) ROOT
+
+        Se construir como um(a) usuário(a) normal (a configuração
+     padrão), certifique-se de que todos os comandos que exigem
+     privilégios de root sejam executados usando sudo. Certifique-se
+     também de que os necessários comandos de privilégio de root estejam
+     visíveis em tua PATH. Os conjuntos de comandos sequenciados
+     garantem que /usr/sbin seja posposto à PATH do(a) usuário(a) ao
+     executar comandos privilegiados.
+
+        Para comandos que necessitam de privilégios de root, os
+     conjuntos de comandos sequenciados gerados os envolucram com o
+     constructo:
+       sudo -E sh -e << ROOT_EOF
+         <comandos a serem executados como root com `$', ``' e `\'
+         escapados>
+       ROOT_EOF
+     A chave "-e" para sh garante que o bloco de comandos saia com
+     erro se um erro ocorrer. A chave "-E" para sudo garante que o
+     ambiente inteiro seja passado para os comandos serem executados com
+     privilégios de root. Ele é efetivo somente se o arquivo
+     /etc/sudoers contiver `Defaults setenv' ou SETENV nos atributos de
+     usuário(a) (isso está implícito se o comando que ao(a) usuário(a)
+     for permitido executar contiver `ALL'). Se pensar que ele é um
+     problema de segurança, você pode proibir esse sinalizador no
+     /etc/sudoers, mas então você terá que desescapar `$' para variáveis
+     vindas do ambiente nas instruções. Embora esse constructo seja
+     bastante forte, ele pode falhar em alguns casos extremos; portanto,
+     revise cuidadosamente essas instruções.
+
+        Devido a problemas de esquema do livro, alguns comandos sudo
+        possivelmente estejam ausentes.
+
+   5.7  OUTROS
+
+        Possivelmente existam outros problemas dos quais nós não
+     estejamos cientes. Se você encontrar algum, por favor informe-os
+     para <alfs-discuss@linuxfromscratch.org>.
+
