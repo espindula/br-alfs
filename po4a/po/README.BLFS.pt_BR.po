@@ -910,7 +910,7 @@ msgstr ""
 #: README.BLFS:298
 #, no-wrap
 msgid "  4.4  CREATING THE MAKEFILE::\n"
-msgstr ""
+msgstr "  4.4  CRIANDO O ARQUIVO MAKE::\n"
 
 #. type: Plain text
 #: README.BLFS:305
@@ -924,6 +924,14 @@ msgid ""
 "    erasing useful data, the script ensures that the name of the current\n"
 "    working directory starts with \"work\".\n"
 msgstr ""
+"       Quando os conjuntos de comandos sequenciados de construção\n"
+"    estiverem prontos para serem executados, o Makefile poderá ser\n"
+"    criado. Crie um subdiretório vazio (por exemplo \"mkdir work\") e\n"
+"    mude para esse diretório. Em seguida, execute ../gen-makefile.sh.\n"
+"    Observe que o diretório será completamente esvaziado antes de gerar\n"
+"    o Makefile, de forma que, para evitar a eliminação de dados úteis, o\n"
+"    conjunto de comandos sequenciados garante que o nome do atual\n"
+"    diretório de trabalho comece com \"work\".\n"
 
 #. type: Plain text
 #: README.BLFS:308
