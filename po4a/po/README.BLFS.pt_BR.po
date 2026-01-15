@@ -997,6 +997,7 @@ msgstr ""
 #, no-wrap
 msgid "   5.1  BLFS BOOTSCRIPTS::\n"
 msgstr ""
+"   5.1  CONJUNTOS DE COMANDOS SEQUENCIADOS DE INICIALIZAÇÃO DO BLFS::\n"
 
 #. type: Plain text
 #: README.BLFS:331
@@ -1009,12 +1010,19 @@ msgid ""
 "during\n"
 "     the build.\n"
 msgstr ""
+"        Normalmente, a instalação do conjunto de comandos sequenciados\n"
+"     de inicialização deveria funcionar. Por outro lado, o livro não\n"
+"     fornece instruções para executá-los, de forma que você pode ter "
+"que\n"
+"     inserir manualmente\n"
+"     \"/etc/init.d/rc.d/<conjunto_de_comandos_sequenciados_de_iniciação>\n"
+"     start\" em algum lugar durante a construção.\n"
 
 #. type: Plain text
 #: README.BLFS:333
 #, no-wrap
 msgid "   5.2  PACKAGE CONFIGURATION::\n"
-msgstr ""
+msgstr "   5.2  CONFIGURAÇÃO DE PACOTE::\n"
 
 #. type: Plain text
 #: README.BLFS:341
@@ -1031,12 +1039,22 @@ msgid ""
 "startup\n"
 "     files are sourced.\n"
 msgstr ""
+"        Para aqueles pacotes que tenham uma seção \"Configuração\", "
+"você\n"
+"     deveria editar o conjunto de comandos sequenciados de construção\n"
+"     para atender às necessidades do teu sistema. Atualmente, somente os\n"
+"     arquivos de configuração de rede de intercomunicação tem de ser\n"
+"     editados (wpa_supplicant, dhcpcd, ...). Às vezes, os arquivos de\n"
+"     iniciação do Bash são modificados. Os fragmentos de conjuntos de\n"
+"     comandos sequenciados contêm uma linha 'source /etc/profile', que\n"
+"     garante que os arquivos de iniciação mais recentes sejam\n"
+"     carregados.\n"
 
 #. type: Plain text
 #: README.BLFS:343
 #, no-wrap
 msgid "   5.3  XORG7\n"
-msgstr ""
+msgstr "   5.3  XORG7\n"
 
 #. type: Plain text
 #: README.BLFS:347
@@ -1048,6 +1066,10 @@ msgid ""
 "     book. Also, the menu gives the choice to select each package "
 "individually.\n"
 msgstr ""
+"        O livro tem esquemas especiais de páginas para os pacotes do\n"
+"     Xorg7. A ferramenta quebra essas páginas em páginas individuais\n"
+"     para cada pacote no livro linear. Além disso, o menu fornece a\n"
+"     escolha de selecionar cada pacote individualmente.\n"
 
 #. type: Plain text
 #: README.BLFS:350
@@ -1056,6 +1078,9 @@ msgid ""
 "        To build the whole Xorg7 chapter, select xinit. The (recommended)\n"
 "     dependency chain brings in the whole set of Xorg packages.\n"
 msgstr ""
+"        Para construir o capítulo inteiro do Xorg7, selecione xinit. A\n"
+"     cadeia de dependências (recomendada) traz o conjunto inteiro dos\n"
+"     pacotes do Xorg.\n"
 
 #. type: Plain text
 #: README.BLFS:352
