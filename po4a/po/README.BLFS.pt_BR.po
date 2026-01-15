@@ -680,8 +680,8 @@ msgid ""
 msgstr ""
 "       Execute <make> para iniciar a interface de configuração. O menu\n"
 "    principal contém quatro blocos: seleção individual de pacotes,\n"
-"    Configurações de construção, Esquema de construção e "
-"Otimização.\n"
+"    Configurações de construção, Esquema de construção e\n"
+"    Otimização.\n"
 
 #. type: Plain text
 #: README.BLFS:240
@@ -721,18 +721,17 @@ msgid ""
 "    management, you have to enter the path to the packInstall.sh script "
 "too.\n"
 msgstr ""
-"       No submenu \"Configurações de Construção\" o nível de "
-"dependência\n"
-"    e os pacotes padrão usados para resolver alternativas são\n"
-"    configurados (atualmente, somente para o MTA). Você também consegue\n"
-"    selecionar se a construção será feita como um(a) usuário(a) normal\n"
-"    ou como root; se usará o gerenciamento de pacotes \"estilo porg\";\n"
-"    se removerá arquivos \".la\"; e se as estatísticas para o pacote\n"
-"    serão geradas (tempo de construção, consumo de memória e "
-"instalação\n"
-"    \"DESTDIR\"). Se você usar o gerenciamento de pacotes, também terá\n"
-"    que inserir o caminho para o conjunto de comandos sequenciais\n"
-"    packInstall.sh.\n"
+"       No submenu \"Configurações de Construção\" o nível de\n"
+"    dependência e os pacotes padrão usados para resolver alternativas\n"
+"    são configurados (atualmente, somente para o MTA). Você também\n"
+"    consegue selecionar se a construção será feita como um(a) "
+"usuário(a)\n"
+"    normal ou como root; se usará o gerenciamento de pacotes \"estilo\n"
+"    porg\"; se removerá arquivos \".la\"; e se as estatísticas para o\n"
+"    pacote serão geradas (tempo de construção, consumo de memória e\n"
+"    instalação \"DESTDIR\"). Se você usar o gerenciamento de pacotes,\n"
+"    também terá que inserir o caminho para o conjunto de comandos\n"
+"    sequenciais packInstall.sh.\n"
 
 #. type: Plain text
 #: README.BLFS:252
@@ -1086,7 +1085,7 @@ msgstr ""
 #: README.BLFS:352
 #, no-wrap
 msgid "   5.4  PATCHES\n"
-msgstr ""
+msgstr "   5.4  REMENDOS\n"
 
 #. type: Plain text
 #: README.BLFS:356
@@ -1097,12 +1096,17 @@ msgid ""
 "     the required patches. Due to book layout issues, some patches may be\n"
 "     missing (as of BLFS 8.0, all the patches seem to be downloaded).\n"
 msgstr ""
+"        Por favor, certifique-se de que todos os conjuntos de comandos\n"
+"     sequenciados tenham os comandos para baixar/aplicar os remendos\n"
+"     exigidos. Devido a problemas de esquema do livro, alguns remendos\n"
+"     possivelmente estejam ausentes (a partir do BLFS 8.0, todos os\n"
+"     remendos parecem ser baixados).\n"
 
 #. type: Plain text
 #: README.BLFS:358
 #, no-wrap
 msgid "   5.5  ROOT COMMANDS\n"
-msgstr ""
+msgstr "   5.5  COMANDOS DO(A) ROOT\n"
 
 #. type: Plain text
 #: README.BLFS:364
@@ -1117,6 +1121,13 @@ msgid ""
 "     ensure that /usr/sbin is appended to the user's PATH when running\n"
 "     privileged commands.\n"
 msgstr ""
+"        Se construir como um(a) usuário(a) normal (a configuração\n"
+"     padrão), certifique-se de que todos os comandos que exigem\n"
+"     privilégios de root sejam executados usando sudo. Certifique-se\n"
+"     também de que os necessários comandos de privilégio de root estejam\n"
+"     visíveis em tua PATH. Os conjuntos de comandos sequenciados\n"
+"     garantem que /usr/sbin seja posposto à PATH do(a) usuário(a) ao\n"
+"     executar comandos privilegiados.\n"
 
 #. type: Plain text
 #: README.BLFS:380
@@ -1143,18 +1154,40 @@ msgid ""
 "     construct is rather strong, it can fail in some corner cases, so\n"
 "     carefully review those instructions.\n"
 msgstr ""
+"        Para comandos que necessitam de privilégios de root, os\n"
+"     conjuntos de comandos sequenciados gerados os envolucram com o\n"
+"     constructo:\n"
+"       sudo -E sh -e << ROOT_EOF\n"
+"         <comandos a serem executados como root com `$', ``' e `\\'\n"
+"         escapados>\n"
+"       ROOT_EOF\n"
+"     A chave \"-e\" para sh garante que o bloco de comandos saia com\n"
+"     erro se um erro ocorrer. A chave \"-E\" para sudo garante que o\n"
+"     ambiente inteiro seja passado para os comandos serem executados com\n"
+"     privilégios de root. Ele é efetivo somente se o arquivo\n"
+"     /etc/sudoers contiver `Defaults setenv' ou SETENV nos atributos de\n"
+"     usuário(a) (isso está implícito se o comando que ao(a) usuário(a)\n"
+"     for permitido executar contiver `ALL'). Se pensar que ele é um\n"
+"     problema de segurança, você pode proibir esse sinalizador no\n"
+"     /etc/sudoers, mas então você terá que desescapar `$' para "
+"variáveis\n"
+"     vindas do ambiente nas instruções. Embora esse constructo seja\n"
+"     bastante forte, ele pode falhar em alguns casos extremos; portanto,\n"
+"     revise cuidadosamente essas instruções.\n"
 
 #. type: Plain text
 #: README.BLFS:382
 #, no-wrap
 msgid "        Due to book layout issues, some sudo commands may be missing.\n"
 msgstr ""
+"        Devido a problemas de esquema do livro, alguns comandos sudo\n"
+"        possivelmente estejam ausentes.\n"
 
 #. type: Plain text
 #: README.BLFS:384
 #, no-wrap
 msgid "   5.7  OTHERS\n"
-msgstr ""
+msgstr "   5.7  OUTROS\n"
 
 #. type: Plain text
 #: README.BLFS:387
@@ -1163,3 +1196,6 @@ msgid ""
 "        There may be other issues that we are not aware of. If you find\n"
 "     any, please report it to <alfs-discuss@linuxfromscratch.org>.\n"
 msgstr ""
+"        Possivelmente existam outros problemas dos quais nós não\n"
+"     estejamos cientes. Se você encontrar algum, por favor informe-os\n"
+"     para <alfs-discuss@linuxfromscratch.org>.\n"
