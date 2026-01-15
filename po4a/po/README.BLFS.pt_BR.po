@@ -940,11 +940,14 @@ msgid ""
 "    Review the Makefile, and, if all looks sane, start the build by running\n"
 "    \"make\".\n"
 msgstr ""
+"    Revise o Makefile e, se tudo parecer são, inicie a construção\n"
+"    executando \"make\".\n"
 
 #. type: Bullet: '5. '
 #: README.BLFS:310
 msgid "GENERATED BUILD SCRIPTS ISSUES::"
 msgstr ""
+"PROBLEMAS DOS CONJUNTOS DE COMANDOS SEQUENCIADOS DE CONSTRUÇÃO GERADOS::"
 
 #. type: Plain text
 #: README.BLFS:324
@@ -968,6 +971,26 @@ msgid ""
 "this\n"
 "   should be done before generating the Makefile in the \"work\" directory.\n"
 msgstr ""
+"      Nesta seção, problemas conhecidos com os conjuntos de comandos\n"
+"   sequenciados de construção gerados são discutidos. Eles são devidos "
+"a\n"
+"   procedimentos de construção e(ou) particularidades de esquema do BLFS\n"
+"   com as quais nós não conseguimos lidar. Em vários casos, editar os\n"
+"   conjuntos de comandos sequenciados de construção é obrigatório. "
+"Você\n"
+"   também possivelmente precise inserir alguns conjuntos de comandos\n"
+"   sequenciados de construção criados por você para resolver\n"
+"   dependências não tratadas e(ou) remover algum conjunto de comandos\n"
+"   sequenciados que instala um pacote desnecessário (pacotes\n"
+"   desnecessários podem ser puxados na cadeia de dependências, se eles\n"
+"   ocorrerem como um \"ou\" com outro pacote). Quando existirem\n"
+"   dependências circulares não conhecidas no livro (isso ocorre somente\n"
+"   para dependências opcionais), você possivelmente precise mover os\n"
+"   conjuntos de comandos sequenciados, de forma que eles sejam\n"
+"   executados na ordem conjunto-A conjunto-B conjunto-A. Isso envolve\n"
+"   copiar conjunto-A para outro nome (usando os campos xxx-a-). Observe\n"
+"   que isso deveria ser feito antes de se gerar o Makefile no diretório\n"
+"   \"work\".\n"
 
 #. type: Plain text
 #: README.BLFS:326
