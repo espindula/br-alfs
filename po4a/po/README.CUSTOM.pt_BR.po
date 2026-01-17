@@ -64,13 +64,15 @@ msgstr ""
 #: README.CUSTOM:17
 #, no-wrap
 msgid "        BASE SYSTEM CUSTOMIZATION\n"
-msgstr ""
+msgstr "        PERSONALIZAÇÃO DO SISTEMA BÁSICO\n"
 
 #. type: Plain text
 #: README.CUSTOM:19
 #, no-wrap
 msgid "  There are two ways to alter how the base system will be built:\n"
 msgstr ""
+"  Existem duas maneiras de alterar como o sistema básico será\n"
+"  construído:\n"
 
 #. type: Bullet: '  - '
 #: README.CUSTOM:23
@@ -79,6 +81,10 @@ msgid ""
 "the way used by book editors to test packages upgrades, command changes, "
 "build order changes. etc."
 msgstr ""
+"Usando uma cópia de trabalho dos fontes do livro e editando os arquivos "
+"XML. Essa é a maneira usada pelos(as) editores(as) do livro para testar "
+"atualizações de pacotes, mudanças de comandos, mudanças da ordem da "
+"construção, entre outras."
 
 #. type: Plain text
 #: README.CUSTOM:26
@@ -87,6 +93,8 @@ msgid ""
 "    This method requires you know very well the book sources and what\n"
 "    files need be edited. It will not be discussed here.\n"
 msgstr ""
+"    Esse método exige que você conheça muito bem os fontes do livro e\n"
+"    quais arquivos precisam ser editados. Não será discutido aqui.\n"
 
 #. type: Bullet: '  - '
 #: README.CUSTOM:29
@@ -94,12 +102,14 @@ msgid ""
 "Editing the generated build scripts to make any change you want.  This is "
 "the method discussed below."
 msgstr ""
+"Editar os conjuntos de comandos sequenciados de construção gerados para "
+"fazer qualquer mudança que você queira. Esse é o método discutido abaixo."
 
 #. type: Plain text
 #: README.CUSTOM:32
 #, no-wrap
 msgid "  EDITING THE BASE SCRIPTS\n"
-msgstr ""
+msgstr "  EDITANDO OS CONJUNTOS DE COMANDOS SEQUENCIADOS BÁSICOS\n"
 
 #. type: Plain text
 #: README.CUSTOM:36
@@ -111,6 +121,11 @@ msgid ""
 "not\n"
 "select \"Run the Makefile\" option.\n"
 msgstr ""
+"  Para começar, os scripts de construção deveriam ser gerados com os\n"
+"padrões do livro. Para fazer isso, configure o jhalfs ativando qualquer\n"
+"opção que você queira incluída, mas não selecione a opção \"Executar "
+"o\n"
+"Makefile\".\n"
 
 #. type: Plain text
 #: README.CUSTOM:40
@@ -121,6 +136,10 @@ msgid ""
 "/mnt/build_dir/jhalfs/lfs-commands) you will find the default build "
 "scripts.\n"
 msgstr ""
+"  Sob o diretório ${BUILD_DIR}/${SCRIPT_ROOT}/$COMMANDS (usando os\n"
+"valores padrão para fazer uma construção do LFS, esse nome de diretório\n"
+"é /mnt/build_dir/jhalfs/lfs-commands) você encontrará os conjuntos de\n"
+"comandos sequenciados padrão da construção.\n"
 
 #. type: Plain text
 #: README.CUSTOM:46
@@ -133,18 +152,28 @@ msgid ""
 "${BUILD_DIR}/sources directory. When done, run 'make' from inside the\n"
 "${BUILD_DIR}/${SCRIPT_ROOT} directory.\n"
 msgstr ""
+"  Se tudo o que você quer for modificar, adicionar ou remover algum\n"
+"comando proveniente de uma instalação de pacote, por exemplo, para\n"
+"mudar a linha ./configure dele, basta editar o conjunto relacionado de\n"
+"comandos sequenciados. Se mudar ou adicionar um remendo, certifique-se\n"
+"de copiar o novo remendo para o diretório ${BUILD_DIR}/sources. Quando\n"
+"terminar, execute \"make\" a partir de dentro do diretório\n"
+"${BUILD_DIR}/${SCRIPT_ROOT}.\n"
 
 #. type: Plain text
 #: README.CUSTOM:49
 #, no-wrap
 msgid "  REPLACING OR INSERTING PACKAGES AND CHANGING BUILD ORDER\n"
 msgstr ""
+"  SUBSTITUINDO OU INSERINDO PACOTES E MUDANDO A ORDEM DA CONSTRUÇÃO\n"
 
 #. type: Plain text
 #: README.CUSTOM:51
 #, no-wrap
 msgid "  To remove a package from the system, just remove its script(s).\n"
 msgstr ""
+"  Para remover um pacote do sistema, basta remover o(s) conjunto(s) dele de "
+"comandos sequenciados.\n"
 
 #. type: Plain text
 #: README.CUSTOM:56
@@ -157,6 +186,11 @@ msgid ""
 "${BUILD_DIR}/sources\n"
 "directory.\n"
 msgstr ""
+"  Para mudar a versão de algum pacote, ou para construir uma versão mais\n"
+"recente ou mais antiga que aquela no livro, edite\n"
+"${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list para mudar o nome do\n"
+"tarball dele e coloque o novo tarball no diretório\n"
+"${BUILD_DIR}/sources.\n"
 
 #. type: Plain text
 #: README.CUSTOM:63
@@ -172,6 +206,13 @@ msgid ""
 "file to replace the removed package tarball name by the new package tarball\n"
 "name.\n"
 msgstr ""
+"  Para substituir um pacote por um equivalente, renomeie o conjunto de\n"
+"comandos sequenciados do pacote substituído para refletir o novo nome\n"
+"do pacote (por exemplo, 102-man-db -> 102-man), edite o conjunto de\n"
+"comandos sequenciados para fazer as mudanças exigidas nos comandos,\n"
+"coloque o novo tarball no diretório ${BUILD_DIR}/sources e edite o\n"
+"arquivo ${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list para substituir o\n"
+"nome do tarball do pacote removido pelo novo tarball do pacote.\n"
 
 #. type: Plain text
 #: README.CUSTOM:66
@@ -180,6 +221,9 @@ msgid ""
 "  To change the build order, rename the scripts changing the first 3-digits\n"
 "string until they are sorted in the way you want.\n"
 msgstr ""
+"  Para mudar a ordem da construção, renomeie os conjuntos de comandos\n"
+"sequenciados mudando a primeira sequência de 3 dígitos até que eles\n"
+"estejam ordenados da maneira que você queira.\n"
 
 #. type: Plain text
 #: README.CUSTOM:78
@@ -203,6 +247,21 @@ msgid ""
 "that\n"
 "package.\n"
 msgstr ""
+"  Para inserir um novo pacote, por exemplo para construir Cracklib para\n"
+"a finalidade de construir Shadow com suporte ao Cracklib, você deveria\n"
+"primeiro decidir antes qual pacote precisa ser instalado, nesse exemplo\n"
+"107-shadow. Em seguida, crie um novo conjunto de comandos sequenciados\n"
+"contendo os comandos necessários, usando um existente como modelo, e\n"
+"nomeie-o com a mesma sequência de 3 dígitos usada para o pacote padrão\n"
+"mencionado, mas adicionando outra sequência de 1 dígito. Em nosso\n"
+"exemplo, o novo conjunto de comandos sequenciados para construir\n"
+"Cracklib antes do Shadow será nominado 107-1-cracklib. Esse esquema de\n"
+"nomenclatura permite inserir até 10 conjuntos de comandos sequenciados\n"
+"antes de cada um dos conjuntos de comandos sequenciados existentes.\n"
+"Coloque o tarball para o novo pacote e os remendos exigidos, se\n"
+"existirem, em ${BUILD_DIR}/sources e edite\n"
+"${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list para adicionar o nome do\n"
+"tarball para esse pacote.\n"
 
 #. type: Plain text
 #: README.CUSTOM:84
@@ -216,6 +275,14 @@ msgid ""
 "create a\n"
 "new Makefile based on the changes you made to the build scripts.\n"
 msgstr ""
+"  Quando estiver pronto(a), inicie novamente a interface de configuração\n"
+"do jhalfs. Certifique-se de que exatamente as mesmas opções estejam\n"
+"selecionadas que ao gerar os conjuntos padrão de comandos sequenciados\n"
+"de construção. Certifique-se de que \"Reconstruir arquivos\" esteja\n"
+"deselecionado e selecione \"Executar o Makefile\" se você quiser. Em\n"
+"seguida, selecione \"Reconstruir o Makefile\". Isso criará um novo\n"
+"Makefile baseado nas mudanças que você fez nos conjuntos de comandos\n"
+"sequenciados de construção.\n"
 
 #. type: Plain text
 #: README.CUSTOM:87
