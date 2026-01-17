@@ -1,0 +1,289 @@
+	COMO ADICIONAR CONJUNTOS DE COMANDOS SEQUENCIADOS PERSONALIZADOS AO MAKEFILE DO JHALFS
+
+
+  Normalmente JHALFS cria um Makefile contendo somente aqueles conjuntos
+de comandos sequenciados encontrados nos livros {,B}LFS. Uma ferramenta
+de construção automatizada não consegue prever as necessidades de cada
+indivíduo(a) e solicitações são feitas "Você pode adicionar pacote
+xxxx". Em vez de adicionar numerosos conjuntos de comandos sequenciados
+e chaves de pacotes para cada solicitação, foi mais fácil adicionar uma
+ferramenta para o(a)(s) usuário(a)(s) codificar(em) as próprias
+necessidades de pacotes dele(a)(s).
+
+  Existem duas áreas que podem ser personalizadas: como o sistema básico
+é construído e quais configurações e pacotes adicionais teu hardware
+exige para estar apto para inicializar e executar. Cada uma dessas áreas
+é tratada de uma maneira diferente.
+
+
+
+        PERSONALIZAÇÃO DO SISTEMA BÁSICO
+
+  Existem duas maneiras de alterar como o sistema básico será
+  construído:
+
+  - Usando uma cópia de trabalho dos fontes do livro e editando os
+    arquivos XML. Essa é a maneira usada pelos(as) editores(as) do
+    livro para testar atualizações de pacotes, mudanças de comandos,
+    mudanças da ordem da construção, entre outras.
+
+    Esse método exige que você conheça muito bem os fontes do livro e
+    quais arquivos precisam ser editados. Não será discutido aqui.
+
+  - Editar os conjuntos de comandos sequenciados de construção gerados
+    para fazer qualquer mudança que você queira. Esse é o método
+    discutido abaixo.
+
+
+  EDITANDO OS CONJUNTOS DE COMANDOS SEQUENCIADOS BÁSICOS
+
+  Para começar, os conjuntos de comandos sequenciados de construção
+deveriam ser gerados com os padrões do livro. Para fazer isso,
+configure o jhalfs ativando qualquer opção que você queira incluída,
+mas não selecione a opção "Executar o Makefile".
+
+  Sob o diretório ${BUILD_DIR}/${SCRIPT_ROOT}/$COMMANDS (usando os
+valores padrão para fazer uma construção do LFS, esse nome de diretório
+é /mnt/build_dir/jhalfs/lfs-commands) você encontrará os conjuntos de
+comandos sequenciados padrão da construção.
+
+  Se tudo o que você quer for modificar, adicionar ou remover algum
+comando proveniente de uma instalação de pacote, por exemplo, para
+mudar a linha ./configure dele, basta editar o conjunto relacionado de
+comandos sequenciados. Se mudar ou adicionar um remendo, certifique-se
+de copiar o novo remendo para o diretório ${BUILD_DIR}/sources. Quando
+terminar, execute "make" a partir de dentro do diretório
+${BUILD_DIR}/${SCRIPT_ROOT}.
+
+
+  SUBSTITUINDO OU INSERINDO PACOTES E MUDANDO A ORDEM DA CONSTRUÇÃO
+
+  Para remover um pacote do sistema, basta remover o(s) conjunto(s) dele de comandos sequenciados.
+
+  Para mudar a versão de algum pacote, ou para construir uma versão mais
+recente ou mais antiga que aquela no livro, edite
+${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list para mudar o nome do
+tarball dele e coloque o novo tarball no diretório
+${BUILD_DIR}/sources.
+
+  Para substituir um pacote por um equivalente, renomeie o conjunto de
+comandos sequenciados do pacote substituído para refletir o novo nome
+do pacote (por exemplo, 102-man-db -> 102-man), edite o conjunto de
+comandos sequenciados para fazer as mudanças exigidas nos comandos,
+coloque o novo tarball no diretório ${BUILD_DIR}/sources e edite o
+arquivo ${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list para substituir o
+nome do tarball do pacote removido pelo novo tarball do pacote.
+
+  Para mudar a ordem da construção, renomeie os conjuntos de comandos
+sequenciados mudando a primeira sequência de 3 dígitos até que eles
+estejam ordenados da maneira que você queira.
+
+  Para inserir um novo pacote, por exemplo para construir Cracklib para
+a finalidade de construir Shadow com suporte ao Cracklib, você deveria
+primeiro decidir antes qual pacote precisa ser instalado, nesse exemplo
+107-shadow. Em seguida, crie um novo conjunto de comandos sequenciados
+contendo os comandos necessários, usando um existente como modelo, e
+nomeie-o com a mesma sequência de 3 dígitos usada para o pacote padrão
+mencionado, mas adicionando outra sequência de 1 dígito. Em nosso
+exemplo, o novo conjunto de comandos sequenciados para construir
+Cracklib antes do Shadow será nominado 107-1-cracklib. Esse esquema de
+nomenclatura permite inserir até 10 conjuntos de comandos sequenciados
+antes de cada um dos conjuntos de comandos sequenciados existentes.
+Coloque o tarball para o novo pacote e os remendos exigidos, se
+existirem, em ${BUILD_DIR}/sources e edite
+${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list para adicionar o nome do
+tarball para esse pacote.
+
+  Quando estiver pronto(a), inicie novamente a interface de configuração
+do jhalfs. Certifique-se de que exatamente as mesmas opções estejam
+selecionadas que ao gerar os conjuntos padrão de comandos sequenciados
+de construção. Certifique-se de que "Reconstruir arquivos" esteja
+deselecionado e selecione "Executar o Makefile" se você quiser. Em
+seguida, selecione "Reconstruir o Makefile". Isso criará um novo
+Makefile baseado nas mudanças que você fez nos conjuntos de comandos
+sequenciados de construção.
+
+
+       ADICIONANDO ARQUIVOS DE CONFIGURAÇÃO PÓS-CONSTRUÇÃO DO SISTEMA E
+       PACOTES EXTRAS
+
+  A instalação de pacotes do BLFS é feita via blfs-tool e ativada quando
+você selecionar a opção de menu apropriada. Veja-se LEIAME e LEIAME.BLFS
+para mais informações.
+
+  O recurso descrito abaixo foi adicionado para que usuários(as)
+pudessem instalar arquivos de configuração restantes, construir os
+pacotes necessários para acessar a Internet ou para suportar hardware
+específico; ou para instalar utilitários básicos que sejam necessários
+desde o início, e não foi destinado para substituir o sistema de
+instalação do BLFS.
+
+  ESQUEMA
+  Um novo diretório foi adicionado à árvore JHALFS que contém os
+conjuntos de comandos sequenciados de configuração e alguns exemplos.
+Uma chave foi adicionada ao arquivo de configuração que
+habilita/desabilita a inclusão de conjuntos de comandos sequenciados
+personalizados.
+
+    custom
+      /config          <-- onde colocar teus conjuntos de comandos
+                           sequenciados.
+      /examples        <-- alguns conjuntos de comandos sequenciados de
+                           exemplo
+      template         <-- TODOS os conjuntos de comandos sequenciados
+                           PRECISAM se parecer com isso
+
+
+  OBSERVE::: Você é responsável por incluir todas as dependências e por
+garantir que elas sejam construídas na ordem correta.
+
+  1. Para adicionar um pacote ao Makefile final do JHALFS você precisa
+     primeiro criar um arquivo no diretório custom/config. O diretório
+     custom/config possivelmente precise ser criado primeiro.
+       **Todos os arquivos de configuração PRECISAM seguir a convenção
+       de nomenclatura, xxx-PKG, onde xxx é o número de ordem e PKG é o
+       nome do pacote. O formato de nomenclatura do arquivo é importante
+       porque ele define a ordem da construção. O exemplo mostrado
+       abaixo tem um número de ordem 950 e os arquivos de registro
+       listarão em ordem alfabética no diretório /logs depois dos
+       conjuntos de comandos sequenciados do blfs-tools. O método mais
+       simples é o de copiar o arquivo de modelo para o diretório de
+       configuração e renomeá-lo.
+
+  2. Povoe as variáveis com os valores necessários.
+       A função da variável é autoexplicativa. As variáveis PATCH
+       precisam ser numeradas, iniciando em PATCH1 (até PATCH10). Se o
+       valor da soma de verificação md5 for conhecido, ele poderá ser
+       adicionado depois do URL como em (aspas necessárias):
+       PATCH1="http://patch-host/patch-path xxxxxxx..."
+
+  3. Comandos de construção
+       Se o pacote que você quer incluir for encontrado no livro BLFS,
+       então você só precisará copiar/colar os comandos entre o texto
+       xEOFx, caso contrário, você mesmo(a) precisará definir os
+       comandos.
+     OBSERVE::: Esse conjunto de comandos sequenciados que você recém
+                criou não é usável diretamente, mas contém todas as
+                informações necessárias para o jhalfs criar um
+                conjunto de comandos sequenciados de construção e uma
+                entrada no Makefile do jhalfs.
+
+  4. Conforme mencionado anteriormente, a ordem da construção é ditada
+     pelo número de 3 dígitos no nome do arquivo. Se um pacote tiver
+     dependências, ele precisará ser numericamente maior que os arquivos
+     de dependência. Por exemplo, o pacote mc tem glib como uma
+     dependência, de modo que a ordem de construção é:
+           950-glib
+           951-mc
+
+  5. Um arquivo de configuração para BLFS-bootscripts já foi criado
+     como 999-blfs_bootscripts. Se um pacote exigir que um conjunto de
+     comandos sequenciados de inicialização seja instalado, adicione o
+     comando para esse arquivo e NÃO no conjunto de comandos
+     sequenciados do pacote. O conjunto de comandos sequenciados do gpm
+     está incluído como um exemplo de arquivo de remendo e a
+     necessidade de um conjunto de comandos sequenciados de
+     inicialização do blfs.
+
+
+  EXEMPLOS
+
+    Outros exemplos podem ser encontrados em custom/examples. Eles estão
+    desatualizados e sem manutenção, mas podem ser úteis para criar teus
+    próprios conjuntos de comandos sequenciados.
+
+
+#--------- Exemplo GLIB -----------
+
+  #
+  # Sintaxe do nome do arquivo xxx-PKG, isto é 950-glibc
+  # Criar um arquivo no diretório custom/config
+  # Povoar o arquivo usando o seguinte conjunto de comandos
+  # sequenciados como um exemplo
+  #
+
+PKG="glib" PKG_VERSION="1.2.10" PKG_FILE="glib-1.2.10.tar.gz"
+URL="http://gd.tuwien.ac.at/graphics/gimp/gtk/v1.2/${PKG_FILE}"
+MD5="6fe30dad87c77b91b632def29dd69ef9"
+
+  # O seguinte código remove variáveis PATCHx previamente definidas
+for i in PATCH{1..10}; do
+   unset $i
+done
+  # Remendos são nominados PATCH[1..10]
+  # Estas informações são usadas somente para baixar o remendo
+PATCH1="http://www.linuxfromscratch.org/patches/blfs/svn/glib-1.2.10-gcc34-1.patch 0077a1cce5e8a2231ac5a9b08c6263ba"
+
+
+  # OBSERVE::
+  #  O esquema complicado usado para gravar um arquivo temporário é uma
+  #  solução alternativa para aspas embutidas simples e duplas.
+
+( cat << "xEOFx"
+
+patch -Np1 -i ../glib-1.2.10-gcc34-1.patch && ./configure --prefix=/usr
+&& make make install && chmod -v 755 /usr/lib/libgmodule-1.2.so.0.0.10
+
+xEOFx ) > tmp
+
+
+#--------- Exemplo GPM -----------
+
+
+PKG="gpm"
+PKG_VERSION="1.20.1"
+PKG_FILE="gpm-1.20.1.tar.bz2"
+URL="ftp://arcana.linux.it/pub/gpm/gpm-1.20.1.tar.bz2"
+MD5="2c63e827d755527950d9d13fe3d87692"
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=" http://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.1-segfault-1.patch"
+PATCH2=" http://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.1-silent-1.patch"
+
+
+( cat << "xEOFx"
+
+patch -Np1 -i ../gpm-1.20.1-segfault-1.patch && patch -Np1 -i
+../gpm-1.20.1-silent-1.patch && ./configure --prefix=/usr
+--sysconfdir=/etc && LDFLAGS="-lm" make
+
+make install && cp -v conf/gpm-root.conf /etc && ldconfig
+
+# O comando normal para se instalar o conjunto de comandos
+sequenciados# de inicialização para gpm --- COLOQUE ESTE COMANDO DENTRO
+DE# 999-blfs_bootscripts#make install-gpm
+
+cat > /etc/sysconfig/mouse << "EOF" # Inicia /etc/sysconfig/mouse
+
+MDEVICE="/dev/psaux" PROTOCOL="imps2" GPMOPTS=""
+
+# Termina /etc/sysconfig/mouse EOF
+
+xEOFx ) > tmp
+
+
+#--------- Exemplo SOMENTE COMANDOS -----------
+  # Este é um exemplo de um conjunto de comandos sequenciados de
+  # comandos autocontido.
+  # Não existe referência para um pacote ou para diretório de pacote.
+  # Este método é útil para se criar arquivos/perfis/entre outras
+  # coisas de usuário(a) em tempo de construção.
+
+
+PKG=""
+PKG_VERSION=""
+PKG_FILE=""
+URL=""
+MD5=""
+for i in PATCH{1..10}; do
+   unset $i
+done
+PATCH1=""
+
+
+( cat << "xEOFx"
+
+echo "APENAS UM TRAÇO INÚTIL"
+
+xEOFx ) > tmp
