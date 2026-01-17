@@ -21,9 +21,7 @@ msgstr ""
 #: README.CUSTOM:2
 #, no-wrap
 msgid "\tHOW TO ADD CUSTOM SCRIPTS TO THE JHALFS MAKEFILE\n"
-msgstr ""
-"\tCOMO ADICIONAR CONJUNTOS DE COMANDOS SEQUENCIADOS PERSONALIZADOS AO "
-"MAKEFILE DO JHALFS\n"
+msgstr "\tCOMO ADICIONAR CONJUNTOS DE COMANDOS SEQUENCIADOS PERSONALIZADOS AO MAKEFILE DO JHALFS\n"
 
 #. type: Plain text
 #: README.CUSTOM:9
@@ -31,10 +29,8 @@ msgstr ""
 msgid ""
 "  Normally JHALFS creates a Makefile containing only those scripts found in\n"
 "the {,B}LFS books. An automated construction tool cannot predict the\n"
-"needs of every individual and requests are made \"Can you add xxxx "
-"package\".\n"
-"Rather than adding numerous package scripts and switches for each request "
-"it\n"
+"needs of every individual and requests are made \"Can you add xxxx package\".\n"
+"Rather than adding numerous package scripts and switches for each request it\n"
 "was easier to add a tool for the user(s) to code their own package needs.\n"
 msgstr ""
 "  Normalmente JHALFS cria um Makefile contendo somente aqueles conjuntos\n"
@@ -51,8 +47,7 @@ msgstr ""
 #, no-wrap
 msgid ""
 "  There are two areas that can be customized: how the base system is built\n"
-"and what additional configurations and packages your hardware requires to "
-"be\n"
+"and what additional configurations and packages your hardware requires to be\n"
 "able to boot and run. Each of those areas are handled in a different way.\n"
 msgstr ""
 "  Existem duas áreas que podem ser personalizadas: como o sistema básico\n"
@@ -81,8 +76,8 @@ msgid ""
 "the way used by book editors to test packages upgrades, command changes, "
 "build order changes. etc."
 msgstr ""
-"Usando uma cópia de trabalho dos fontes do livro e editando os arquivos "
-"XML. Essa é a maneira usada pelos(as) editores(as) do livro para testar "
+"Usando uma cópia de trabalho dos fontes do livro e editando os arquivos XML. "
+"Essa é a maneira usada pelos(as) editores(as) do livro para testar "
 "atualizações de pacotes, mudanças de comandos, mudanças da ordem da "
 "construção, entre outras."
 
@@ -115,17 +110,14 @@ msgstr "  EDITANDO OS CONJUNTOS DE COMANDOS SEQUENCIADOS BÁSICOS\n"
 #: README.CUSTOM:36
 #, no-wrap
 msgid ""
-"  To begin with, the build scripts should be generated with book defaults. "
-"To\n"
-"do that, configure jhalfs activating any option you want included, but do "
-"not\n"
+"  To begin with, the build scripts should be generated with book defaults. To\n"
+"do that, configure jhalfs activating any option you want included, but do not\n"
 "select \"Run the Makefile\" option.\n"
 msgstr ""
-"  Para começar, os scripts de construção deveriam ser gerados com os\n"
-"padrões do livro. Para fazer isso, configure o jhalfs ativando qualquer\n"
-"opção que você queira incluída, mas não selecione a opção \"Executar "
-"o\n"
-"Makefile\".\n"
+"  Para começar, os conjuntos de comandos sequenciados de construção\n"
+"deveriam ser gerados com os padrões do livro. Para fazer isso,\n"
+"configure o jhalfs ativando qualquer opção que você queira incluída,\n"
+"mas não selecione a opção \"Executar o Makefile\".\n"
 
 #. type: Plain text
 #: README.CUSTOM:40
@@ -133,8 +125,7 @@ msgstr ""
 msgid ""
 "  Under the ${BUILD_DIR}/${SCRIPT_ROOT}/$COMMANDS directory\n"
 "(using the defaults values to do an LFS build, that directory name is\n"
-"/mnt/build_dir/jhalfs/lfs-commands) you will find the default build "
-"scripts.\n"
+"/mnt/build_dir/jhalfs/lfs-commands) you will find the default build scripts.\n"
 msgstr ""
 "  Sob o diretório ${BUILD_DIR}/${SCRIPT_ROOT}/$COMMANDS (usando os\n"
 "valores padrão para fazer uma construção do LFS, esse nome de diretório\n"
@@ -146,8 +137,7 @@ msgstr ""
 #, no-wrap
 msgid ""
 "  If all you want is modify, add, or remove some command from a package\n"
-"installation, for example to change its ./configure line, just edit the "
-"related\n"
+"installation, for example to change its ./configure line, just edit the related\n"
 "script. If changing or adding a patch, be sure to copy the new patch to the\n"
 "${BUILD_DIR}/sources directory. When done, run 'make' from inside the\n"
 "${BUILD_DIR}/${SCRIPT_ROOT} directory.\n"
@@ -164,26 +154,21 @@ msgstr ""
 #: README.CUSTOM:49
 #, no-wrap
 msgid "  REPLACING OR INSERTING PACKAGES AND CHANGING BUILD ORDER\n"
-msgstr ""
-"  SUBSTITUINDO OU INSERINDO PACOTES E MUDANDO A ORDEM DA CONSTRUÇÃO\n"
+msgstr "  SUBSTITUINDO OU INSERINDO PACOTES E MUDANDO A ORDEM DA CONSTRUÇÃO\n"
 
 #. type: Plain text
 #: README.CUSTOM:51
 #, no-wrap
 msgid "  To remove a package from the system, just remove its script(s).\n"
-msgstr ""
-"  Para remover um pacote do sistema, basta remover o(s) conjunto(s) dele de "
-"comandos sequenciados.\n"
+msgstr "  Para remover um pacote do sistema, basta remover o(s) conjunto(s) dele de comandos sequenciados.\n"
 
 #. type: Plain text
 #: README.CUSTOM:56
 #, no-wrap
 msgid ""
-"  To change the version of some package, or to build a newer or older "
-"version\n"
+"  To change the version of some package, or to build a newer or older version\n"
 "than that in the book, edit ${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list to\n"
-"change its tarball name and place the new tarball in the "
-"${BUILD_DIR}/sources\n"
+"change its tarball name and place the new tarball in the ${BUILD_DIR}/sources\n"
 "directory.\n"
 msgstr ""
 "  Para mudar a versão de algum pacote, ou para construir uma versão mais\n"
@@ -196,13 +181,10 @@ msgstr ""
 #: README.CUSTOM:63
 #, no-wrap
 msgid ""
-"  To replace a package by an equivalent one, rename the replaced package "
-"script\n"
-"to reflect the new package name (for example, 102-man-db -> 102-man), edit "
-"the\n"
+"  To replace a package by an equivalent one, rename the replaced package script\n"
+"to reflect the new package name (for example, 102-man-db -> 102-man), edit the\n"
 "script to make the required commands changes, place the new tarball in the\n"
-"${BUILD_DIR}/sources directory, and edit "
-"${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list\n"
+"${BUILD_DIR}/sources directory, and edit ${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list\n"
 "file to replace the removed package tarball name by the new package tarball\n"
 "name.\n"
 msgstr ""
@@ -230,21 +212,15 @@ msgstr ""
 #, no-wrap
 msgid ""
 "  To insert a new package, for example to build Cracklib in order to build\n"
-"Shadow with Cracklib support, you should first decide before what package "
-"it\n"
+"Shadow with Cracklib support, you should first decide before what package it\n"
 "needs to be installed, in this example 107-shadow. Then create a new script\n"
-"containing the needed commands, using an existing one as template, and name "
-"it\n"
+"containing the needed commands, using an existing one as template, and name it\n"
 "with the same 3-digits string used for that mentioned default package, but\n"
-"adding another 1-digit string. In our example, the new script to build "
-"Cracklib\n"
-"before Shadow will be named 107-1-cracklib. This naming scheme allows "
-"inserting\n"
+"adding another 1-digit string. In our example, the new script to build Cracklib\n"
+"before Shadow will be named 107-1-cracklib. This naming scheme allows inserting\n"
 "up to 10 scripts before each of the existing scripts. Place the tarball for\n"
-"the new package and required patches, if any, in ${BUILD_DIR}/sources and "
-"edit\n"
-"${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list to add the tarball name for "
-"that\n"
+"the new package and required patches, if any, in ${BUILD_DIR}/sources and edit\n"
+"${BUILD_DIR}/${SCRIPT_ROOT}/pkg_tarball_list to add the tarball name for that\n"
 "package.\n"
 msgstr ""
 "  Para inserir um novo pacote, por exemplo para construir Cracklib para\n"
@@ -267,12 +243,10 @@ msgstr ""
 #: README.CUSTOM:84
 #, no-wrap
 msgid ""
-"  When ready, launch again the jhalfs configuration interface. Make sure "
-"that\n"
+"  When ready, launch again the jhalfs configuration interface. Make sure that\n"
 "exactly the same options are selected as when generating the default build\n"
 "scripts. Be sure that \"Rebuild files\" is unselected and select \"Run the\n"
-"Makefile\" if you want. Then select \"Rebuild the Makefile\". This will "
-"create a\n"
+"Makefile\" if you want. Then select \"Rebuild the Makefile\". This will create a\n"
 "new Makefile based on the changes you made to the build scripts.\n"
 msgstr ""
 "  Quando estiver pronto(a), inicie novamente a interface de configuração\n"
@@ -287,9 +261,10 @@ msgstr ""
 #. type: Plain text
 #: README.CUSTOM:87
 #, no-wrap
-msgid ""
-"       ADDING POST-SYSTEM BUILD CONFIGURATION FILES AND EXTRA PACKAGES\n"
+msgid "       ADDING POST-SYSTEM BUILD CONFIGURATION FILES AND EXTRA PACKAGES\n"
 msgstr ""
+"       ADICIONANDO ARQUIVOS DE CONFIGURAÇÃO PÓS-CONSTRUÇÃO DO SISTEMA E\n"
+"       PACOTES EXTRAS\n"
 
 #. type: Plain text
 #: README.CUSTOM:91
@@ -299,6 +274,9 @@ msgid ""
 "when you select the appropriate menu option. See README and README.BLFS for\n"
 "more info.\n"
 msgstr ""
+"  A instalação de pacotes do BLFS é feita via blfs-tool e ativada quando\n"
+"você selecionar a opção de menu apropriada. Veja-se LEIAME e LEIAME.BLFS\n"
+"para mais informações.\n"
 
 #. type: Plain text
 #: README.CUSTOM:97
@@ -310,6 +288,12 @@ msgid ""
 "needed from the beginning, and was not intended to replace the BLFS\n"
 "install system.\n"
 msgstr ""
+"  O recurso descrito abaixo foi adicionado para que usuários(as)\n"
+"pudessem instalar arquivos de configuração restantes, construir os\n"
+"pacotes necessários para acessar a Internet ou para suportar hardware\n"
+"específico; ou para instalar utilitários básicos que sejam necessários\n"
+"desde o início, e não foi destinado para substituir o sistema de\n"
+"instalação do BLFS.\n"
 
 #. type: Plain text
 #: README.CUSTOM:102
@@ -320,6 +304,12 @@ msgid ""
 "configuration scripts and a few examples. A switch has been added to the\n"
 "configuration file which enables/disables the inclusion of custom scripts.\n"
 msgstr ""
+"  ESQUEMA\n"
+"  Um novo diretório foi adicionado à árvore JHALFS que contém os\n"
+"conjuntos de comandos sequenciados de configuração e alguns exemplos.\n"
+"Uma chave foi adicionada ao arquivo de configuração que\n"
+"habilita/desabilita a inclusão de conjuntos de comandos sequenciados\n"
+"personalizados.\n"
 
 #. type: Plain text
 #: README.CUSTOM:107
@@ -330,36 +320,51 @@ msgid ""
 "      /examples        <-- a few example scripts\n"
 "      template         <-- ALL scripts MUST look like this\n"
 msgstr ""
+"    custom\n"
+"      /config          <-- onde colocar teus conjuntos de comandos\n"
+"                           sequenciados.\n"
+"      /examples        <-- alguns conjuntos de comandos sequenciados de\n"
+"                           exemplo\n"
+"      template         <-- TODOS os conjuntos de comandos sequenciados\n"
+"                           PRECISAM se parecer com isso\n"
 
 #. type: Plain text
 #: README.CUSTOM:111
 #, no-wrap
 msgid ""
-"  NOTE::: You are responsible for including all dependencies and ensuring "
-"they\n"
+"  NOTE::: You are responsible for including all dependencies and ensuring they\n"
 "          are built in the right order.\n"
 msgstr ""
+"  OBSERVE::: Você é responsável por incluir todas as dependências e por\n"
+"garantir que elas sejam construídas na ordem correta.\n"
 
 #. type: Plain text
 #: README.CUSTOM:122
 #, no-wrap
 msgid ""
-"  1. To add a package to the final JHALFS Makefile you must first create a "
-"file\n"
+"  1. To add a package to the final JHALFS Makefile you must first create a file\n"
 "     in the custom/config directory. The directory custom/config may need\n"
 "     to be created first.\n"
-"       **All config files MUST follow the naming convention, xxx-PKG, where "
-"xxx\n"
-"       is the order number and PKG is the name of the package. The file "
-"naming\n"
+"       **All config files MUST follow the naming convention, xxx-PKG, where xxx\n"
+"       is the order number and PKG is the name of the package. The file naming\n"
 "       format is important as it defines the build order. The example shown\n"
-"       below has an order number 950 and log files will list in "
-"alphabetical\n"
+"       below has an order number 950 and log files will list in alphabetical\n"
 "       order in the /logs directory after blfs-tools scripts.\n"
-"    The simplest method is to copy the template file into the config "
-"directory\n"
+"    The simplest method is to copy the template file into the config directory\n"
 "    and rename it.\n"
 msgstr ""
+"  1. Para adicionar um pacote ao Makefile final do JHALFS você precisa\n"
+"     primeiro criar um arquivo no diretório custom/config. O diretório\n"
+"     custom/config possivelmente precise ser criado primeiro.\n"
+"       **Todos os arquivos de configuração PRECISAM seguir a convenção\n"
+"       de nomenclatura, xxx-PKG, onde xxx é o número de ordem e PKG é o\n"
+"       nome do pacote. O formato de nomenclatura do arquivo é importante\n"
+"       porque ele define a ordem da construção. O exemplo mostrado\n"
+"       abaixo tem um número de ordem 950 e os arquivos de registro\n"
+"       listarão em ordem alfabética no diretório /logs depois dos\n"
+"       conjuntos de comandos sequenciados do blfs-tools. O método mais\n"
+"       simples é o de copiar o arquivo de modelo para o diretório de\n"
+"       configuração e renomeá-lo.\n"
 
 #. type: Plain text
 #: README.CUSTOM:128
@@ -367,11 +372,16 @@ msgstr ""
 msgid ""
 "  2. Populate the variables with the necessary values.\n"
 "       Variable function is self explanatory. PATCH variables must be\n"
-"       numbered, starting at PATCH1 (up to PATCH10). If the md5 checksum "
-"value\n"
+"       numbered, starting at PATCH1 (up to PATCH10). If the md5 checksum value\n"
 "       is known, it can be added after the URL as in (quotes needed):\n"
 "       PATCH1=\"http://patch-host/patch-path xxxxxxx...\"\n"
 msgstr ""
+"  2. Povoe as variáveis com os valores necessários.\n"
+"       A função da variável é autoexplicativa. As variáveis PATCH\n"
+"       precisam ser numeradas, iniciando em PATCH1 (até PATCH10). Se o\n"
+"       valor da soma de verificação md5 for conhecido, ele poderá ser\n"
+"       adicionado depois do URL como em (aspas necessárias):\n"
+"       PATCH1=\"http://patch-host/patch-path xxxxxxx...\"\n"
 
 #. type: Plain text
 #: README.CUSTOM:136
@@ -381,40 +391,61 @@ msgid ""
 "       If the package you want to include is found in the BLFS\n"
 "       book then you only need to copy/paste the commands between the xEOFx\n"
 "       text, otherwise you will need to define the commands yourself.\n"
-"     NOTE::: This script you just created is not usable directly but "
-"contains\n"
-"             all the information necessary for jhalfs to create a build "
-"script\n"
+"     NOTE::: This script you just created is not usable directly but contains\n"
+"             all the information necessary for jhalfs to create a build script\n"
 "\t     and an entry in the jhalfs Makefile.\n"
 msgstr ""
+"  3. Comandos de construção\n"
+"       Se o pacote que você quer incluir for encontrado no livro BLFS,\n"
+"       então você só precisará copiar/colar os comandos entre o texto\n"
+"       xEOFx, caso contrário, você mesmo(a) precisará definir os\n"
+"       comandos.\n"
+"     OBSERVE::: Esse conjunto de comandos sequenciados que você recém\n"
+"                criou não é usável diretamente, mas contém todas as\n"
+"                informações necessárias para o jhalfs criar um\n"
+"                conjunto de comandos sequenciados de construção e uma\n"
+"                entrada no Makefile do jhalfs.\n"
 
 #. type: Plain text
 #: README.CUSTOM:143
 #, no-wrap
 msgid ""
-"  4. As mentioned previously the build order is dictated by the 3 digit "
-"number\n"
+"  4. As mentioned previously the build order is dictated by the 3 digit number\n"
 "     in the file name. If a package has dependencies it must be numerically\n"
 "     larger than the dependency files.\n"
 "       e.g. The package mc has glib as a dependency, so the build order is:\n"
 "           950-glib\n"
 "           951-mc\n"
 msgstr ""
+"  4. Conforme mencionado anteriormente, a ordem da construção é ditada\n"
+"     pelo número de 3 dígitos no nome do arquivo. Se um pacote tiver\n"
+"     dependências, ele precisará ser numericamente maior que os arquivos\n"
+"     de dependência. Por exemplo, o pacote mc tem glib como uma\n"
+"     dependência, de modo que a ordem de construção é:\n"
+"           950-glib\n"
+"           951-mc\n"
 
 #. type: Bullet: '  5. '
 #: README.CUSTOM:148
 msgid ""
-"A config file for BLFS-bootscripts is already created as "
-"999-blfs_bootscripts.  If a package requires a bootscript to be installed "
-"add the cmd to this file and NOT in the package script. The gpm script is "
+"A config file for BLFS-bootscripts is already created as 999-"
+"blfs_bootscripts.  If a package requires a bootscript to be installed add "
+"the cmd to this file and NOT in the package script. The gpm script is "
 "included as an example of patch file and the need for a blfs bootscript."
 msgstr ""
+"Um arquivo de configuração para BLFS-bootscripts já foi criado como 999-"
+"blfs_bootscripts. Se um pacote exigir que um conjunto de comandos "
+"sequenciados de inicialização seja instalado, adicione o comando para esse "
+"arquivo e NÃO no conjunto de comandos sequenciados do pacote. O conjunto de "
+"comandos sequenciados do gpm está incluído como um exemplo de arquivo de "
+"remendo e a necessidade de um conjunto de comandos sequenciados de "
+"inicialização do blfs."
 
 #. type: Plain text
 #: README.CUSTOM:151
 #, no-wrap
 msgid "  EXAMPLES\n"
-msgstr ""
+msgstr "  EXEMPLOS\n"
 
 #. type: Plain text
 #: README.CUSTOM:154
@@ -423,11 +454,14 @@ msgid ""
 "    Other examples can be found in custom/examples. They are dated and\n"
 "    unmaintained, but can be useful for creating your own scripts.\n"
 msgstr ""
+"    Outros exemplos podem ser encontrados em custom/examples. Eles estão\n"
+"    desatualizados e sem manutenção, mas podem ser úteis para criar teus\n"
+"    próprios conjuntos de comandos sequenciados.\n"
 
 #. type: Plain text
 #: README.CUSTOM:157
 msgid "#--------- GLIB example -----------"
-msgstr ""
+msgstr "#--------- Exemplo GLIB -----------"
 
 #. type: Plain text
 #: README.CUSTOM:163
@@ -439,6 +473,12 @@ msgid ""
 "  # Populate the file using the following script as an example\n"
 "  #\n"
 msgstr ""
+"  #\n"
+"  # Sintaxe do nome do arquivo xxx-PKG, isto é 950-glibc\n"
+"  # Criar um arquivo no diretório custom/config\n"
+"  # Povoar o arquivo usando o seguinte conjunto de comandos\n"
+"  # sequenciados como um exemplo\n"
+"  #\n"
 
 #. type: Plain text
 #: README.CUSTOM:169
@@ -447,6 +487,9 @@ msgid ""
 "URL=\"http://gd.tuwien.ac.at/graphics/gimp/gtk/v1.2/${PKG_FILE}\" "
 "MD5=\"6fe30dad87c77b91b632def29dd69ef9\""
 msgstr ""
+"PKG=\"glib\" PKG_VERSION=\"1.2.10\" PKG_FILE=\"glib-1.2.10.tar.gz\" "
+"URL=\"http://gd.tuwien.ac.at/graphics/gimp/gtk/v1.2/${PKG_FILE}\" "
+"MD5=\"6fe30dad87c77b91b632def29dd69ef9\""
 
 #. type: Plain text
 #: README.CUSTOM:177
@@ -458,10 +501,15 @@ msgid ""
 "done\n"
 "  # Patches are named PATCH[1..10]\n"
 "  # This information is used to download the patch only\n"
-""
-"PATCH1=\"http://www.linuxfromscratch.org/patches/blfs/svn/glib-1.2.10-gcc34-1.patch "
-"0077a1cce5e8a2231ac5a9b08c6263ba\"\n"
+"PATCH1=\"http://www.linuxfromscratch.org/patches/blfs/svn/glib-1.2.10-gcc34-1.patch 0077a1cce5e8a2231ac5a9b08c6263ba\"\n"
 msgstr ""
+"  # O seguinte código remove variáveis PATCHx previamente definidas\n"
+"for i in PATCH{1..10}; do\n"
+"   unset $i\n"
+"done\n"
+"  # Remendos são nominados PATCH[1..10]\n"
+"  # Estas informações são usadas somente para baixar o remendo\n"
+"PATCH1=\"http://www.linuxfromscratch.org/patches/blfs/svn/glib-1.2.10-gcc34-1.patch 0077a1cce5e8a2231ac5a9b08c6263ba\"\n"
 
 #. type: Plain text
 #: README.CUSTOM:182
@@ -471,11 +519,14 @@ msgid ""
 "  #  The convoluted scheme used to write out a temporary file is\n"
 "  #  a work-around for embedded single and double quotes.\n"
 msgstr ""
+"  # OBSERVE::\n"
+"  #  O esquema complicado usado para gravar um arquivo temporário é uma\n"
+"  #  solução alternativa para aspas embutidas simples e duplas.\n"
 
 #. type: Plain text
 #: README.CUSTOM:184 README.CUSTOM:211 README.CUSTOM:258
 msgid "( cat << \"xEOFx\""
-msgstr ""
+msgstr "( cat << \"xEOFx\""
 
 #. type: Plain text
 #: README.CUSTOM:190
@@ -483,16 +534,18 @@ msgid ""
 "patch -Np1 -i ../glib-1.2.10-gcc34-1.patch && ./configure --prefix=/usr && "
 "make make install && chmod -v 755 /usr/lib/libgmodule-1.2.so.0.0.10"
 msgstr ""
+"patch -Np1 -i ../glib-1.2.10-gcc34-1.patch && ./configure --prefix=/usr && "
+"make make install && chmod -v 755 /usr/lib/libgmodule-1.2.so.0.0.10"
 
 #. type: Plain text
 #: README.CUSTOM:193 README.CUSTOM:237 README.CUSTOM:262
 msgid "xEOFx ) > tmp"
-msgstr ""
+msgstr "xEOFx ) > tmp"
 
 #. type: Plain text
 #: README.CUSTOM:196
 msgid "#--------- GPM example -----------"
-msgstr ""
+msgstr "#--------- Exemplo GPM -----------"
 
 #. type: Plain text
 #: README.CUSTOM:208
@@ -506,26 +559,35 @@ msgid ""
 "for i in PATCH{1..10}; do\n"
 "   unset $i\n"
 "done\n"
-"PATCH1=\" "
-"http://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.1-segfault-1.patch\""
-"\n"
-"PATCH2=\" "
-"http://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.1-silent-1.patch\""
-"\n"
+"PATCH1=\" http://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.1-segfault-1.patch\"\n"
+"PATCH2=\" http://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.1-silent-1.patch\"\n"
 msgstr ""
+"PKG=\"gpm\"\n"
+"PKG_VERSION=\"1.20.1\"\n"
+"PKG_FILE=\"gpm-1.20.1.tar.bz2\"\n"
+"URL=\"ftp://arcana.linux.it/pub/gpm/gpm-1.20.1.tar.bz2\"\n"
+"MD5=\"2c63e827d755527950d9d13fe3d87692\"\n"
+"for i in PATCH{1..10}; do\n"
+"   unset $i\n"
+"done\n"
+"PATCH1=\" http://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.1-segfault-1.patch\"\n"
+"PATCH2=\" http://www.linuxfromscratch.org/patches/blfs/svn/gpm-1.20.1-silent-1.patch\"\n"
 
 #. type: Plain text
 #: README.CUSTOM:216
 msgid ""
-"patch -Np1 -i ../gpm-1.20.1-segfault-1.patch && patch -Np1 -i "
-"../gpm-1.20.1-silent-1.patch && ./configure --prefix=/usr --sysconfdir=/etc "
-"&& LDFLAGS=\"-lm\" make"
+"patch -Np1 -i ../gpm-1.20.1-segfault-1.patch && patch -Np1 -i ../gpm-1.20.1-"
+"silent-1.patch && ./configure --prefix=/usr --sysconfdir=/etc && LDFLAGS=\"-"
+"lm\" make"
 msgstr ""
+"patch -Np1 -i ../gpm-1.20.1-segfault-1.patch && patch -Np1 -i ../gpm-1.20.1-"
+"silent-1.patch && ./configure --prefix=/usr --sysconfdir=/etc && LDFLAGS=\"-"
+"lm\" make"
 
 #. type: Plain text
 #: README.CUSTOM:220
 msgid "make install && cp -v conf/gpm-root.conf /etc && ldconfig"
-msgstr ""
+msgstr "make install && cp -v conf/gpm-root.conf /etc && ldconfig"
 
 #. type: Plain text
 #: README.CUSTOM:224
@@ -533,21 +595,24 @@ msgid ""
 "# The normal cmd to install the boot script for gpm # --- PUT THIS CMD "
 "INSIDE 999-blfs_bootscripts #make install-gpm"
 msgstr ""
+"# O comando normal para se instalar o conjunto de comandos sequenciados# de "
+"inicialização para gpm --- COLOQUE ESTE COMANDO DENTRO DE# 999-"
+"blfs_bootscripts#make install-gpm"
 
 #. type: Plain text
 #: README.CUSTOM:227
 msgid "cat > /etc/sysconfig/mouse << \"EOF\" # Begin /etc/sysconfig/mouse"
-msgstr ""
+msgstr "cat > /etc/sysconfig/mouse << \"EOF\" # Inicia /etc/sysconfig/mouse"
 
 #. type: Plain text
 #: README.CUSTOM:231
 msgid "MDEVICE=\"/dev/psaux\" PROTOCOL=\"imps2\" GPMOPTS=\"\""
-msgstr ""
+msgstr "MDEVICE=\"/dev/psaux\" PROTOCOL=\"imps2\" GPMOPTS=\"\""
 
 #. type: Plain text
 #: README.CUSTOM:234
 msgid "# End /etc/sysconfig/mouse EOF"
-msgstr ""
+msgstr "# Termina /etc/sysconfig/mouse EOF"
 
 #. type: Plain text
 #: README.CUSTOM:244
@@ -559,6 +624,12 @@ msgid ""
 "  # This method is useful for creating user files/profiles/etc\n"
 "  # at build time.\n"
 msgstr ""
+"#--------- Exemplo SOMENTE COMANDOS -----------\n"
+"  # Este é um exemplo de um conjunto de comandos sequenciados de\n"
+"  # comandos autocontido.\n"
+"  # Não existe referência para um pacote ou para diretório de pacote.\n"
+"  # Este método é útil para se criar arquivos/perfis/entre outras\n"
+"  # coisas de usuário(a) em tempo de construção.\n"
 
 #. type: Plain text
 #: README.CUSTOM:255
@@ -574,8 +645,17 @@ msgid ""
 "done\n"
 "PATCH1=\"\"\n"
 msgstr ""
+"PKG=\"\"\n"
+"PKG_VERSION=\"\"\n"
+"PKG_FILE=\"\"\n"
+"URL=\"\"\n"
+"MD5=\"\"\n"
+"for i in PATCH{1..10}; do\n"
+"   unset $i\n"
+"done\n"
+"PATCH1=\"\"\n"
 
 #. type: Plain text
 #: README.CUSTOM:260
 msgid "echo \"JUST A USELESS TRACE\""
-msgstr ""
+msgstr "echo \"APENAS UM TRAÇO INÚTIL\""
