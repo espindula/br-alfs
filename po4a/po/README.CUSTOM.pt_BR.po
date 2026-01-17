@@ -21,7 +21,9 @@ msgstr ""
 #: README.CUSTOM:2
 #, no-wrap
 msgid "\tHOW TO ADD CUSTOM SCRIPTS TO THE JHALFS MAKEFILE\n"
-msgstr "\tCOMO ADICIONAR CONJUNTOS DE COMANDOS SEQUENCIADOS PERSONALIZADOS AO MAKEFILE DO JHALFS\n"
+msgstr ""
+"\tCOMO ADICIONAR CONJUNTOS DE COMANDOS SEQUENCIADOS PERSONALIZADOS AO\n"
+"\tMAKEFILE DO JHALFS\n"
 
 #. type: Plain text
 #: README.CUSTOM:9
@@ -160,7 +162,9 @@ msgstr "  SUBSTITUINDO OU INSERINDO PACOTES E MUDANDO A ORDEM DA CONSTRUÇÃO\n"
 #: README.CUSTOM:51
 #, no-wrap
 msgid "  To remove a package from the system, just remove its script(s).\n"
-msgstr "  Para remover um pacote do sistema, basta remover o(s) conjunto(s) dele de comandos sequenciados.\n"
+msgstr ""
+"  Para remover um pacote do sistema, basta remover o(s) conjunto(s)\n"
+"  dele de comandos sequenciados.\n"
 
 #. type: Plain text
 #: README.CUSTOM:56
@@ -509,7 +513,8 @@ msgstr ""
 "done\n"
 "  # Remendos são nominados PATCH[1..10]\n"
 "  # Estas informações são usadas somente para baixar o remendo\n"
-"PATCH1=\"http://www.linuxfromscratch.org/patches/blfs/svn/glib-1.2.10-gcc34-1.patch 0077a1cce5e8a2231ac5a9b08c6263ba\"\n"
+"PATCH1=\"http://www.linuxfromscratch.org/patches/blfs/svn/glib-1.2.10-gcc34-1.patch\n"
+"0077a1cce5e8a2231ac5a9b08c6263ba\"\n"
 
 #. type: Plain text
 #: README.CUSTOM:182
@@ -595,9 +600,10 @@ msgid ""
 "# The normal cmd to install the boot script for gpm # --- PUT THIS CMD "
 "INSIDE 999-blfs_bootscripts #make install-gpm"
 msgstr ""
-"# O comando normal para se instalar o conjunto de comandos sequenciados# de "
-"inicialização para gpm --- COLOQUE ESTE COMANDO DENTRO DE# 999-"
-"blfs_bootscripts#make install-gpm"
+"# O comando normal para se instalar o conjunto de comandos\n"
+"# sequenciados de inicialização para gpm --- COLOQUE ESTE COMANDO\n"
+"# DENTRO DE 999-blfs_bootscripts\n"
+"#make install-gpm"
 
 #. type: Plain text
 #: README.CUSTOM:227

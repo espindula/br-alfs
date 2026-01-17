@@ -1,4 +1,5 @@
-	COMO ADICIONAR CONJUNTOS DE COMANDOS SEQUENCIADOS PERSONALIZADOS AO MAKEFILE DO JHALFS
+	COMO ADICIONAR CONJUNTOS DE COMANDOS SEQUENCIADOS PERSONALIZADOS AO
+	MAKEFILE DO JHALFS
 
 
   Normalmente JHALFS cria um Makefile contendo somente aqueles conjuntos
@@ -58,7 +59,8 @@ ${BUILD_DIR}/${SCRIPT_ROOT}.
 
   SUBSTITUINDO OU INSERINDO PACOTES E MUDANDO A ORDEM DA CONSTRUÇÃO
 
-  Para remover um pacote do sistema, basta remover o(s) conjunto(s) dele de comandos sequenciados.
+  Para remover um pacote do sistema, basta remover o(s) conjunto(s)
+  dele de comandos sequenciados.
 
   Para mudar a versão de algum pacote, ou para construir uma versão mais
 recente ou mais antiga que aquela no livro, edite
@@ -212,7 +214,8 @@ for i in PATCH{1..10}; do
 done
   # Remendos são nominados PATCH[1..10]
   # Estas informações são usadas somente para baixar o remendo
-PATCH1="http://www.linuxfromscratch.org/patches/blfs/svn/glib-1.2.10-gcc34-1.patch 0077a1cce5e8a2231ac5a9b08c6263ba"
+PATCH1="http://www.linuxfromscratch.org/patches/blfs/svn/glib-1.2.10-gcc34-1.patch
+0077a1cce5e8a2231ac5a9b08c6263ba"
 
 
   # OBSERVE::
@@ -251,8 +254,9 @@ patch -Np1 -i ../gpm-1.20.1-segfault-1.patch && patch -Np1 -i
 make install && cp -v conf/gpm-root.conf /etc && ldconfig
 
 # O comando normal para se instalar o conjunto de comandos
-sequenciados# de inicialização para gpm --- COLOQUE ESTE COMANDO DENTRO
-DE# 999-blfs_bootscripts#make install-gpm
+# sequenciados de inicialização para gpm --- COLOQUE ESTE COMANDO
+# DENTRO DE 999-blfs_bootscripts
+#make install-gpm
 
 cat > /etc/sysconfig/mouse << "EOF" # Inicia /etc/sysconfig/mouse
 
