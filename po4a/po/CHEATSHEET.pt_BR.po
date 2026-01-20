@@ -1,0 +1,370 @@
+# Portuguese translations for br-alfs package
+# Copyright (C) 2026 Jamenson Ferreira Espindula de Almeida Melo
+# This file is distributed under the same license as the br-alfs package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: br-alfs 1.0\n"
+"Report-Msgid-Bugs-To: jafesp@gmail.com\n"
+"POT-Creation-Date: 2026-01-20 08:15-0300\n"
+"PO-Revision-Date: 2026-01-20 08:15-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. type: Plain text
+#: CHEATSHEET:3
+#, no-wrap
+msgid ""
+"This file contains procedures to build LFS and install the jhalfs tools\n"
+"for building BLFS packages.\n"
+"==============================\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:5
+#, no-wrap
+msgid ""
+"Procedure 1: Install blfs tools when building LFS\n"
+"==============================\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:7
+#, no-wrap
+msgid ""
+"Stage 1: Host configuration\n"
+"---------------\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:16
+#, no-wrap
+msgid ""
+"Step 1: as user, from home directory:\n"
+"  $ git clone https://git.linuxfromscratch.org/jhalfs.git\n"
+"  $ cd jhalfs\n"
+"  $ mkdir custom/config\n"
+"  $ cp custom/examples/950-userconf custom/config\n"
+"  - Edit custom/config/950-userconf, replacing the fields in angle brackets\n"
+"    (< ... >) with information for the user that will be created on the new\n"
+"    system.\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:25
+#, no-wrap
+msgid ""
+"Step 2: as root:\n"
+"  - Create the new partition, the directory /mnt/lfs, and mount the new\n"
+"    partition on it (follow book up to the end of chapter 2)\n"
+"  - Create a directory /sources on the host, and change its mode:\n"
+"    $ chmod a+wt /sources\n"
+"    (Beware: on host, not on /mnt/lfs)\n"
+"  - Run visudo and give enough privilege to the host user, so that she/he\n"
+"    can run any command as any user\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:35
+#, no-wrap
+msgid ""
+"Step 3: as user:\n"
+"  - Download the kernel to /sources, unpack it, run the configuration steps\n"
+"    described in LFS Book section 10.3. If UEFI is needed, add the configuration\n"
+"    steps from BLFS book Chapter 5, section \"Using GRUB to Set Up the Boot\n"
+"    Process with UEFI\".\n"
+"  - When you are done with configuration, copy .config:\n"
+"  $ cp .config ../config-<version>\n"
+"  - Create a file /sources/fstab with content as described in 10.2 (note:\n"
+"    in /sources, not in /etc)\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:42
+#, no-wrap
+msgid ""
+"Stage 2: Building LFS\n"
+"Step 4: as user, from ~/jhalfs\n"
+"  - Run \"make\", and fill in the menus as follows\n"
+"    (some fields should be changed for your configuration, they will be denoted\n"
+"    with xxx/yyy to indicate a choice between xxx and yyy, or in angle brackets\n"
+"    <...> if several choices are possible)\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:67
+#, no-wrap
+msgid ""
+"BOOK Settings --->\n"
+"    Choose BOOK (Linux From Scratch)  --->\n"
+"    Init system (LFS SysV/LFS systemd) --->\n"
+"    XML Source of Book (retrieved from git repository)  --->\n"
+"    (trunk) Which point in git history?\n"
+"    Multilib (Standard LFS on i686 or amd64)  --->\n"
+"    Build method (chroot)  --->\n"
+"[*] Add blfs-tool support\n"
+"    blfs-tool dependencies  --->\n"
+"      [*] libxml2 (required)\n"
+"      [*] libxslt (required)\n"
+"      [*] DocBook XML DTD (required)\n"
+"      [*] lynx (optional, for reading the generated book)\n"
+"      [*] sudo (recommended)\n"
+"      [*] wget (recommended)\n"
+"      [*] GPM (optional, see help)\n"
+"      [*] GIT client (optional, see help)\n"
+"    BLFS book version (BLFS Branch (default trunk) or any commit)  --->\n"
+"(trunk) BLFS Book commit (branch/tag/sha) (NEW)\n"
+"(/blfs_root) Root of the tools directory (see help)\n"
+"(blfs-xml) BLFS sources directory (internal parameter)\n"
+"(lfs-xml) LFS sources directory (internal parameter)\n"
+"[*] Add custom tools support\n"
+"(/var/lib/jhalfs/BLFS) Installed packages database directory\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:80
+#, no-wrap
+msgid ""
+"General Settings --->\n"
+"(lfs) Temporary user for chapters 4, 5, and 6 (should not exist)\n"
+"(lfs) Group of user for chapters 4, 5, and 6 (should not exist)\n"
+"(/mnt/lfs) Build Directory\n"
+"[*] Retrieve source files\n"
+"(/sources) Package Archive Directory\n"
+"(<ftp.snt.utwente.nl/pub/software>) Replacement for ftp.gnu.org\n"
+"[ ]     Retry on 'connection refused' failure\n"
+"(20)    Number of retry attempts on download failures\n"
+"(30)    Download timeout (in seconds)\n"
+"[ ] Run the makefile\n"
+"[*] Rebuild files\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:93
+#, no-wrap
+msgid ""
+"Build Settings --->\n"
+"    Parallelism settings  --->\n"
+"      [*] Use all cores\n"
+"      (all)   set of cpus to use, or 'all' for all cpus\n"
+"      [*/ ] Build Binutils pass1 without parallelism (Real SBU)\n"
+"[ ] Run testsuites\n"
+"[ ] Keep build directory in chapter 8\n"
+"[ ] Test mismatch beween package version and directory name\n"
+"[ ] Package management\n"
+"[*] Create a log of installed files for each package\n"
+"[*] Strip Installed Binaries/Libraries\n"
+"[*/ ] DO NOT use/display progress_bar\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:126
+#, no-wrap
+msgid ""
+"System configuration --->\n"
+"[*] Use a custom fstab file\n"
+"(/sources/fstab) Fstab file (optional)\n"
+"[*] Build the kernel\n"
+"(/sources/config-<version>) Kernel config file\n"
+"[ ] Install non-wide-character ncurses\n"
+"(<GMT>) TimeZone\n"
+"(<en_US.UTF-8>) Language\n"
+"[ ] Install the full set of locales\n"
+"    Groff page size (A4/Letter)  --->\n"
+"(<my-lfs>) Hostname (see help)\n"
+"    Network configuration  --->\n"
+"      (<ens3>) netword card name\n"
+"      (<10.0.2.9>) Static IP address\n"
+"      (<10.0.2.2>) Gateway\n"
+"      (<24>) Subnet prefix\n"
+"      (<10.0.2.255>) Broadcast address\n"
+"      (<local>) Domain name (see help)\n"
+"      (<10.0.2.3>) Primary Name server\n"
+"      (<8.8.8.8>) Secondary Name server\n"
+"    Console configuration  --->\n"
+"      (<lat0-16>) Console font\n"
+"      (<us>) Keymap name\n"
+"      [ ] Hardware clock is set to local time\n"
+"      (<4>) Default log level (1-8)\n"
+"Advanced Features  --->\n"
+"    [ ] Optimization\n"
+"    [*] Create SBU and disk usage report\n"
+"    [ ] Save temporary system work\n"
+"    [ ] Run comparison analysis on final stage\n"
+"    Internal Settings (WARNING: for jhalfs developers only)  --->\n"
+"      (keep all defaults)\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:128
+msgid "[ ] Rebuild the Makefile (see help)"
+msgstr ""
+
+#. type: Bullet: '  - '
+#: CHEATSHEET:131
+msgid ""
+"Exit the menu (type \"q\"), then answer the questions, and wait for "
+"completion."
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:135
+#, no-wrap
+msgid ""
+"step 5: build the LFS system: as user, run:\n"
+"  $ make -C /mnt/lfs/jhalfs\n"
+"    You can leave the computer because building LFS takes some time...\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:144
+#, no-wrap
+msgid ""
+"Stage 3: configuring the LFS system\n"
+"step 6: when the build finishes:\n"
+"  - Enter chroot:\n"
+"  $ make -C /mnt/lfs/jhalfs chroot\n"
+"  - Set a password for root:\n"
+"  # passwd\n"
+"  - and for the unprivileged user:\n"
+"  # passwd <username>\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:149
+#, no-wrap
+msgid ""
+"step 7: set up GRUB:\n"
+"  - If you need UEFI, see below, otherwise:\n"
+"  # grub-install --target i386-pc /dev/<sda>\n"
+"  - Set up /boot/grub.cfg as explained in 10.3\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:168
+#, no-wrap
+msgid ""
+"step 7-bis: set up GRUB for UEFI\n"
+"  - Become the unprivileged user:\n"
+"  # su - <username>\n"
+"  - Then run:\n"
+"  $ cd blfs_root\n"
+"  $ make\n"
+"    select:\n"
+"[*] Post LFS Configuration and Extra Software  --->\n"
+"   [*] File Systems and Disk Management  --->\n"
+"      [*] grub-efi <2.12> for EFI\n"
+"  - Exit, answer the questions\n"
+"  - When the script generation is done:\n"
+"  $ mkdir work && cd work\n"
+"  $ ../gen-makefile.sh\n"
+"  $ make\n"
+"  - Wait for completion, then log out from user:\n"
+"  $ exit\n"
+"  - Configure grub uefi as instructed in blfs chapter 5.\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:173
+#, no-wrap
+msgid ""
+"step 8: end of procedure 1:\n"
+"  - Exit chroot:\n"
+"# exit\n"
+"  - Then reboot to LFS.\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:174
+#, no-wrap
+msgid "==============================\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:176
+#, no-wrap
+msgid ""
+"Procedure 2: Install blfs tools after building LFS\n"
+"==============================\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:190
+#, no-wrap
+msgid ""
+"Follow procedure 1 up to step 8, except you don't use 950-userconf, you change\n"
+"step 4, first menu:\n"
+"BOOK Settings  --->\n"
+"    Choose BOOK (Linux From Scratch)  --->\n"
+"    Init system (LFS SysV)  --->\n"
+"    XML Source of Book (retrieved from git repository)  --->\n"
+"(trunk) Which point in git history?\n"
+"    Multilib (Standard LFS on i686 or amd64)  --->\n"
+"    Build method (chroot)  --->\n"
+"[ ] Add blfs-tool support\n"
+"[ ] Add custom tools support\n"
+"and you don't set a password for the unprivileged user, since it has not been\n"
+"created yet.\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:206
+#, no-wrap
+msgid ""
+"Stage 4: installing BLFS building tools on a running LFS system\n"
+"step 9: As root on the LFS system:\n"
+"  - Install the necessary dependencies for jhalfs (see the dependencies in\n"
+"    the menu \"blfs-tools dependencies\", above), following the BLFS book\n"
+"    by the method of your choice (in chroot, using ssh after installing openssh,\n"
+"    ... )\n"
+"  - Create an unprivileged user\n"
+"  - Boot LFS and log in as this user; from now on, everything is done as this\n"
+"    user.\n"
+"  - Install jhalfs:\n"
+"  $ git clone https://git.linuxfromscratch.org/jhalfs.git\n"
+"  $ cd jhalfs\n"
+"  - Prepare the system:\n"
+"  $ sudo mkdir -p /var/lib/jhalfs/BLFS\n"
+"  $ sudo chown <username>:<username> /var/lib/jhalfs/BLFS\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:222
+#, no-wrap
+msgid ""
+"step 10: install the BLFS tools: run\n"
+"  $ make\n"
+"  - Fill in the menu:\n"
+"BOOK Settings  --->\n"
+"    Choose BOOK (Beyond Linux From Scratch (see help))  --->\n"
+"    Init system (BLFS SysV/BLFS systemd)  --->\n"
+"    XML Source of Book (retrieved from git repository)  --->\n"
+"(trunk) Which point in git history? (NEW)\n"
+"(/blfs_root) Root of the tools directory (see help) (NEW)\n"
+"(blfs-xml) BLFS sources directory (internal parameter) (NEW)\n"
+"(lfs-xml) LFS sources directory (internal parameter) (NEW)\n"
+"    LFS book version (LFS branch (default trunk) or any commit)  --->\n"
+"(trunk) LFS Book Commit (mandatory) (NEW)\n"
+"(/var/lib/jhalfs/BLFS) Installed packages database directory (NEW)\n"
+"  - Exit, wait for completion.\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:228
+msgid ""
+"step 11: set up the BLFS tools: change to ~/blfs_root, and run \"./update-"
+"installed.sh\" select in the menu the packages you have installed (note: "
+"select all the LFS packages with a <A>). Check the versions of installed "
+"packages are the right ones. Change them if needed."
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET:229
+msgid "You should be at the same point as at the end of procedure 1."
+msgstr ""
