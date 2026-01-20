@@ -1,0 +1,155 @@
+# Portuguese translations for br-alfs package
+# Copyright (C) 2026 Jamenson Ferreira Espindula de Almeida Melo
+# This file is distributed under the same license as the br-alfs package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: br-alfs 1.0\n"
+"Report-Msgid-Bugs-To: jafesp@gmail.com\n"
+"POT-Creation-Date: 2026-01-20 01:28-0300\n"
+"PO-Revision-Date: 2026-01-20 01:28-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. type: Plain text
+#: README.PACKAGE_MANAGEMENT:3
+#, no-wrap
+msgid ""
+"TITLE : Package management in jhalfs\n"
+"BY    : Pierre Labastie (work in progress)\n"
+msgstr ""
+
+#. type: Bullet: '1. '
+#: README.PACKAGE_MANAGEMENT:5
+msgid "INTRODUCTION:"
+msgstr ""
+
+#. type: Plain text
+#: README.PACKAGE_MANAGEMENT:16
+#, no-wrap
+msgid ""
+"      There are several hints discussing package management for LFS, but\n"
+"  nothing under jhalfs. There used to be a patch for PACO that I cannot\n"
+"  find now. So there was a need for such a tool, and an infrastructure,\n"
+"  which allows using a package manager inside jhalfs, has been developped.\n"
+"  I hope it is flexible enough to support several package managers, at least\n"
+"  among those who use DESTDIR install and/or LD_PRELOAD during install.\n"
+"  It has been tested with dpkg from Debian, pacman from Arch Linux,\n"
+"  and porg. Sample configuration files are given for those three packages.\n"
+"  I am sorry to say I have (almost) no experience with rpm, so I cannot\n"
+"  tell whether it would fit.\n"
+msgstr ""
+
+#. type: Bullet: '2. '
+#: README.PACKAGE_MANAGEMENT:18
+msgid "OVERVIEW OF THE SYSTEM:"
+msgstr ""
+
+#. type: Plain text
+#: README.PACKAGE_MANAGEMENT:22
+#, no-wrap
+msgid ""
+"      For now, package management is only available for LFS. The `porg style'\n"
+"  (see below) package management has been ported to BLFS, but not the distro\n"
+"  style one (the book layout makes it rather difficult).\n"
+msgstr ""
+
+#. type: Plain text
+#: README.PACKAGE_MANAGEMENT:42
+#, no-wrap
+msgid ""
+"      This tool comes in two flavours:\n"
+"  - for distros package managers (e.g dpkg or pacman), it basically performs\n"
+"    a \"DESTDIR install\" for all pages in chapter 8, 9 and 10 of the book. The\n"
+"    name of the DESTDIR directory is the same as the one of the executed\n"
+"    script. The path to this directory is available to the scriplets through\n"
+"    the PKG_DEST variable. The details of the DESTDIR part are given below.\n"
+"    After the package is installed in $PKG_DEST, a function \"packInstall\" is\n"
+"    called, which is supposed to create a binary package (e.g. make a .deb\n"
+"    file), store it to a repository and install it to the system.\n"
+"  - for porg style package manager, the install instructions are wrapped\n"
+"    between pairs of single quotes ('). This allows passing those instructions\n"
+"    to a function (\"wrapInstall\"), which may itself call porg or another\n"
+"    (e.g. fakeroot, not tested) instruction wrapper. Note that if the\n"
+"    instructions contain single quote charaters, they are changed to '\\'',\n"
+"    which pass them literally. At the end of the installation, a function\n"
+"    \"packInstall\" is called, with a slighly different aim compared to the\n"
+"    DESTDIR one: it is used to make a tarball of the installed files (e.g.\n"
+"    using \"porgball\") and store them into some repository. But there is no\n"
+"    need to install them to the system, since this has already been done.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.PACKAGE_MANAGEMENT:47
+#, no-wrap
+msgid ""
+"      Note that with carefully crafted \"packInstall\" and \"wrapInstall\"\n"
+"  functions, a combination of the two methods could be used, for example for\n"
+"  DESTDIR installs using fakeroot. This is work in progress and not fully\n"
+"  implemented yet (well... Closer to a wish list actually).\n"
+msgstr ""
+
+#. type: Bullet: '3. '
+#: README.PACKAGE_MANAGEMENT:49
+msgid "DETAILS:"
+msgstr ""
+
+#. type: Plain text
+#: README.PACKAGE_MANAGEMENT:61
+#, no-wrap
+msgid ""
+"      The XSL stylesheet used for generating the scriptlets, automatically\n"
+"  adds DESTDIR install instructions when \"package management\" is selected.\n"
+"  Also all the paths beginning with \" /\" or \">/\" (absolute paths) are prepended\n"
+"  with $PKG_DEST. This has the default that you might want to move\n"
+"  files to non existent directories. There is no simple way to automatically\n"
+"  create those directories, because you have sometimes to use the full path\n"
+"  (instructions of the form `cp file dir') and sometimes only the dirname\n"
+"  (instructions of the form `cp file1 file2'). So the XSL stylesheet\n"
+"  creates a reasonable subset of the FHS hierarchy into the destination\n"
+"  directory. Empty directories are then removed before packing the\n"
+"  binary package.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.PACKAGE_MANAGEMENT:75
+#, no-wrap
+msgid ""
+"      In order to use the package manager, it has to be installed at the end of\n"
+"  chapter 7 (temporary installation) and chapter 8 (final install).\n"
+"  Furthermore, the administrative files and directories have to be created\n"
+"  during the `Creating Directories' and `Creating Essential Files' stages.\n"
+"  For all this, the user has to supply a file in docbook XML format, with\n"
+"  the necessary instructions and enough information to download the tarball.\n"
+"  This file should reside in the `pkgmngt' directory and be named\n"
+"  `packageManager.xml'. A template named `packageManager.xml.template' is\n"
+"  provided in the `pkgmngt' subdirectory. There are also three XML files for\n"
+"  dpkg, pacman, and porg, respectively `packageManager.xml.dpkg',\n"
+"  `packageManager.xml.pacman',  and `packageManager.xml.porg', that you can\n"
+"  copy to `packageManager.xml' and modify to suit your needs.\n"
+"  They are not updated often, so the versions used can be rather old.\n"
+msgstr ""
+
+#. type: Plain text
+#: README.PACKAGE_MANAGEMENT:87
+#, no-wrap
+msgid ""
+"      The last thing to do is to tell how to use the package manager. The user\n"
+"  has to provide two functions, \"wrapInstall\" and \"packInstall\", as described\n"
+"  above. Please note that nothing has been done to manage configuration files,\n"
+"  which are ususally treated specially by package managers: depending on\n"
+"  the book layout, it is sometimes possible to create those files afterwards,\n"
+"  and sometimes not, which means that you have to check them after each\n"
+"  upgrade. Both functions should be defined in a file named `packInstall.sh',\n"
+"  residing in the `pkgmngt' directory. A template is provided (actually a copy\n"
+"  of the file for dpkg), as well as three example scripts for dpkg, pacman,\n"
+"  and porg. Pacman Note: due to the way pacman checks the available space on\n"
+"  disk, the root directory in chroot must be a mount point, otherwise the\n"
+"  installation of packages fails.\n"
+msgstr ""
