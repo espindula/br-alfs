@@ -1,0 +1,107 @@
+TÍTULO : Gerenciamento de pacotes no jhalfs
+POR    : Pierre Labastie (trabalho em progresso)
+
+1. INTRODUÇÃO:
+
+      Existem várias dicas discutindo o gerenciamento de pacotes para
+  LFS, mas nada sob jhalfs. Costumava existir um remendo para PACO
+  que eu não consigo encontrar agora. Portanto, existiu a necessidade
+  de tal ferramenta, e uma infraestrutura que permitisse usar-se um
+  gerenciador de pacotes dentro do jhalfs, foi desenvolvida. Eu
+  espero que ela seja flexível o suficiente para suportar vários
+  gerenciadores de pacotes, pelo menos entre aqueles que usam a
+  instalação DESTDIR e(ou) LD_PRELOAD durante a instalação. Ela foi
+  testada com dpkg proveniente do Debian, pacman proveniente do Arch
+  Linux e porg. Exemplos de arquivos de configuração são fornecidos
+  para esses três pacotes. Eu lamento dizer que não tenho (quase)
+  nenhuma experiência com rpm, de modo que não consigo dizer se ela
+  se adequaria.
+
+2. VISÃO GERAL DO SISTEMA:
+
+      Por enquanto, o gerenciamento de pacotes está disponível somente
+  para LFS. O gerenciamento de pacotes `estilo porg' (veja-se abaixo)
+  foi portado para o BLFS, mas não o estilo distribuição (o esquema
+  do livro torna isso bastante difícil).
+
+      Esta ferramenta vem em dois sabores:
+  - para gerenciadores de pacotes de distribuições (por exemplo, dpkg ou
+    pacman), ela basicamente realiza uma "instalação DESTDIR" para
+    todas as páginas nos capítulos 8, 9 e 10 do livro. O nome do
+    diretório DESTDIR é o mesmo que o do conjunto de comandos
+    sequenciados executados. O caminho para esse diretório está
+    disponível para os fragmentos de conjuntos de comandos
+    sequenciados por meio da variável PKG_DEST. Os detalhes da parte
+    DESTDIR são fornecidos abaixo. Depois que o pacote for instalado
+    em $PKG_DEST, uma função "packInstall" é chamada, que presume-se
+    que criará um pacote binário (por exemplo, criará um arquivo .deb),
+    vai armazená-lo em um repositório e vai instalá-lo no sistema.
+  - para o gerenciador de pacotes estilo porg, as instruções de
+    instalação são envolucradas em pares de aspas simples ('). Isso
+    permite passar essas instruções para uma função
+    ("wrapInstall"), que pode ela própria chamar porg ou outro
+    envolucrador de instrução (por exemplo, fakeroot, não testado).
+    Observe que se as instruções contiverem caracteres de aspas
+    simples, elas serão mudadas para '\'', que as passará
+    literalmente. No final da instalação, uma função "packInstall"
+    é chamada, com um objetivo um pouco diferente comparado com o do
+    DESTDIR: ela é usada para fazer um tarball dos arquivos
+    instalados (por exemplo, usando "porgball") e armazená-lo em
+    algum repositório. Mas não existe necessidade de instalá-los no
+    sistema, pois isso já foi feito.
+
+      Observe que com funções "packInstall" e "wrapInstall"
+  cuidadosamente elaboradas, uma combinação dos dois métodos poderia
+  ser usada, por exemplo, para instalações DESTDIR usando fakeroot.
+  Esse é um trabalho em andamento e ainda não totalmente implementado
+  (bem... Mais perto de uma lista de desejos, na verdade).
+
+3. DETALHES:
+
+      A folha de estilo XSL usada para gerar os fragmentos de conjuntos
+  de comandos sequenciados adiciona automaticamente instruções de
+  instalação DESTDIR quando "gerenciamento de pacotes" for
+  selecionado. Além disso, todos os caminhos que comecem com " /"
+  ou ">/" (caminhos absolutos) serão prepostos com $PKG_DEST. Isso
+  tem o padrão de que você pode querer mover arquivos para diretórios
+  inexistentes. Não existe uma maneira simples de criar
+  automaticamente esses diretórios, porque às vezes você tem que usar
+  o caminho completo (instruções da forma `cp arquivo diretório') e às
+  vezes somente o nome do diretório (instruções da forma `cp arquivo1
+  arquivo2'). Portanto, a folha de estilo XSL cria um subconjunto
+  razoável da hierarquia FHS no diretório de destino. Diretórios
+  vazios são então removidos antes de empacotar o pacote binário.
+
+      Para a finalidade de usar o gerenciador de pacotes, ele tem de
+  ser instalado no final do capítulo 7 (instalação temporária) e do
+  capítulo 8 (instalação final). Além disso, os arquivos e diretórios
+  administrativos tem de ser criados durante as etapas `Criando
+  Diretórios' e `Criando Arquivos Essenciais'. Para tudo isso, o(a)
+  usuário(a) tem de fornecer um arquivo no formato docbook XML, com
+  as instruções necessárias e informações suficientes para baixar o
+  tarball. Esse arquivo deveria residir no diretório `pkgmngt' e ser
+  nominado `packageManager.xml'. Um modelo nominado de
+  `packageManager.xml.template' é fornecido no subdiretório
+  `pkgmngt'. Existem também três arquivos XML para dpkg, pacman e
+  porg, respectivamente `packageManager.xml.dpkg',
+  `packageManager.xml.pacman' e `packageManager.xml.porg', que você
+  pode copiar para `packageManager.xml' e modificar para atender às
+  tuas necessidades. Eles não são atualizados frequentemente, de modo
+  que as versões usadas podem ser bastante antigas.
+
+      A última coisa a fazer é dizer como usar o gerenciador de
+  pacotes. O(A) usuário(a) tem que fornecer duas funções,
+  "wrapInstall" e "packInstall", conforme descrito acima. Por
+  favor, observe que nada foi feito para gerenciar os arquivos de
+  configuração, que normalmente são especialmente tratados pelos
+  gerenciadores de pacotes: dependendo do esquema do livro, às vezes
+  é possível criar esses arquivos posteriormente, e às vezes não, o
+  que significa que você tem que verificá-los depois de cada
+  atualização. Ambas as funções deveriam ser definidas em um arquivo
+  nominado de `packInstall.sh', residente no diretório `pkgmngt'. Um
+  modelo é fornecido (na verdade, uma cópia do arquivo para dpkg),
+  bem como três conjuntos de comandos sequenciados de exemplo para
+  dpkg, pacman e porg. Observação do Pacman: devido à maneira como o
+  pacman verifica o espaço disponível no disco, o diretório raiz no
+  chroot precisa ser um ponto de montagem, caso contrário a
+  instalação dos pacotes falhará.
