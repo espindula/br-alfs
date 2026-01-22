@@ -1,0 +1,237 @@
+Este arquivo contém procedimentos para construir o LFS e para
+instalar as ferramentas do jhalfs para construir pacotes do BLFS.
+==============================
+Procedimento 1: Instalar ferramentas blfs ao construir LFS
+==============================
+Estágio 1: Configuração do anfitrião
+---------------
+Passo 1: como usuário(a), a partir do diretório home:
+  $ git clone https://git.linuxfromscratch.org/jhalfs.git
+  $ cd jhalfs
+  $ mkdir custom/config
+  $ cp custom/examples/950-userconf custom/config
+  - Editar custom/config/950-userconf, substituindo os campos entre
+    colchetes angulares (< ... >) pelas informações para o(a)
+    usuário(a) que será criado(a) no novo sistema.
+
+Passo 2: como root:
+  - Criar a nova partição, o diretório /mnt/lfs, e montar a nova
+    partição nela (acompanhar o livro até o final do capítulo 2)
+  - Criar um diretório /sources no anfitrião e mudar o modo dele:
+    $ chmod a+wt /sources
+    (Cuidado: no anfitrião, não no /mnt/lfs)
+  - Executar visudo e dar privilégios suficientes para o(a)
+    usuário(a) do anfitrião, de modo que ele/ela consiga executar
+    qualquer comando como qualquer usuário(a)
+
+Passo 3: como usuário(a):
+  - Baixar o núcleo em /sources, desempacote-o e execute os passos de
+    configuração descritos na seção 10.3 do Livro LFS. Se UEFI for
+    necessária, adicione as etapas de configuração a partir do livro
+    BLFS, Capítulo 5, seção "Usando GRUB para Configurar o Processo de
+    Inicialização com UEFI".
+  - Quando você terminar a configuração, copiar .config:
+  $ cp .config ../config-<versão>
+  - Criar um arquivo /sources/fstab com conteúdo conforme descrito
+    em 10.2 (observe: em /sources, não em /etc)
+
+Estágio 2: Construindo LFS
+Passo 4: como usuário(a), a partir de ~/jhalfs
+  - Executar "make" e preencher os menus conforme segue
+    (alguns campos deveriam ser mudados para tua configuração, eles
+    serão indicados com xxx/yyy para indicar uma escolha entre xxx e
+    yyy, ou entre colchetes angulares <...> se várias escolhas forem
+    possíveis)
+
+Configurações do LIVRO --->
+    Escolher LIVRO (Linux From Scratch)  --->
+    Sistema de iniciação (LFS SysV/LFS systemd) --->
+    Fonte XML do Livro (recuperado a partir de repositório git)  --->
+    (trunk) Qual ponto no histórico git?
+    Multilib (LFS Padrão no i686 ou no amd64)  --->
+    Método de construção (chroot)  --->
+[*] Adicionar suporte a blfs-tool
+    Dependências da blfs-tool  --->
+      [*] libxml2 (exigida)
+      [*] libxslt (exigida)
+      [*] DocBook XML DTD (exigida)
+      [*] lynx (opcional, para leitura do livro gerado)
+      [*] sudo (recomendada)
+      [*] wget (recomendada)
+      [*] GPM (opcional, veja-se ajuda)
+      [*] Cliente GIT (opcional, veja-se ajuda)
+    Versão do livro BLFS (Ramificação do BLFS (padrão trunk) ou qualquer submissão)  --->
+(trunk) Submissão do Livro BLFS (ramificação/etiqueta/resumo) (NOVA)
+(/blfs_root) Raiz do diretório das ferramentas (veja-se ajuda)
+(blfs-xml) Diretório dos fontes do BLFS (parâmetro interno)
+(lfs-xml) Diretório dos fontes do LFS (parâmetro interno)
+[*] Adicionar suporte a ferramentas personalizadas
+(/var/lib/jhalfs/BLFS) Diretório da base de dados dos pacotes instalados
+
+Configurações Gerais --->
+(lfs) Usuário(a) temporário(a) para capítulos 4, 5 e 6 (deveria não existir)
+(lfs) Grupo do(a) usuário(a) para capítulos 4, 5 e 6 (deveria não existir)
+(/mnt/lfs) Diretório da Construção
+[*] Recuperar arquivos de fonte
+(/sources) Diretório de Arquivamento de Pacotes
+(<ftp.snt.utwente.nl/pub/software>) Substituto para ftp.gnu.org
+[ ]     Retentar na falha 'conexão recusada'
+(20)    Número de tentativas de retentativas nas falhas de transferência
+(30)    Tempo limite de transferência (em segundos)
+[ ] Executar o makefile
+[*] Reconstruir arquivos
+
+Configurações de Construção --->
+    Configurações de paralelismo  --->
+      [*] Usar todos os núcleos
+      (all)   conjunto de UCPs a usar, ou 'all' para todas UCPs
+      [*/ ] Construir Binutils passagem1 sem paralelismo (UPC Real)
+[ ] Executar suítes de teste
+[ ] Manter diretório da construção no capítulo 8
+[ ] Testar divergência entre versão de pacote e nome de diretório
+[ ] Gerenciamento de pacote
+[*] Criar um registro dos arquivos instalados para cada pacote
+[*] Despojar Binários/Bibliotecas Instalados(as)
+[*/ ] NÃO usar/exibir barra de progresso
+
+Configuração de sistema --->
+[*] Usar um arquivo personalizado fstab
+(/sources/fstab) Arquivo fstab (opcional)
+[*] Construir o núcleo
+(/sources/config-<versão>) Arquivo de configuração do núcleo
+[ ] Instalar ncurses de caracteres não abrangentes
+(<GMT>) Fuso Horário
+(<en_US.UTF-8>) Idioma
+[ ] Instalar o conjunto completo de localidades
+    Tamanho da página do Groff (A4/Letter)  --->
+(<my-lfs>) Nome do dispositivo (veja-se ajuda)
+    Configuração de rede de intercomunicação --->
+      (<ens3>) Nome da placa de rede de intercomunicação
+      (<10.0.2.9>) Endereço IP estático
+      (<10.0.2.2>) Gateway
+      (<24>) Prefixo de subrede
+      (<10.0.2.255>) Endereço de difusão
+      (<local>) Nome de domínio (veja-se ajuda)
+      (<10.0.2.3>) Servidor primário de nomes
+      (<8.8.8.8>) Servidor secundário de nomes
+    Configuração do console  --->
+      (<lat0-16>) Fonte do console
+      (<us>) Nome do mapa de teclas
+      [ ] Relógio do hardware está configurado para hora local
+      (<4>) Nível padrão de registro (1-8)
+Recursos Avançados  --->
+    [ ] Otimização
+    [*] Criar informe de UPC e de uso de disco
+    [ ] Salvar trabalho do sistema temporário
+    [ ] Executar análise de comparação no estágio final
+    Configurações Internas (AVISO: para desenvolvedores(as) do
+    jhalfs somente) --->
+      (manter todos os padrões)
+
+[ ] Reconstruir o Makefile (veja-se ajuda)
+
+  - Sair do menu (digitar "q"), então responder às questões e aguardar
+    pela completação.
+
+passo 5: construir o sistema LFS: como usuário(a), execute:
+  $ make -C /mnt/lfs/jhalfs
+    Você pode deixar o computador porque construir o LFS leva algum
+    tempo ...
+
+Estágio 3: configurando o sistema LFS
+passo 6: quando a construção finalizar:
+  - Entrar no chroot:
+  $ make -C /mnt/lfs/jhalfs chroot
+  - Configurar uma senha para root:
+  # passwd
+  - e para o(a) usuário(a) desprivilegiado(a):
+  # passwd <nomeusuário(a)>
+
+passo 7: configurar GRUB:
+  - Se você precisar da UEFI, veja-se abaixo, do contrário:
+  # grub-install --target i386-pc /dev/<sda>
+  - Configure /boot/grub.cfg conforme explicado no 10.3
+
+passo 7-bis: configurar GRUB para UEFI
+  - Tornar-se um(a) usuário(a) desprivilegiado(a):
+  # su - <nomeusuário(a)>
+  - Então executar:
+  $ cd blfs_root
+  $ make
+    selecionar:
+[*] Pós Configuração do LFS e Software Extra  --->
+   [*] Sistemas de Arquivos e Gerenciamento de Disco  --->
+      [*] grub-efi <2.12> para EFI
+  - Sair, responder às perguntas
+  - Quando a geração do conjunto de comandos sequenciados estiver pronta:
+  $ mkdir work && cd work
+  $ ../gen-makefile.sh
+  $ make
+  - Aguardar o término, então deslogar-se do(a) usuário(a):
+  $ exit
+  - Configurar grub uefi conforme instruído no capítulo 5 do BLFS.
+
+passo 8: fim do procedimento 1:
+  - Sair do chroot:
+# exit
+  - Então reinicializar para o LFS.
+
+==============================
+Procedimento 2: Instalar ferramentas blfs depois de construir o LFS
+==============================
+Seguir o procedimento 1 até o passo 8, exceto se você não usar 950-userconf, você muda
+o passo 4, primeiro menu:
+Configurações do LIVRO  --->
+    Escolher LIVRO (Linux From Scratch)  --->
+    Sistema de iniciação (LFS SysV)  --->
+    Fonte XML do Livro (recuperado a partir de repositório git)  --->
+(trunk) Qual ponto no histórico git?
+    Multilib (LFS padrão no i686 ou amd64)  --->
+    Método de construção (chroot)  --->
+[ ] Adicionar suporte para blfs-tool
+[ ] Adicionar suporte para ferramentas personalizadas
+e você não configura uma senha para o(a) usuário(a)
+desprivilegiado(a), pois ele(a) ainda não foi criado(a).
+
+Estágio 4: instalando ferramentas de construção do BLFS em um sistema
+LFS executando
+passo 9: Como root no sistema LFS:
+  - Instalar as dependências necessárias para jhalfs (vejam-se as
+    dependências no menu "dependências blfs-tools", acima),
+    seguindo o livro BLFS pelo método da tua escolha (no chroot,
+    usando ssh depois de instalar openssh, ... )
+  - Criar um(a) usuário(a) desprivilegiado(a)
+  - Inicializar o LFS e se logar como esse(a) usuário(a); a partir
+    de agora, tudo será feito como esse(a) usuário(a).
+  - Instalar jhalfs:
+  $ git clone https://git.linuxfromscratch.org/jhalfs.git
+  $ cd jhalfs
+  - Preparar o sistema:
+  $ sudo mkdir -p /var/lib/jhalfs/BLFS
+  $ sudo chown <nomeusuário(a)>:<nomeusuário(a)> /var/lib/jhalfs/BLFS
+
+passo 10: instalar as ferramentas BLFS: executar
+  $ make
+  - Preencher o menu:
+Configurações do LIVRO  --->
+    Escolher LIVRO (Beyond Linux From Scratch (veja-se ajuda))  --->
+    Sistema de iniciação (BLFS SysV/BLFS systemd)  --->
+    Fonte XML do Livro (recuperado a partir de repositório git)  --->
+(trunk) Qual ponto no histórico git? (NOVO)
+(/blfs_root) Raiz do diretório das ferramentas (veja-se ajuda) (NOVO)
+(blfs-xml) Diretório dos fontes do BLFS (parâmetro interno) (NOVO)
+(lfs-xml) Diretório dos fontes do LFS (parâmetro interno) (NOVO)
+    Versão do livro LFS (Ramificação do LFS (padrão trunk) ou
+    qualquer submissão) --->
+(trunk) Submissão do Livro LFS (obrigatório) (NOVO)
+(/var/lib/jhalfs/BLFS) Diretório da base de dados dos pacotes
+			instalados (NOVO)
+  - Sair, aguardar o término.
+
+passo 11: configurar as ferramentas BLFS: mudar para ~/blfs_root, e
+executar "./update-installed.sh" selecionar no menu os pacotes que você
+tiver instalado (observar: selecionar todos os pacotes do LFS com um
+<A>). Verificar se as versões dos pacotes instalados são as
+corretas. Mude-as se necessário.
+
+Você deveria estar no mesmo ponto que ao final do procedimento 1.
