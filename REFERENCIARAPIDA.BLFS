@@ -1,0 +1,44 @@
+Este arquivo contém um procedimento para construir pacotes do BLFS
+usando jhalfs. É presumido que as ferramentas jhalfs para construir o
+BLFS já estejam instaladas, possivelmente usando um dos procedimentos
+na REFERÊNCIA RÁPIDA.
+
+Passo 1: como usuário(a), a partir do diretório lar:
+  $ cd blfs_root
+  $ make
+  - Preencha o menu com os pacotes que você quer construir e para
+    menus não de pacotes:
+Configurações de construção  --->
+    Servidor de mensagens eletrônicas para resolver a dependência do
+    MTA (<sendmail>)  --->
+    Nível de dependência (Dependências exigidas mais recomendadas)
+    --->
+(<en_US.UTF-8>) Variável LANG na forma
+                ll_CC.mapacaracteres[@modificadores]
+[*] Construir como Usuário(a)
+[ ] Usar gerenciamento de pacotes `estilo porg'
+[*] Remover arquivos .la da libtool depois da instalação do pacote
+[ ] Gerar estatísticas para o(s) pacote(s) solicitado(s)
+Esquema da Construção  --->
+(/sources) Diretório dos fontes
+[ ] Baixar fontes para subdiretórios
+(/sources) Diretório da construção
+[*] Construir em subdiretórios
+[ ] Manter diretório do fonte
+Otimização  --->
+(0) Número de tarefas paralelas
+(EMPTY) Conteúdo da variável CFLAGS
+(EMPTY) Conteúdo da variável CXXFLAGS
+(EMPTY) Conteúdo da variável LDFLAGS
+  - sair e aguardar o término
+
+Passo 2: (frequentemente opcional, porém ...)
+  - verificar conjuntos de comandos sequenciados gerados
+
+Passo 3: criar o Makefile de ordenamento da construção
+  $ mkdir work && cd work
+  $ ../gen-makefile.sh
+
+Passo 4: construir os pacotes
+  $ make
+  - vá tomar um café
