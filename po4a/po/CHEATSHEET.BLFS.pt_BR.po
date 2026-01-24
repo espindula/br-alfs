@@ -1,0 +1,83 @@
+# Portuguese translations for br-alfs package
+# Copyright (C) 2026 Jamenson Ferreira Espindula de Almeida Melo
+# This file is distributed under the same license as the br-alfs package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: br-alfs 1.0\n"
+"Report-Msgid-Bugs-To: jafesp@gmail.com\n"
+"POT-Creation-Date: 2026-01-24 00:38-0300\n"
+"PO-Revision-Date: 2026-01-24 00:38-0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. type: Plain text
+#: CHEATSHEET.BLFS:4
+msgid ""
+"This file contains a procedure for building BLFS packages using jhalfs.  It "
+"is supposed that the jhalfs tools for building BLFS are already installed, "
+"possibly using one of the procedures in CHEATSHEET."
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET.BLFS:30
+#, no-wrap
+msgid ""
+"Step 1: as user, from home directory:\n"
+"  $ cd blfs_root\n"
+"  $ make\n"
+"  - Fill up the menu with the packages you want to build, and for\n"
+"    non package menus:\n"
+"Build settings  --->\n"
+"    Mail server for resolving the MTA dependency (<sendmail>)  --->\n"
+"    Dependency level (Required plus recommended dependencies)  --->\n"
+"(<en_US.UTF-8>) LANG variable in the form ll_CC.charmap[@modifiers]\n"
+"[*] Build as User\n"
+"[ ] Use `porg style' package management\n"
+"[*] Remove libtool .la files after package installation\n"
+"[ ] Generate statistics for the requested package(s)\n"
+"Build Layout  --->\n"
+"(/sources) Directory of sources\n"
+"[ ] Downloads sources to subdirectories\n"
+"(/sources) Build directory\n"
+"[*] Build into subdirectories\n"
+"[ ] Keep source directory\n"
+"Optimization  --->\n"
+"(0) Number of parallel jobs\n"
+"(EMPTY) Content of variable CFLAGS\n"
+"(EMPTY) Content of variable CXXFLAGS\n"
+"(EMPTY) Content of variable LDFLAGS\n"
+"  - exit and wait for completion\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET.BLFS:33
+#, no-wrap
+msgid ""
+"Step 2: (often optional, but...)\n"
+"  - verify generated scripts\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET.BLFS:37
+#, no-wrap
+msgid ""
+"Step 3: create the build ordering Makefile\n"
+"  $ mkdir work && cd work\n"
+"  $ ../gen-makefile.sh\n"
+msgstr ""
+
+#. type: Plain text
+#: CHEATSHEET.BLFS:40
+#, no-wrap
+msgid ""
+"Step 4: build the packages\n"
+"  $ make\n"
+"  - go grab a coffee\n"
+msgstr ""
