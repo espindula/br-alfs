@@ -1,0 +1,1754 @@
+# SOME DESCRIPTIVE TITLE
+# Copyright (C) YEAR Jamenson Ferreira Espindula de Almeida Melo
+# This file is distributed under the same license as the br-alfs package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: br-alfs 1.0\n"
+"Report-Msgid-Bugs-To: jafesp@gmail.com\n"
+"POT-Creation-Date: 2026-01-25 11:30-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. type: Plain text
+#: Config.in:4
+#, no-wrap
+msgid ""
+"# Check for \"nproc\" presence:\n"
+"config HAVE_NPROC\n"
+"    def_bool $(shell,if nproc >/dev/null 2>&1; then echo y; else echo n; fi)\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:8
+#, no-wrap
+msgid ""
+"# Check for \"cpuset controller in cgroup v2\" presence:\n"
+"config HAVE_CGROUP\n"
+"    def_bool $(shell,if grep -q cpuset /sys/fs/cgroup/cgroup.controllers 2>/dev/null; then echo y; else echo n; fi)\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:10
+msgid "menu \"BOOK Settings\""
+msgstr ""
+
+#. type: Plain text
+#: Config.in:17
+#, no-wrap
+msgid ""
+"    #--- BOOK/script\n"
+"    choice\n"
+"        prompt \"Choose BOOK\"\n"
+"        default BOOK_LFS_ANY\n"
+"        help\n"
+"            Select whether you want to build LFS or install the BLFS tools\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:22
+#, no-wrap
+msgid ""
+"        config    BOOK_LFS_ANY\n"
+"            bool \"Linux From Scratch\"\n"
+"            help\n"
+"                Set up the tools to build LFS, and optionally run the build\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:30
+#, no-wrap
+msgid ""
+"        config    BOOK_BLFS\n"
+"            bool \"Beyond Linux From Scratch (see help)\"\n"
+"            help\n"
+"                if the LFS system has already been built, and you have not\n"
+"                installed the tools to build BLFS packages during that build,\n"
+"                install those tools now.\n"
+"    endchoice\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:33
+#, no-wrap
+msgid ""
+"    choice\n"
+"    prompt \"Init system\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:39
+#, no-wrap
+msgid ""
+"      if BOOK_LFS_ANY\n"
+"        config BOOK_LFS\n"
+"        bool \"LFS SysV\"\n"
+"        help\n"
+"            Extract the SysV flavour of the LFS book\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:50
+#, no-wrap
+msgid ""
+"        config BOOK_LFS_SYSD\n"
+"        bool \"LFS systemd\"\n"
+"        help\n"
+"            Extract the systemd flavour of the LFS book\n"
+"      endif\n"
+"      if BOOK_BLFS\n"
+"        config BLFS_SYSV\n"
+"        bool \"BLFS SysV\"\n"
+"        help\n"
+"            Extract the SysV flavour of the BLFS book\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:57
+#, no-wrap
+msgid ""
+"        config BLFS_SYSD\n"
+"        bool \"BLFS systemd\"\n"
+"        help\n"
+"            Extract the systemd flavour of the BLFS book\n"
+"      endif\n"
+"    endchoice\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:62
+#, no-wrap
+msgid ""
+"    config    INITSYS\n"
+"        string\n"
+"        default \"sysv\"         if BOOK_LFS || BLFS_SYSV\n"
+"        default \"systemd\"      if BOOK_LFS_SYSD || BLFS_SYSD\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:68
+#, no-wrap
+msgid ""
+"    config    RUN_ME\n"
+"        string\n"
+"        default \"./jhalfs run\" if BOOK_LFS || BOOK_LFS_SYSD\n"
+"        default \"./install-blfs-tools.sh auto\" if BOOK_BLFS\n"
+"    #--- End BOOK/script\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:73
+#, no-wrap
+msgid ""
+"    #--- Book version\n"
+"    choice\n"
+"        prompt   \"XML Source of Book\"\n"
+"        default   BRANCH\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:79
+#, no-wrap
+msgid ""
+"        config    BRANCH\n"
+"            bool   \"retrieved from git repository\"\n"
+"            help\n"
+"                Use a book XML source downloaded from the git repository, and\n"
+"                checked out at any commit (branch/tag/sha)\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:86
+#, no-wrap
+msgid ""
+"        config    WORKING_COPY\n"
+"            bool    \"Local Copy\"\n"
+"            help\n"
+"                Use a local copy of the book XML source (not necessarily\n"
+"                a git repository)\n"
+"    endchoice\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:98
+#, no-wrap
+msgid ""
+"    config    COMMIT\n"
+"        string    \"Which point in git history?\"\n"
+"        default    \"trunk\" if LFS_MULTILIB_NO || BOOK_BLFS\n"
+"        default    \"multilib\" if ! LFS_MULTILIB_NO\n"
+"        depends on    BRANCH\n"
+"        help\n"
+"            You can select the development version of the book using \"trunk\".\n"
+"            A stable version may be selected with its version string, for\n"
+"            example \"12.1\".\n"
+"            Actually any way to denote a commit in git can be used, such as\n"
+"            an abbreviated commit sha or a tag or a branch name.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:105
+#, no-wrap
+msgid ""
+"    config    BOOK\n"
+"        string    \"Location of local copy (mandatory)\"\n"
+"        default    \"**EDIT ME**\"\n"
+"        depends on    WORKING_COPY\n"
+"        help\n"
+"            The full path to a local copy of the book XML sources\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:114
+#, no-wrap
+msgid ""
+"    choice\n"
+"    depends on (BOOK_LFS || BOOK_LFS_SYSD)\n"
+"    prompt \"Multilib\"\n"
+"    default LFS_MULTILIB_NO\n"
+"        config LFS_MULTILIB_NO\n"
+"        bool \"Standard LFS on i686 or amd64\"\n"
+"        help\n"
+"            Use standard LFS book (choose this if not multilib source)\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:119
+#, no-wrap
+msgid ""
+"        config LFS_MULTILIB_I686\n"
+"        bool \"Multilib LFS on amd64 with i686 libraries\"\n"
+"        help\n"
+"            Use Multilib LFS book with i686 libraries\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:124
+#, no-wrap
+msgid ""
+"        config LFS_MULTILIB_X32\n"
+"        bool \"Multilib LFS on amd64 with x32 libraries\"\n"
+"        help\n"
+"            Use Multilib LFS book with x32 libraries\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:129
+#, no-wrap
+msgid ""
+"        config LFS_MULTILIB_ALL\n"
+"        bool \"Multilib LFS on amd64 with i686 and x32 libraries\"\n"
+"        help\n"
+"            Use Multilib LFS book with i686 and x32 libraries\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:131 Config.in:575 Config.in:897
+#, no-wrap
+msgid "    endchoice\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:138
+#, no-wrap
+msgid ""
+"    config    MULTILIB\n"
+"        string\n"
+"        default \"default\"      if LFS_MULTILIB_NO\n"
+"        default \"ml_32\"        if LFS_MULTILIB_I686\n"
+"        default \"ml_x32\"       if LFS_MULTILIB_X32\n"
+"        default \"ml_all\"       if LFS_MULTILIB_ALL\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:140
+#, no-wrap
+msgid "    #--- End BOOK version\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:149
+#, no-wrap
+msgid ""
+"    choice\n"
+"        prompt    \"Build method\"\n"
+"        default   BUILD_CHROOT\n"
+"        depends on (BOOK_LFS || BOOK_LFS_SYSD)\n"
+"        help\n"
+"            What build method should be used: a chroot jail or minimal boot\n"
+"            system. Review the clfs-ng branch chap6 \"TO BOOT OR CHROOT\" for\n"
+"            a full explanation.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:152
+#, no-wrap
+msgid ""
+"        config    BUILD_CHROOT\n"
+"            bool    \"chroot\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:156
+#, no-wrap
+msgid ""
+"        config    BUILD_BOOT\n"
+"            bool    \"boot\"\n"
+"    endchoice\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:161
+#, no-wrap
+msgid ""
+"    config    METHOD\n"
+"        string\n"
+"        default \"chroot\"    if BUILD_CHROOT\n"
+"        default \"boot\"      if BUILD_BOOT\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:171
+#, no-wrap
+msgid ""
+"    config    BOOT_CONFIG\n"
+"        string  \"BOOT kernel config file (mandatory)\"\n"
+"        default \"***EDIT ME***\"\n"
+"        depends on BUILD_BOOT\n"
+"        help\n"
+"            If METHOD=boot, location of boot-kernel config file\n"
+"            The config file will be copied to ${BUILD_DIR}/sources\n"
+"            and renamed 'bootkernel-config'\n"
+"            NOTE: this setting is required\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:188
+#, no-wrap
+msgid ""
+"    #--- blfs-tool Support\n"
+"    config BLFS_TOOL\n"
+"        bool    \"Add blfs-tool support\"\n"
+"        default    n\n"
+"        depends on !BOOK_BLFS\n"
+"        help\n"
+"            Activating this option will install additional packages needed\n"
+"            to use blfs tools after booting the new system.\n"
+"            The blfs-tool files will be installed under $BUILD_DIR/blfs_root\n"
+"            (see below).\n"
+"            After booting the new xLFS system, but before using the blfs tools,\n"
+"            you should create a user account, move the /blfs_root directory\n"
+"            to that user's home, and change its ownership to that of the user.\n"
+"            Also, be sure to give the user read and write access on the\n"
+"            $TRACKING_DIR directory and the files that it contains.\n"
+"            Don't forget to configure sudo properly on the new system.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:191
+#, no-wrap
+msgid ""
+"    config DUMMY # Avoid indenting the items below\n"
+"    bool\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:194
+#, no-wrap
+msgid ""
+"    if BLFS_TOOL\n"
+"        menu \"blfs-tool dependencies\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:198
+#, no-wrap
+msgid ""
+"            config    DEP_LIBXML\n"
+"            bool    \"libxml2 (required)\"\n"
+"            default    y\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:202
+#, no-wrap
+msgid ""
+"            config    DEP_LIBXSLT\n"
+"            bool    \"libxslt (required)\"\n"
+"            default    y\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:206
+#, no-wrap
+msgid ""
+"            config    DEP_DBXML\n"
+"            bool    \"DocBook XML DTD (required)\"\n"
+"            default    y\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:210
+#, no-wrap
+msgid ""
+"            config    DEP_LYNX\n"
+"            bool    \"lynx (optional, for reading the generated book)\"\n"
+"            default    y\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:214
+#, no-wrap
+msgid ""
+"            config    DEP_SUDO\n"
+"            bool    \"sudo (recommended)\"\n"
+"            default    y\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:218
+#, no-wrap
+msgid ""
+"            config    DEP_WGET\n"
+"            bool    \"wget (recommended)\"\n"
+"            default    y\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:226
+#, no-wrap
+msgid ""
+"            config    DEP_GPM\n"
+"            bool    \"GPM (optional, see help)\"\n"
+"            default    n\n"
+"            help\n"
+"                if you install gpm, it will be started\n"
+"                automatically on boot. It allows copy-paste\n"
+"                while Xorg is not installed.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:234
+#, no-wrap
+msgid ""
+"            config    DEP_GIT\n"
+"            bool    \"GIT client (optional, see help)\"\n"
+"            default    n\n"
+"            help\n"
+"                Git is needed for updating the book\n"
+"                sources. You do not need it if building a\n"
+"                stable book.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:236
+#, no-wrap
+msgid "        endmenu\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:240
+#, no-wrap
+msgid ""
+"        choice\n"
+"        prompt    \"BLFS book version\"\n"
+"        default    BLFS_BRANCH\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:246
+#, no-wrap
+msgid ""
+"            config    BLFS_BRANCH\n"
+"            bool    \"BLFS Branch (default trunk) or any commit\"\n"
+"            help\n"
+"                Use a BLFS book downloaded from the git repository, and\n"
+"                checked out at any commit (branch/tag/sha).\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:252
+#, no-wrap
+msgid ""
+"            config    BLFS_WORKING_COPY\n"
+"            bool    \"BLFS working copy\"\n"
+"            help\n"
+"                Use a local working copy of the BLFS book.\n"
+"        endchoice\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:259
+#, no-wrap
+msgid ""
+"        config    BLFS_WC_LOCATION\n"
+"        string    \"Location of the local BLFS working copy (mandatory)\"\n"
+"        default    \"**EDIT ME**\"\n"
+"        depends on BLFS_WORKING_COPY\n"
+"        help\n"
+"            Full path to the BLFS book working copy\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:268
+#, no-wrap
+msgid ""
+"        config    BLFS_COMMIT\n"
+"        string    \"BLFS Book commit (branch/tag/sha)\"\n"
+"        default   \"trunk\"\n"
+"        depends on BLFS_BRANCH\n"
+"        help\n"
+"             Can be any branch, tag, or abbreviated (or not) commit sha.\n"
+"    endif\n"
+"    #--- End blfs-tool Support\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:278
+#, no-wrap
+msgid ""
+"    #--- BLFS params (Used for installing the tools, either after a jhalfs run\n"
+"    #    or directly)\n"
+"        config    BLFS_ROOT\n"
+"        string \"Root of the tools directory (see help)\"\n"
+"        default \"/blfs_root\"\n"
+"        depends on BLFS_TOOL || BOOK_BLFS\n"
+"        help\n"
+"            Path to the directory where all required files and scripts\n"
+"            will be stored.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:284
+#, no-wrap
+msgid ""
+"            This path must begin with a slash, and:\n"
+"            - is relative to the user's HOME directory when installing the\n"
+"              blfs tools on an already existing LFS system.\n"
+"            - is relative to the root of the build directory (`/' in chroot)\n"
+"              when adding the tools after a jhalfs run\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:286
+#, no-wrap
+msgid "            CAUTION: this directory will be removed if it already exists.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:295
+#, no-wrap
+msgid ""
+"        config    BLFS_XML\n"
+"        string \"BLFS sources directory (internal parameter)\"\n"
+"        default \"blfs-xml\"\n"
+"        depends on BLFS_TOOL || BOOK_BLFS\n"
+"        help\n"
+"            The directory name under $BLFS_ROOT where the BLFS\n"
+"            book sources will be copied or checked out. Do not change that\n"
+"            unless you know what you are doing...\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:304
+#, no-wrap
+msgid ""
+"        config    LFS_XML\n"
+"        string \"LFS sources directory (internal parameter)\"\n"
+"        default \"lfs-xml\"\n"
+"        depends on BLFS_TOOL || BOOK_BLFS\n"
+"        help\n"
+"            The directory name under $BLFS_ROOT where the LFS\n"
+"            book sources will be copied or checked out. Do not change that\n"
+"            unless you know what you are doing...\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:309
+#, no-wrap
+msgid ""
+"        choice\n"
+"        prompt    \"LFS book version\"\n"
+"        default    LFS_BRANCH\n"
+"        depends on    BOOK_BLFS\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:315
+#, no-wrap
+msgid ""
+"            config    LFS_BRANCH\n"
+"            bool     \"LFS branch (default trunk) or any commit\"\n"
+"            help\n"
+"                Use an LFS book downloaded from the git repository and\n"
+"                checked out at any commit (branch/tag/sha).\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:321
+#, no-wrap
+msgid ""
+"            config    LFS_WORKING_COPY\n"
+"            bool     \"LFS working copy\"\n"
+"            help\n"
+"                Use a local working copy of the LFS book.\n"
+"        endchoice\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:328
+#, no-wrap
+msgid ""
+"        config    BLFS_LFS_BOOK\n"
+"        string    \"Location of the local LFS working copy (mandatory)\"\n"
+"        default    \"**EDIT ME**\"\n"
+"        depends on LFS_WORKING_COPY\n"
+"        help\n"
+"            Full path to the LFS book working copy\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:336
+#, no-wrap
+msgid ""
+"        config    BLFS_LFS_COMMIT\n"
+"        string    \"LFS Book Commit (mandatory)\"\n"
+"        default   \"trunk\"\n"
+"        depends on LFS_BRANCH\n"
+"        help\n"
+"            Any branch, tag or abbreviated (or not) commit sha.\n"
+"    # End of BLFS parameters\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:346
+#, no-wrap
+msgid ""
+"    #--- Custom Tools support\n"
+"    config CUSTOM_TOOLS\n"
+"        depends on !BOOK_BLFS\n"
+"        bool    \"Add custom tools support\"\n"
+"        default    n\n"
+"        help\n"
+"            Activating this option additional packages you create\n"
+"            will be installed after finished the xLFS system build.\n"
+"    #--- End Custom Tools support\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:356
+#, no-wrap
+msgid ""
+"    #--- This directory is needed for blfs tools installation and custom tools\n"
+"    #    As well.\n"
+"    config    TRACKING_DIR\n"
+"        string \"Installed packages database directory\"\n"
+"        default \"/var/lib/jhalfs/BLFS\"\n"
+"        depends on BOOK_BLFS || BLFS_TOOL || CUSTOM_TOOLS\n"
+"        help\n"
+"            Full path to the directory where the database of\n"
+"            installed packages will be created.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:361
+#, no-wrap
+msgid ""
+"            If the blfs tools are installed on a running xLFS system,\n"
+"            the user must have enough privileges to create this directory.\n"
+"            It may be necessary to create the /var/lib/jhalfs directory as\n"
+"            root, and make it writable by the user before running this tool.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:366
+#, no-wrap
+msgid ""
+"            If you are installing the blfs tools as part of an xLFS build\n"
+"            and/or using the customized scripts feature, you will\n"
+"            need to fix this directory's permissions after booting\n"
+"            the new system.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:369
+#, no-wrap
+msgid ""
+"            Note that the user who will build the packages must\n"
+"            have read and write access to this directory.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:372
+msgid "#--- End BOOK Settings endmenu"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:375
+msgid "menu \"General Settings\" depends on !BOOK_BLFS"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:377
+#, no-wrap
+msgid "    #--- LFS User Account\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:386
+#, no-wrap
+msgid ""
+"    config    LUSER\n"
+"        string \"Temporary user for chapters 4, 5, and 6 (should not exist)\"\n"
+"        default    \"lfs\"\n"
+"        help\n"
+"           LFS creates a temporary user for running commands in chapters\n"
+"           4, 5, and 6. In the book, its username is \"lfs\", but in jhalfs\n"
+"           you can choose it. It should *not* exist on the system, and it\n"
+"           is removed before entering chroot.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:395
+#, no-wrap
+msgid ""
+"    config    LGROUP\n"
+"        string \"Group of user for chapters 4, 5, and 6 (should not exist)\"\n"
+"        default    LUSER\n"
+"        help\n"
+"           This is the main group of the temporary user created in chapter\n"
+"           4. In the book, the groupname is \"lfs\", but in jhalfs\n"
+"           you can choose it. It should *not* exist on the system, and it\n"
+"           is removed before entering chroot.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:399
+#, no-wrap
+msgid ""
+"    config    LHOME\n"
+"        string\n"
+"        default    \"/home\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:401
+#, no-wrap
+msgid "    #--- End Set User Account\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:410
+#, no-wrap
+msgid ""
+"    config BUILDDIR\n"
+"        string \"Build Directory\"\n"
+"        default \"/mnt/build_dir\"\n"
+"        help\n"
+"            #-- The directory where the created system will be located.\n"
+"            #   NOTE: A working directory named jhalfs will be created\n"
+"            #   here, so ensure this does not conflict with the jhalfs\n"
+"            #   source directory.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:419
+#, no-wrap
+msgid ""
+"    config    GETPKG\n"
+"        bool \"Retrieve source files\"\n"
+"        default n\n"
+"        help\n"
+"            #-- Download all packages and patches required by the selected book\n"
+"            #   NOTE: Looks for files in the local archive defined by SRC_ARCHIVE\n"
+"            #   first and if necessary retrieves them from the 'net.\n"
+"            #   Files will be transferred to $BUILDDIR/sources.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:428
+#, no-wrap
+msgid ""
+"    config SRC_ARCHIVE\n"
+"        string \"Package Archive Directory\"\n"
+"        default \"$SRC_ARCHIVE\"\n"
+"        depends on GETPKG\n"
+"        help\n"
+"            #-- A local archive for packages/files (not $BUILDDIR/sources)\n"
+"            #   Any missing file will be downloaded and archived here,\n"
+"            #   if the user has the right privileges.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:437
+#, no-wrap
+msgid ""
+"    config GNU_REPLACE\n"
+"        string \"Replacement for ftp.gnu.org\"\n"
+"        default \"ftp.gnu.org\"\n"
+"        depends on GETPKG\n"
+"        help\n"
+"           Name of a mirror for ftp.gnu.org. This should be the url up\n"
+"           to and not including \"/gnu\", and not including https://\n"
+"           Example: ftp.nluug.nl/pub\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:446
+#, no-wrap
+msgid ""
+"    config RETRYSRCDOWNLOAD\n"
+"        bool \"Retry on 'connection refused' failure\"\n"
+"        default n\n"
+"        depends on GETPKG\n"
+"        help\n"
+"            #-- Attempt to download a source package again if it fails\n"
+"            #   with a 'connection refused' error. This can happen on\n"
+"            #   servers that are overloaded.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:453
+#, no-wrap
+msgid ""
+"    config RETRYDOWNLOADCNT\n"
+"        int \"Number of retry attempts on download failures\"\n"
+"        default 20\n"
+"        depends on GETPKG\n"
+"        help\n"
+"            #-- Number of times to retry a failed download.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:461
+#, no-wrap
+msgid ""
+"    config DOWNLOADTIMEOUT\n"
+"        int \"Download timeout (in seconds)\"\n"
+"        default 30\n"
+"        depends on GETPKG\n"
+"        help\n"
+"            #-- Number of seconds to wait for a download to start before\n"
+"            #   timing out.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:467
+#, no-wrap
+msgid ""
+"    config    RUNMAKE\n"
+"        bool    \"Run the makefile\"\n"
+"        default n\n"
+"        help\n"
+"            #-- Automatically run the makefile once it has been created\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:475
+#, no-wrap
+msgid ""
+"    config    CLEAN\n"
+"        bool    \"Rebuild files\"\n"
+"        default    n\n"
+"        help\n"
+"            #-- Clean the build directory before performing any other task.\n"
+"            #   The directory is cleaned only if it was populated by a\n"
+"            #   previous JHALFS run.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:478
+msgid "#--- End General Settings endmenu"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:481
+msgid "menu \"Build Settings\" depends on !BOOK_BLFS"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:500
+#, no-wrap
+msgid ""
+"    #--- Parallelism\n"
+"    menu \"Parallelism settings\"\n"
+"    if HAVE_NPROC\n"
+"        config ALL_CORES\n"
+"        bool \"Use all cores\"\n"
+"        default y\n"
+"        help\n"
+"              If you answer y, MAKEFLAGS will be set to \"-j$(nproc)\" at the\n"
+"              beginning of each package script, and book instructions will not\n"
+"              be changed otherwise. This will run the scripts with the same\n"
+"              settings as in the book since version r12.0-87 included. Before\n"
+"              that version, this will run the builds with all cores, but some\n"
+"              test suites may still be run sequentially. You'll be asked for\n"
+"              a CPU set to use, so that the number of jobs can still be limited\n"
+"              in this way (useful for measuring SBU values at -j4, for\n"
+"              example).\n"
+"              If you answer n, then jhalfs will fall back to a static number\n"
+"              of cores, defined below.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:514
+#, no-wrap
+msgid ""
+"        if ALL_CORES && HAVE_CGROUP\n"
+"            config CPUSET\n"
+"            string \"set of cpus to use, or 'all' for all cpus\"\n"
+"            default \"all\"\n"
+"            help\n"
+"                 See \"List format\" in cpuset(7). Choosing cpus depend\n"
+"                 on the topology of your processors. Sometimes two\n"
+"                 hyperthreads on the same core are numbered consecutively.\n"
+"                 For example for using all cores and no hyperthreading on\n"
+"                 a Haswell, use \"0,2,4,6\". Other brands may have a different\n"
+"                 topology, and may require e.g. \"0-3\" to use the first 4 cores.\n"
+"                 If not sure, keep the default.\n"
+"        endif\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:521
+#, no-wrap
+msgid ""
+"    endif # HAVE_NPROC\n"
+"    if !HAVE_NPROC\n"
+"        config ALL_CORES\n"
+"        bool\n"
+"        default n\n"
+"    endif\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:529
+#, no-wrap
+msgid ""
+"    config    N_PARALLEL\n"
+"        int \"Number of parallel `make' jobs\"\n"
+"        depends on !ALL_CORES\n"
+"        default 1\n"
+"        help\n"
+"            #-- The usual recommandation is (number of CPU cores)+1\n"
+"            #   Do not set for meaningful SBU calculations.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:537
+#, no-wrap
+msgid ""
+"    config    REALSBU\n"
+"        bool    \"Build Binutils pass1 without parallelism (Real SBU)\"\n"
+"        default    n\n"
+"        help\n"
+"           #-- Use -j1 in make invokation for Binutils pass1 to\n"
+"           #   get a valid SBU value.\n"
+"    endmenu # parallelism\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:553
+#, no-wrap
+msgid ""
+"    #--- Test Suites\n"
+"    config    CONFIG_TESTS\n"
+"        bool    \"Run testsuites\"\n"
+"        default    y\n"
+"        help\n"
+"            #-- Run test suites\n"
+"            #  If you select 'y' here:\n"
+"            #  You will have to select between:\n"
+"            #  - Only critical final system testsuites\n"
+"            #  - All final system testsuites\n"
+"            #\n"
+"            #  Note that in any case, all the test instructions will\n"
+"            #  be generated. Those which are not wanted will be commented\n"
+"            #  out. If you select 'n' here, the commented test instructions\n"
+"            #  do not stop on test suite failures.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:558
+#, no-wrap
+msgid ""
+"    choice\n"
+"        depends on    CONFIG_TESTS\n"
+"        prompt    \"Tests level\"\n"
+"        default    TST_1\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:566
+#, no-wrap
+msgid ""
+"        config  TST_1\n"
+"            bool    \"Only final system critical testsuites\"\n"
+"            help\n"
+"                #-- Critical tests:\n"
+"                # Only Glibc, Binutils, GMP, MPFR, MPC and GCC\n"
+"                # testsuites for final system. The others are commented\n"
+"                # out.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:573
+#, no-wrap
+msgid ""
+"        config    TST_2\n"
+"            bool    \"All final system testsuites\"\n"
+"            help\n"
+"                #-- All final system test suites:\n"
+"                # Test instructions for the temporary tools (if available)\n"
+"                # are commented out.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:582
+#, no-wrap
+msgid ""
+"    config    TEST\n"
+"        int\n"
+"        default    \"0\"    if !CONFIG_TESTS\n"
+"        default    \"1\"    if TST_1\n"
+"        default    \"2\"    if TST_2\n"
+"    #--- End Test Suites\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:604
+#, no-wrap
+msgid ""
+"    #--- Keep dirs in chapter eight\n"
+"    config KEEPDIR\n"
+"        bool     \"Keep build directory in chapter 8\"\n"
+"        default n\n"
+"        help\n"
+"            If you check this option, the build directories will not\n"
+"            be removed after installation of packages in chapter 8.\n"
+"            This is for being able to debug failed tests or other non\n"
+"            fatal failures. But mhis lay consume a lot of disk space.\n"
+"    #--- End Keep dirs in chapter eight\n"
+"    #\n"
+"    #--- Test mismatch between dirname version and package version\n"
+"    config TEST_MISMATCH\n"
+"        bool     \"Test mismatch beween package version and directory name\"\n"
+"        default y\n"
+"        help\n"
+"            If you check this option, the version of the extracted\n"
+"            directory name will be compared to the package version,\n"
+"            and a mismatch will abort the build. This is of almost\n"
+"            no use if you are not an editor of the book.\n"
+"    #--- End Test mismatch\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:634
+#, no-wrap
+msgid ""
+"    #--- Package Management\n"
+"    config  PKGMNGT\n"
+"        bool    \"Package management\"\n"
+"        depends on BOOK_LFS || BOOK_LFS_SYSD\n"
+"        default n\n"
+"        help\n"
+"            #-- Use package management\n"
+"            #\n"
+"            #  If set, you'll have to choose between\n"
+"            #  two package management styles:\n"
+"            #  - Build and install:\n"
+"            #    the packages in the final phase are built\n"
+"            #    in a separate directory, PKG_DEST.\n"
+"            #    You should provide a bash function for\n"
+"            #    packaging and installing the package.\n"
+"            #  - Preload a library before install:\n"
+"            #    Run the install instructions inside a\n"
+"            #    wrapper command, which monitors the\n"
+"            #    installed files.\n"
+"            #\n"
+"            #  Also, you have to provide the instructions\n"
+"            #  to build the package manager during the\n"
+"            #  temporary tools phase, in the form of a\n"
+"            #  sect1 of the book identical to a package\n"
+"            #  sect1. See README.PACKAGE_MANAGEMENT\n"
+"    choice\n"
+"        depends on PKGMNGT\n"
+"        prompt \"Package management style\"\n"
+"        default PKG_PACK\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:637
+#, no-wrap
+msgid ""
+"        config PKG_PACK\n"
+"            bool \"Build and pack (pacman or dpkg style)\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:641
+#, no-wrap
+msgid ""
+"        config LIB_LOAD\n"
+"            bool \"Preload a library before installing (porg style)\"\n"
+"    endchoice\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:647
+#, no-wrap
+msgid ""
+"    config WRAP_INSTALL\n"
+"        bool\n"
+"        default y if LIB_LOAD\n"
+"        default n if PKG_PACK\n"
+"    #--- End package management\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:655
+#, no-wrap
+msgid ""
+"    #--- Installed files logs\n"
+"    config    INSTALL_LOG\n"
+"        bool    \"Create a log of installed files for each package\"\n"
+"        default    n\n"
+"        help\n"
+"            #-- Select this if you want to create logs of the files\n"
+"            #   installed by each package on the final system.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:657
+#, no-wrap
+msgid "    #--- End Installed files logs\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:661
+#, no-wrap
+msgid ""
+"    config    STRIP\n"
+"        bool \"Strip Installed Binaries/Libraries\"\n"
+"        default n\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:668
+#, no-wrap
+msgid ""
+"    config    NO_PROGRESS_BAR\n"
+"        bool \"DO NOT use/display progress_bar\"\n"
+"        default n\n"
+"        help\n"
+"            #-- Do not use the progress bar routine. On slower machines\n"
+"            #   this function consumes precious CPU cycles.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:671
+msgid "#--- End Build Settings endmenu"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:674
+#, no-wrap
+msgid ""
+"menu \"System configuration\"\n"
+"    depends on !BOOK_BLFS\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:682
+#, no-wrap
+msgid ""
+"    #--- FSTAB\n"
+"    config    HAVE_FSTAB\n"
+"        bool    \"Use a custom fstab file\"\n"
+"        default    n\n"
+"        help\n"
+"            #-- Select this if you have an fstab file with entries\n"
+"            #   for the target system\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:690
+#, no-wrap
+msgid ""
+"    config    FSTAB\n"
+"        string    \"Fstab file (optional)\"\n"
+"        default    \"***EDIT ME***\"\n"
+"        depends on HAVE_FSTAB\n"
+"        help\n"
+"            #-- The location of fstab file (if empty, a template is created)\n"
+"    #--- End FSTAB\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:701
+#, no-wrap
+msgid ""
+"    #--- Kernel\n"
+"    config    CONFIG_BUILD_KERNEL\n"
+"        bool    \"Build the kernel\"\n"
+"        default    n\n"
+"        help\n"
+"            #-- Select this option if you wish to build the kernel.\n"
+"            #\n"
+"            #   You will be prompted for the full path to the .config\n"
+"            #   file. It will be copied to the 'sources' directory and\n"
+"            #   renamed kernel-config\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:718
+#, no-wrap
+msgid ""
+"    config    CONFIG\n"
+"        string    \"Kernel config file\"\n"
+"        default    \"***EDIT ME***\"\n"
+"        depends on CONFIG_BUILD_KERNEL\n"
+"        help\n"
+"            #-- Fully qualified path to a kernel config file\n"
+"            #   The config file will be copied to ${BUILD_DIR}/sources\n"
+"            #   and renamed 'kernel-config'\n"
+"            #\n"
+"            #   Important: if the config file is out of date (missing\n"
+"            #   option), the kernel build will timeout instead of\n"
+"            #   waiting forever for an input. This will generate error\n"
+"            #   124. In this case, update your config file,\n"
+"            #   copy it to $BUILD_DIR/sources/kernel-config, and\n"
+"            #   restart the build.\n"
+"    #--- End Kernel\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:725
+#, no-wrap
+msgid ""
+"    config    NCURSES5\n"
+"        bool \"Install non-wide-character ncurses\"\n"
+"        default n\n"
+"        depends on BOOK_LFS || BOOK_LFS_SYSD\n"
+"        help\n"
+"            #-- Install the optional non wide character ncurses5 library\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:732
+#, no-wrap
+msgid ""
+"    config    TIMEZONE\n"
+"        string \"TimeZone\"\n"
+"        default \"GMT\"\n"
+"        help\n"
+"            #-- The timezone as output by tzselect\n"
+"            #   This will be copied to /etc/localtime\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:740
+#, no-wrap
+msgid ""
+"    config    LANG\n"
+"        string \"Language\"\n"
+"        default \"$LANG\"\n"
+"        help\n"
+"            #-- LANG variable set in /etc/profile\n"
+"            #   See http://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED\n"
+"            #   for values (or the file localedata/SUPPORTED in glibc tarball)\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:750
+#, no-wrap
+msgid ""
+"    config  FULL_LOCALE\n"
+"        bool \"Install the full set of locales\"\n"
+"        default n\n"
+"        help\n"
+"            #-- If set to y, the full set of supported locales\n"
+"            #   will be installed. Otherwise, only the minimal set\n"
+"            #   necessary for the tests will be installed,\n"
+"            #   together with the locale associated with the\n"
+"            #   LANG you have chosen, if not in the minimal set.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:757
+#, no-wrap
+msgid ""
+"    #--- Groff page\n"
+"    choice\n"
+"        prompt    \"Groff page size\"\n"
+"        default    PAGE_LETTER\n"
+"        help\n"
+"            #-- Page definition for groff: letter or A4\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:760
+#, no-wrap
+msgid ""
+"        config    PAGE_LETTER\n"
+"            bool    \"letter\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:764
+#, no-wrap
+msgid ""
+"        config    PAGE_A4\n"
+"            bool    \"A4\"\n"
+"    endchoice\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:770
+#, no-wrap
+msgid ""
+"    config    PAGE\n"
+"        string\n"
+"        default    \"letter\"    if PAGE_LETTER\n"
+"        default    \"A4\"        if PAGE_A4\n"
+"    #--- End Groff page\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:782
+#, no-wrap
+msgid ""
+"    config    HOSTNAME\n"
+"        string \"Hostname (see help)\"\n"
+"        default \"**EDITME**\"\n"
+"        help\n"
+"          If you are on a public network, use the hostname given to you by\n"
+"          your institution, or corporation, etc. If your network is private,\n"
+"          that is, behind a firewall such as a box to connect to your ISP,\n"
+"          you can choose anything you'd like. Combined with the domain name\n"
+"          \"local\", you have the possibility to access your computer by name\n"
+"          instead of address on the private network (see RFC 6762 and\n"
+"          https://www.howtogeek.com/167190/).\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:800
+#, no-wrap
+msgid ""
+"       menu \"Network configuration\"\n"
+"        config INTERFACE\n"
+"            string \"netword card name\"\n"
+"            default \"eth0\"\n"
+"            help\n"
+"              eth0 is used in most cases. Virtual interfaces may get other\n"
+"              names (for example enp0s3 for the default network stack in qemu).\n"
+"              Systemd may also rename network interfaces according to their\n"
+"              bus addresses.\n"
+"        config IP_ADDR\n"
+"            string \"Static IP address\"\n"
+"            default \"10.0.2.9\"\n"
+"            help\n"
+"              The default here is for a virtual interface in qemu. Private\n"
+"              networks have addresses in the range 10.x.x.x or 192.168.x.x.\n"
+"              You have to know your network prefix. Then the last figure\n"
+"              may be anything you like.\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:836
+#, no-wrap
+msgid ""
+"        config GATEWAY\n"
+"            string \"Gateway\"\n"
+"            default \"10.0.2.2\"\n"
+"            help\n"
+"              Again, this default is for a qemu network stack. Usually, the\n"
+"              gateway is the address of your firewall.\n"
+"        config PREFIX\n"
+"            string \"Subnet prefix\"\n"
+"            default \"24\"\n"
+"            help\n"
+"              Again, this default is for a qemu network stack, but is also\n"
+"              the most used in private networks.\n"
+"        config BROADCAST\n"
+"            string \"Broadcast address\"\n"
+"            default \"10.0.2.255\"\n"
+"        config DOMAIN\n"
+"            string \"Domain name (see help)\"\n"
+"            default \"local\"\n"
+"            help\n"
+"               Domain Name:\n"
+"               Doamin names are registered, so if your computer is on a public\n"
+"               network, you cannot use any name you'd like. On a public\n"
+"               network, you should have been given a domain name by\n"
+"               your corporation, institution, etc.\n"
+"               If your network is really private, that is behind a firewall\n"
+"               such as a box for connecting to an ISP, you can choose any\n"
+"               domain you'd like. You can also opt for \"local\", see RFC 6762,\n"
+"               or \"something.test\", see RFC 6761.\n"
+"        config DNS1\n"
+"            string \"Primary Name server\"\n"
+"            default \"10.0.2.3\"\n"
+"        config DNS2\n"
+"            string \"Secondary Name server\"\n"
+"            default \"8.8.8.8\"\n"
+"    endmenu # Network configuration\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:863
+#, no-wrap
+msgid ""
+"    menu \"Console configuration\"\n"
+"        config FONT\n"
+"            string \"Console font\"\n"
+"            default \"lat0-16\"\n"
+"            help\n"
+"                Unicode mode is set by default. Setting FONT_MAP, FONT_UNIMAP,\n"
+"                etc, must be done manually.\n"
+"        config KEYMAP\n"
+"            string \"Keymap name\"\n"
+"            default \"us\"\n"
+"        config LOCAL\n"
+"            boolean \"Hardware clock is set to local time\"\n"
+"            default n\n"
+"            help\n"
+"                If the harware clock is set to local time, answer yes,\n"
+"                If it is set to UTC, answer no\n"
+"        config LOG_LEVEL\n"
+"            string \"Default log level (1-8)\"\n"
+"            default \"4\"\n"
+"            depends on BOOK_LFS\n"
+"            help\n"
+"                This can be changed using dmesg. 1 means \"no message\",\n"
+"                8 shows every message sent by the kernel, which is very\n"
+"                noisy. The default at boot time is 7, which is quite\n"
+"                noisy too.\n"
+"    endmenu # Console configuration\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:865
+#, no-wrap
+msgid "endmenu        #--- System configuration\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:868
+msgid "menu \"Advanced Features\" depends on !BOOK_BLFS"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:883
+#, no-wrap
+msgid ""
+"    #--- Optimizations\n"
+"    config    CONFIG_OPTIMIZE\n"
+"        bool    \"Optimization\"\n"
+"        default    n\n"
+"        help\n"
+"            #   Opens a menu for various optimization settings:\n"
+"            #   Actual optimization flags MUST be defined in ./optimize/*\n"
+"            #   before activating this option.\n"
+"            #\n"
+"            # WARNING: The use of build optimizations may lead to build issues.\n"
+"            #   If the system doesn't work as expected, please rebuild\n"
+"            #   without optimizations before asking for support.\n"
+"    menu    \"Optimization settings\"\n"
+"        depends on CONFIG_OPTIMIZE\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:889
+#, no-wrap
+msgid ""
+"    choice\n"
+"        prompt \"Optimization level\"\n"
+"        default OPT_1\n"
+"        help\n"
+"            #-- Optimization values are set in optimize/* files\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:892
+#, no-wrap
+msgid ""
+"        config    OPT_1\n"
+"            bool    \"Final system only\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:895
+#, no-wrap
+msgid ""
+"        config    OPT_2\n"
+"            bool    \"Both temp tools and final system\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:904
+#, no-wrap
+msgid ""
+"    endmenu # Optimization settings\n"
+"    config    OPTIMIZE\n"
+"        int\n"
+"        default    \"0\"    if !CONFIG_OPTIMIZE\n"
+"        default    \"1\"    if OPT_1\n"
+"        default    \"2\"    if OPT_2\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:906
+#, no-wrap
+msgid "    #--- End Optimizations\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:910
+#, no-wrap
+msgid ""
+"    config    REPORT\n"
+"        bool \"Create SBU and disk usage report\"\n"
+"        default y\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:918
+#, no-wrap
+msgid ""
+"    config    SAVE_CH5\n"
+"        bool \"Save temporary system work\"\n"
+"        depends on BOOK_LFS || BOOK_LFS_SYSD\n"
+"        default n\n"
+"        help\n"
+"            Save the state of jhalfs after finishing building the temporary\n"
+"            system\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:922
+#, no-wrap
+msgid ""
+"            if you tick this item, the whole $LFS directory is\n"
+"            saved when chapter 7 is finished. It'll be in a .tar\n"
+"            file in the $BUILD_DIR/jhalfs directory\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:941
+#, no-wrap
+msgid ""
+"    #--- ICA\n"
+"    config    COMPARE\n"
+"        bool \"Run comparison analysis on final stage\"\n"
+"        default n\n"
+"        help\n"
+"            #-- Should an iterative comparison analysis be performed?\n"
+"            #\n"
+"            #   Unless you are familiar with ICA, do not\n"
+"            #   select this option\n"
+"            #\n"
+"            #  ICA is an analysis tool for comparing one\n"
+"            #  build to the next. Builds mays differ from one iteration\n"
+"            #  to another due to the build order and this tool try\n"
+"            #  to ferret out those differences by examining the stored\n"
+"            #  build logs and binary files.\n"
+"            #\n"
+"            #  The scripts are well commented and can be found in ./extras/*\n"
+"            #\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:947
+#, no-wrap
+msgid ""
+"    config    ITERATIONS\n"
+"        int    \"Number of test runs (2,3,4,5)\"    if COMPARE\n"
+"        depends on COMPARE\n"
+"        range    2 5\n"
+"        default    3\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:951
+#, no-wrap
+msgid ""
+"    config    RUN_ICA\n"
+"        bool\n"
+"        default y if COMPARE\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:953
+#, no-wrap
+msgid "    #--- End ICA\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:956
+#, no-wrap
+msgid ""
+"    #-- Internal Settings\n"
+"    menu \"Internal Settings (WARNING: for jhalfs developers only)\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:960
+#, no-wrap
+msgid ""
+"        config    SCRIPT_ROOT\n"
+"            string    \"Scripts root\"\n"
+"            default \"jhalfs\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:964
+#, no-wrap
+msgid ""
+"        config    JHALFSDIR\n"
+"            string \"jhalfs directory\"\n"
+"            default \"$BUILDDIR/$SCRIPT_ROOT\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:968
+#, no-wrap
+msgid ""
+"        config    LOGDIRBASE\n"
+"            string \"Build logs directory basename\"\n"
+"            default \"logs\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:972
+#, no-wrap
+msgid ""
+"        config    LOGDIR\n"
+"            string \"Build logs directory\"\n"
+"            default \"$JHALFSDIR/$LOGDIRBASE\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:976
+#, no-wrap
+msgid ""
+"        config    TESTLOGDIRBASE\n"
+"            string \"Test suites logs directory basename\"\n"
+"            default \"test-logs\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:980
+#, no-wrap
+msgid ""
+"        config    TESTLOGDIR\n"
+"            string \"Test suites logs directory\"\n"
+"            default \"$JHALFSDIR/$TESTLOGDIRBASE\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:984
+#, no-wrap
+msgid ""
+"        config    FILELOGDIRBASE\n"
+"            string \"Installed files logs directory basename\"\n"
+"            default \"installed-files\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:988
+#, no-wrap
+msgid ""
+"        config    FILELOGDIR\n"
+"            string \"Installed files logs directory\"\n"
+"            default \"$JHALFSDIR/$FILELOGDIRBASE\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:992
+#, no-wrap
+msgid ""
+"        config    ICALOGDIR\n"
+"            string \"ICA logs directory\"\n"
+"            default \"$LOGDIR/ICA\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:996
+#, no-wrap
+msgid ""
+"        config    MKFILE\n"
+"            string \"Makefile\"\n"
+"            default \"$JHALFSDIR/Makefile\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:1000
+#, no-wrap
+msgid ""
+"        config    XSL\n"
+"            string \"XSL stylesheet\"\n"
+"            default \"lfs.xsl\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:1004
+#, no-wrap
+msgid ""
+"        config    PKG_LST\n"
+"            string \"Package contents list\"\n"
+"            default \"unpacked\"\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:1012
+#, no-wrap
+msgid ""
+"        config    DEL_LA_FILES\n"
+"            bool \"Remove libtool .la files\"\n"
+"            default y\n"
+"            help\n"
+"                #-- Remove files libxxx.la installed by libtool. Only set to\n"
+"                #   \"n\" if you know what you are doing. For a rationale\n"
+"                #   see https://blog.flameeyes.eu/tags/lafiles/\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:1015
+#, no-wrap
+msgid ""
+"    #--- End Internal Settings\n"
+"    endmenu\n"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:1018
+msgid "#--- End Advanced Features endmenu"
+msgstr ""
+
+#. type: Plain text
+#: Config.in:1032
+#, no-wrap
+msgid ""
+"config REBUILD_MAKEFILE\n"
+"#    depends on !BOOK_BLFS\n"
+"    bool \"Rebuild the Makefile (see help)\"\n"
+"    default n\n"
+"    help\n"
+"        #-- Rebuild the Makefile\n"
+"        #\n"
+"        #   This option allows to rebuild the Makefile after\n"
+"        #   customizing the base system build scripts.\n"
+"        #\n"
+"        #   See README.CUSTOM for more info about this feature.\n"
+"        #   Note that you should do that after configuring a jhalfs\n"
+"        #   build, and only if you need changing the build scripts order\n"
+"        #   or add a new one.\n"
+msgstr ""
