@@ -300,6 +300,13 @@ msgid ""
 "        help\n"
 "            The full path to a local copy of the book XML sources\n"
 msgstr ""
+"    config    BOOK\n"
+"        string    \"Local da cópia local (obrigatório)\"\n"
+"        default    \"**EDIT ME**\"\n"
+"        depends on    WORKING_COPY\n"
+"        help\n"
+"            O caminho completo para uma cópia local dos fontes XML do "
+"livro\n"
 
 #. type: Plain text
 #: Config.in:114
@@ -314,6 +321,15 @@ msgid ""
 "        help\n"
 "            Use standard LFS book (choose this if not multilib source)\n"
 msgstr ""
+"    choice\n"
+"    depends on (BOOK_LFS || BOOK_LFS_SYSD)\n"
+"    prompt \"Multilib\"\n"
+"    default LFS_MULTILIB_NO\n"
+"        config LFS_MULTILIB_NO\n"
+"        bool \"LFS padrão no i686 ou amd64\"\n"
+"        help\n"
+"            Usar livro LFS padrão (escolha isso se não fonte multi "
+"bibliotecas)\n"
 
 #. type: Plain text
 #: Config.in:119
@@ -324,6 +340,10 @@ msgid ""
 "        help\n"
 "            Use Multilib LFS book with i686 libraries\n"
 msgstr ""
+"        config LFS_MULTILIB_I686\n"
+"        bool \"LFS multi bibliotecas no amd64 com bibliotecas do i686\"\n"
+"        help\n"
+"            Usar livro LFS multi bibliotecas com bibliotecas do i686\n"
 
 #. type: Plain text
 #: Config.in:124
@@ -334,6 +354,10 @@ msgid ""
 "        help\n"
 "            Use Multilib LFS book with x32 libraries\n"
 msgstr ""
+"        config LFS_MULTILIB_X32\n"
+"        bool \"LFS multi bibliotecas no amd64 com bibliotecas do x32\"\n"
+"        help\n"
+"            Usar livro LFS multi bibliotecas com bibliotecas do x32\n"
 
 #. type: Plain text
 #: Config.in:129
@@ -344,12 +368,18 @@ msgid ""
 "        help\n"
 "            Use Multilib LFS book with i686 and x32 libraries\n"
 msgstr ""
+"        config LFS_MULTILIB_ALL\n"
+"        bool \"LFS multi bibliotecas no amd64 com bibliotecas do 1686 e do "
+"x32\"\n"
+"        help\n"
+"            Usar livro LFS multi bibliotecas com bibliotecas do i686 e do "
+"x32\n"
 
 #. type: Plain text
 #: Config.in:131 Config.in:575 Config.in:897
 #, no-wrap
 msgid "    endchoice\n"
-msgstr ""
+msgstr "    endchoice\n"
 
 #. type: Plain text
 #: Config.in:138
@@ -362,12 +392,18 @@ msgid ""
 "        default \"ml_x32\"       if LFS_MULTILIB_X32\n"
 "        default \"ml_all\"       if LFS_MULTILIB_ALL\n"
 msgstr ""
+"    config    MULTILIB\n"
+"        string\n"
+"        default \"default\"      if LFS_MULTILIB_NO\n"
+"        default \"ml_32\"        if LFS_MULTILIB_I686\n"
+"        default \"ml_x32\"       if LFS_MULTILIB_X32\n"
+"        default \"ml_all\"       if LFS_MULTILIB_ALL\n"
 
 #. type: Plain text
 #: Config.in:140
 #, no-wrap
 msgid "    #--- End BOOK version\n"
-msgstr ""
+msgstr "    #--- Fim versão do LIVRO\n"
 
 #. type: Plain text
 #: Config.in:149
@@ -383,6 +419,18 @@ msgid ""
 "for\n"
 "            a full explanation.\n"
 msgstr ""
+"    choice\n"
+"        prompt    \"Método de construção\"\n"
+"        default   BUILD_CHROOT\n"
+"        depends on (BOOK_LFS || BOOK_LFS_SYSD)\n"
+"        help\n"
+"            Qual método de construção deveria ser usado: uma jaula chroot "
+"ou\n"
+"            um sistema de inicialização mínima. Revise a ramificação "
+"clfs-ng,\n"
+"            capítulo 6, \"PARA INICIALIZAR OU CHROOT\" para uma "
+"explicação\n"
+"            completa.\n"
 
 #. type: Plain text
 #: Config.in:152
@@ -391,6 +439,8 @@ msgid ""
 "        config    BUILD_CHROOT\n"
 "            bool    \"chroot\"\n"
 msgstr ""
+"        config    BUILD_CHROOT\n"
+"            bool    \"chroot\"\n"
 
 #. type: Plain text
 #: Config.in:156
@@ -400,6 +450,9 @@ msgid ""
 "            bool    \"boot\"\n"
 "    endchoice\n"
 msgstr ""
+"        config    BUILD_BOOT\n"
+"            bool    \"boot\"\n"
+"    endchoice\n"
 
 #. type: Plain text
 #: Config.in:161
@@ -410,6 +463,10 @@ msgid ""
 "        default \"chroot\"    if BUILD_CHROOT\n"
 "        default \"boot\"      if BUILD_BOOT\n"
 msgstr ""
+"    config    METHOD\n"
+"        string\n"
+"        default \"chroot\"    if BUILD_CHROOT\n"
+"        default \"boot\"      if BUILD_BOOT\n"
 
 #. type: Plain text
 #: Config.in:171
