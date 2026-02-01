@@ -482,6 +482,19 @@ msgid ""
 "            and renamed 'bootkernel-config'\n"
 "            NOTE: this setting is required\n"
 msgstr ""
+"    config    BOOT_CONFIG\n"
+"        string  \"Arquivo de configuração da INICIALIZAÇÃO do núcleo\n"
+"                (obrigatório)\"\n"
+"        default \"***EDIT ME***\"\n"
+"        depends on BUILD_BOOT\n"
+"        help\n"
+"            Se MÉTODO=boot, local do arquivo de configuração da "
+"inicialização\n"
+"            do núcleo\n"
+"            O arquivo de configuração será copiado para "
+"${BUILD_DIR}/sources e\n"
+"            renomeado 'bootkernel-config'\n"
+"            OBSERVAÇÃO: essa configuração é exigida\n"
 
 #. type: Plain text
 #: Config.in:188
@@ -507,6 +520,26 @@ msgid ""
 "            $TRACKING_DIR directory and the files that it contains.\n"
 "            Don't forget to configure sudo properly on the new system.\n"
 msgstr ""
+"    #--- Suporte blfs-tool\n"
+"    config BLFS_TOOL\n"
+"        bool    \"Adicionar suporte blfs-tool\"\n"
+"        default    n\n"
+"        depends on !BOOK_BLFS\n"
+"        help\n"
+"            Ativar essa opção instalará pacotes adicionais necessários "
+"para\n"
+"            usar as ferramentas blfs depois de inicializar o novo\n"
+"            sistema. Os arquivos da ferramenta blfs serão instalados\n"
+"            sob $BUILD_DIR/blfs_root (veja-se abaixo). Depois de\n"
+"            inicializar o novo sistema xLFS, mas antes de usar as\n"
+"            ferramentas blfs, você deveria criar uma conta de\n"
+"            usuário(a), mover o diretório /blfs_root para o home\n"
+"            desse(a) usuário(a) e mudar a titularidade da\n"
+"            propriedade dele para a do(a) usuário(a). Além disso,\n"
+"            certifique-se de conceder para o(a) usuário(a) acesso de\n"
+"            leitura e de escrita sobre diretório $TRACKING_DIR e os\n"
+"            arquivos que ele contiver. Não esqueçer de configurar o\n"
+"            sudo adequadamente sobre o novo sistema.\n"
 
 #. type: Plain text
 #: Config.in:191
@@ -515,6 +548,8 @@ msgid ""
 "    config DUMMY # Avoid indenting the items below\n"
 "    bool\n"
 msgstr ""
+"    config DUMMY # Evitar recuar os itens abaixo\n"
+"    bool\n"
 
 #. type: Plain text
 #: Config.in:194
@@ -523,6 +558,8 @@ msgid ""
 "    if BLFS_TOOL\n"
 "        menu \"blfs-tool dependencies\"\n"
 msgstr ""
+"    if BLFS_TOOL\n"
+"        menu \"dependências blfs-tool\"\n"
 
 #. type: Plain text
 #: Config.in:198
@@ -532,6 +569,9 @@ msgid ""
 "            bool    \"libxml2 (required)\"\n"
 "            default    y\n"
 msgstr ""
+"            config    DEP_LIBXML\n"
+"            bool    \"libxml2 (exigida)\"\n"
+"            default    y\n"
 
 #. type: Plain text
 #: Config.in:202
@@ -541,6 +581,9 @@ msgid ""
 "            bool    \"libxslt (required)\"\n"
 "            default    y\n"
 msgstr ""
+"            config    DEP_LIBXSLT\n"
+"            bool    \"libxslt (exigida)\"\n"
+"            default    y\n"
 
 #. type: Plain text
 #: Config.in:206
@@ -550,6 +593,9 @@ msgid ""
 "            bool    \"DocBook XML DTD (required)\"\n"
 "            default    y\n"
 msgstr ""
+"            config    DEP_DBXML\n"
+"            bool    \"DocBook XML DTD (exigida)\"\n"
+"            default    y\n"
 
 #. type: Plain text
 #: Config.in:210
@@ -559,6 +605,9 @@ msgid ""
 "            bool    \"lynx (optional, for reading the generated book)\"\n"
 "            default    y\n"
 msgstr ""
+"            config    DEP_LYNX\n"
+"            bool    \"lynx (opcional, para leitura do livro gerado)\"\n"
+"            default    y\n"
 
 #. type: Plain text
 #: Config.in:214
@@ -568,6 +617,9 @@ msgid ""
 "            bool    \"sudo (recommended)\"\n"
 "            default    y\n"
 msgstr ""
+"            config    DEP_SUDO\n"
+"            bool    \"sudo (recomendada)\"\n"
+"            default    y\n"
 
 #. type: Plain text
 #: Config.in:218
@@ -577,6 +629,9 @@ msgid ""
 "            bool    \"wget (recommended)\"\n"
 "            default    y\n"
 msgstr ""
+"            config    DEP_WGET\n"
+"            bool    \"wget (recomendada)\"\n"
+"            default    y\n"
 
 #. type: Plain text
 #: Config.in:226
@@ -590,6 +645,15 @@ msgid ""
 "                automatically on boot. It allows copy-paste\n"
 "                while Xorg is not installed.\n"
 msgstr ""
+"            config    DEP_GPM\n"
+"            bool    \"GPM (opcional, veja-se ajuda)\"\n"
+"            default    n\n"
+"            help\n"
+"                se você instalar o gpm, ele será iniciado automaticamente "
+"na\n"
+"                inicialização.  Permite copiar e colar enquanto o Xorg "
+"não\n"
+"                estiver instalado.\n"
 
 #. type: Plain text
 #: Config.in:234
@@ -603,12 +667,19 @@ msgid ""
 "                sources. You do not need it if building a\n"
 "                stable book.\n"
 msgstr ""
+"            config    DEP_GIT\n"
+"            bool    \"Cliente GIT (opcional, veja-se ajuda)\"\n"
+"            default    n\n"
+"            help\n"
+"                Git é necessário para atualizar os fontes do livro. Você "
+"não\n"
+"                precisa dele se construir um livro estável.\n"
 
 #. type: Plain text
 #: Config.in:236
 #, no-wrap
 msgid "        endmenu\n"
-msgstr ""
+msgstr "        endmenu\n"
 
 #. type: Plain text
 #: Config.in:240
@@ -618,6 +689,9 @@ msgid ""
 "        prompt    \"BLFS book version\"\n"
 "        default    BLFS_BRANCH\n"
 msgstr ""
+"        choice\n"
+"        prompt    \"Versão do livro BLFS\"\n"
+"        default    BLFS_BRANCH\n"
 
 #. type: Plain text
 #: Config.in:246
@@ -629,6 +703,13 @@ msgid ""
 "                Use a BLFS book downloaded from the git repository, and\n"
 "                checked out at any commit (branch/tag/sha).\n"
 msgstr ""
+"            config    BLFS_BRANCH\n"
+"            bool    \"Ramificação BLFS (padrão trunk) ou alguma "
+"submissão\"\n"
+"            help\n"
+"                Usar um livro BLFS baixado a partir do repositório git e\n"
+"                extraído de alguma submissão "
+"(ramificação/etiqueta/resumo).\n"
 
 #. type: Plain text
 #: Config.in:252
@@ -640,6 +721,11 @@ msgid ""
 "                Use a local working copy of the BLFS book.\n"
 "        endchoice\n"
 msgstr ""
+"            config    BLFS_WORKING_COPY\n"
+"            bool    \"Cópia fincional do BLFS\"\n"
+"            help\n"
+"                Usar uma cópia local e funcional do livro BLFS.\n"
+"        endchoice\n"
 
 #. type: Plain text
 #: Config.in:259
@@ -652,6 +738,13 @@ msgid ""
 "        help\n"
 "            Full path to the BLFS book working copy\n"
 msgstr ""
+"        config    BLFS_WC_LOCATION\n"
+"        string    \"Local da cópia local e funcional do BLFS "
+"(obrigatório)\"\n"
+"        default    \"**EDIT ME**\"\n"
+"        depends on BLFS_WORKING_COPY\n"
+"        help\n"
+"            Caminho completo para a cópia funcional do livro BLFS\n"
 
 #. type: Plain text
 #: Config.in:268
@@ -666,6 +759,17 @@ msgid ""
 "    endif\n"
 "    #--- End blfs-tool Support\n"
 msgstr ""
+"        config    BLFS_COMMIT\n"
+"        string    \"Submissão do Livro BLFS "
+"(ramificação/etiqueta/resumo)\"\n"
+"        default   \"trunk\"\n"
+"        depends on BLFS_BRANCH\n"
+"        help\n"
+"             Pode ser alguma ramificação, etiqueta ou resumo abreviado "
+"(ou\n"
+"             não) de submissão.\n"
+"    endif\n"
+"    #--- Fim Suporte blfs-tool\n"
 
 #. type: Plain text
 #: Config.in:278
@@ -682,6 +786,16 @@ msgid ""
 "            Path to the directory where all required files and scripts\n"
 "            will be stored.\n"
 msgstr ""
+"    #--- Parâmetros do BLFS (Usados para instalar as ferramentas, quer "
+"depois\n"
+"    #    de uma execução do jhalfs quer diretamente)\n"
+"        config    BLFS_ROOT\n"
+"        string \"Raiz do diretório das ferramentas (veja-se ajuda)\"\n"
+"        default \"/blfs_root\"\n"
+"        depends on BLFS_TOOL || BOOK_BLFS\n"
+"        help\n"
+"            Caminho para o diretório onde todos os arquivos e conjuntos de\n"
+"            comandos sequenciados exigidos serão armazenados.\n"
 
 #. type: Plain text
 #: Config.in:284
@@ -694,13 +808,21 @@ msgid ""
 "chroot)\n"
 "              when adding the tools after a jhalfs run\n"
 msgstr ""
+"            Esse caminho precisa iniciar com uma barra, e:\n"
+"            - ser relativo ao diretório HOME do(a) usuário(a) ao instalar "
+"as\n"
+"              ferramentas blfs em um sistema LFS já existente.\n"
+"            - ser relativo à raiz do diretório da construção (`/' no "
+"chroot)\n"
+"              ao se adicionar as ferramentas depois de uma execução do "
+"jhalfs\n"
 
 #. type: Plain text
 #: Config.in:286
 #, no-wrap
 msgid ""
 "            CAUTION: this directory will be removed if it already exists.\n"
-msgstr ""
+msgstr "            ALERTA: esse diretório será removido se já existir.\n"
 
 #. type: Plain text
 #: Config.in:295
@@ -715,6 +837,16 @@ msgid ""
 "            book sources will be copied or checked out. Do not change that\n"
 "            unless you know what you are doing...\n"
 msgstr ""
+"        config    BLFS_XML\n"
+"        string \"Diretório dos fontes do BLFS (parâmetro interno)\"\n"
+"        default \"blfs-xml\"\n"
+"        depends on BLFS_TOOL || BOOK_BLFS\n"
+"        help\n"
+"            O nome do diretório sob $BLFS_ROOT onde os fontes do livro "
+"BLFS\n"
+"            serão copiados ou extraídos. Não mude isso a menos que você "
+"saiba\n"
+"            o que está fazendo ...\n"
 
 #. type: Plain text
 #: Config.in:304
@@ -729,6 +861,15 @@ msgid ""
 "            book sources will be copied or checked out. Do not change that\n"
 "            unless you know what you are doing...\n"
 msgstr ""
+"        config    LFS_XML\n"
+"        string \"Diretório dos fontes do LFS (parâmetro interno)\"\n"
+"        default \"lfs-xml\"\n"
+"        depends on BLFS_TOOL || BOOK_BLFS\n"
+"        help\n"
+"            O nome do diretório sob $BLFS_ROOT onde os fontes do livro LFS\n"
+"            serão copiados ou extraídos. Não mude isso a menos que você "
+"saiba\n"
+"            o que está fazendo ...\n"
 
 #. type: Plain text
 #: Config.in:309
@@ -739,6 +880,10 @@ msgid ""
 "        default    LFS_BRANCH\n"
 "        depends on    BOOK_BLFS\n"
 msgstr ""
+"        choice\n"
+"        prompt    \"Versão do livro LFS\"\n"
+"        default    LFS_BRANCH\n"
+"        depends on    BOOK_BLFS\n"
 
 #. type: Plain text
 #: Config.in:315
@@ -750,6 +895,13 @@ msgid ""
 "                Use an LFS book downloaded from the git repository and\n"
 "                checked out at any commit (branch/tag/sha).\n"
 msgstr ""
+"            config    LFS_BRANCH\n"
+"            bool     \"Ramificação LFS (padrão trunk) ou alguma "
+"submissão\"\n"
+"            help\n"
+"                Usar um livro LFS baixado a partir de um repositório git e\n"
+"                extraído em alguma submissão "
+"(ramificação/etiqueta/resumo).\n"
 
 #. type: Plain text
 #: Config.in:321
@@ -761,6 +913,11 @@ msgid ""
 "                Use a local working copy of the LFS book.\n"
 "        endchoice\n"
 msgstr ""
+"            config    LFS_WORKING_COPY\n"
+"            bool     \"Cópia funcional do LFS\"\n"
+"            help\n"
+"                Usar uma cópia local e funcional do livro LFS.\n"
+"        endchoice\n"
 
 #. type: Plain text
 #: Config.in:328
@@ -773,6 +930,13 @@ msgid ""
 "        help\n"
 "            Full path to the LFS book working copy\"\n"
 msgstr ""
+"        config    BLFS_LFS_BOOK\n"
+"        string    \"Local da cópia local e funcional do LFS "
+"(obrigatório)\"\n"
+"        default    \"**EDIT ME**\"\n"
+"        depends on LFS_WORKING_COPY\n"
+"        help\n"
+"            caminho completo para a cópia funcional do livro LFS\"\n"
 
 #. type: Plain text
 #: Config.in:336
