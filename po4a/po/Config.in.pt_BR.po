@@ -950,6 +950,15 @@ msgid ""
 "            Any branch, tag or abbreviated (or not) commit sha.\n"
 "    # End of BLFS parameters\n"
 msgstr ""
+"        config    BLFS_LFS_COMMIT\n"
+"        string    \"Submissão do Livro LFS (obrigatório)\"\n"
+"        default   \"trunk\"\n"
+"        depends on LFS_BRANCH\n"
+"        help\n"
+"            Alguma ramificação, etiqueta oo resumo de submissão abreviado "
+"(ou\n"
+"            não).\n"
+"    # Fim dos parâmetros do BLFS\n"
 
 #. type: Plain text
 #: Config.in:346
@@ -965,6 +974,16 @@ msgid ""
 "            will be installed after finished the xLFS system build.\n"
 "    #--- End Custom Tools support\n"
 msgstr ""
+"    #--- Suporte a Ferramentas Personalizadas\n"
+"    config CUSTOM_TOOLS\n"
+"        depends on !BOOK_BLFS\n"
+"        bool    \"Adicionar suporte a ferramentas personalizadas\"\n"
+"        default    n\n"
+"        help\n"
+"            Ativando essa opção, os pacotes adicionais que você criar "
+"serão\n"
+"            instalados depois de finalizada a construção do sistema xLFS.\n"
+"    #--- Fim suporte a Ferramentas Personalizadas\n"
 
 #. type: Plain text
 #: Config.in:356
@@ -981,6 +1000,17 @@ msgid ""
 "            Full path to the directory where the database of\n"
 "            installed packages will be created.\n"
 msgstr ""
+"            Este diretório é necessário para instalação de ferramentas "
+"blfs e\n"
+"            ferramentas personalizadas também.\n"
+"    config    TRACKING_DIR\n"
+"        string \"Diretório da base de dados de pacotes instaldos\"\n"
+"        default \"/var/lib/jhalfs/BLFS\"\n"
+"        depends on BOOK_BLFS || BLFS_TOOL || CUSTOM_TOOLS\n"
+"        help\n"
+"            Caminho completo para o diretório onde a base de dados dos "
+"pacotes\n"
+"            instalados será criada.\n"
 
 #. type: Plain text
 #: Config.in:361
@@ -992,6 +1022,12 @@ msgid ""
 "            root, and make it writable by the user before running this "
 "tool.\n"
 msgstr ""
+"            Se as ferramentas blfs forem instaladas em um sistema xLFS em\n"
+"            execução, o(a) usuário(a) precisará ter privilégios "
+"suficientes\n"
+"            para criar esse diretório. Pode ser necessário criar o\n"
+"            diretório /var/lib/jhalfs como root e torná-lo escrevível\n"
+"            pelo(a) usuário(a) antes de executar essa ferramenta.\n"
 
 #. type: Plain text
 #: Config.in:366
@@ -1002,6 +1038,11 @@ msgid ""
 "            need to fix this directory's permissions after booting\n"
 "            the new system.\n"
 msgstr ""
+"            Se estiver instalando as ferramentas blfs como parte de uma\n"
+"            construção do xLFS e(ou) usando o recurso de conjuntos de\n"
+"            comandos sequenciados personalizados, você precisará corrigir\n"
+"            as permissões desse diretório depois de inicializar o novo\n"
+"            sistema.\n"
 
 #. type: Plain text
 #: Config.in:369
@@ -1010,22 +1051,24 @@ msgid ""
 "            Note that the user who will build the packages must\n"
 "            have read and write access to this directory.\n"
 msgstr ""
+"            Observe que o(a) usuário(a) que construirá os pacotes precisa\n"
+"            ter acesso de leitura e de escrita a esse diretório.\n"
 
 #. type: Plain text
 #: Config.in:372
 msgid "#--- End BOOK Settings endmenu"
-msgstr ""
+msgstr "#--- Fim Configurações do LIVRO endmenu"
 
 #. type: Plain text
 #: Config.in:375
 msgid "menu \"General Settings\" depends on !BOOK_BLFS"
-msgstr ""
+msgstr "menu \"Configurações Gerais\" depends on !BOOK_BLFS"
 
 #. type: Plain text
 #: Config.in:377
 #, no-wrap
 msgid "    #--- LFS User Account\n"
-msgstr ""
+msgstr "    #--- Conta do(a) Usuário(a) LFS\n"
 
 #. type: Plain text
 #: Config.in:386
@@ -1041,6 +1084,17 @@ msgid ""
 "           you can choose it. It should *not* exist on the system, and it\n"
 "           is removed before entering chroot.\n"
 msgstr ""
+"    config    LUSER\n"
+"        string \"Usuário(a) temporário(a) para os capítulos 4, 5 e 6 "
+"(não\n"
+"                 deveria existir)\"\n"
+"        default    \"lfs\"\n"
+"        help\n"
+"           LFS cria um(a) usuário(a) temporário(a) para executar comandos\n"
+"           nos capítulos 4, 5 e 6. No livro, o nome de usuário(a) é\n"
+"           \"lfs\", mas no jhalfs você consegue escolhê-lo. Ele(a) *não*\n"
+"           deveria existir no sistema e é removido antes de entrar no\n"
+"           chroot.\n"
 
 #. type: Plain text
 #: Config.in:395
@@ -1056,6 +1110,15 @@ msgid ""
 "           you can choose it. It should *not* exist on the system, and it\n"
 "           is removed before entering chroot.\n"
 msgstr ""
+"    config    LGROUP\n"
+"        string \"Grupo de usuário(a) para os capítulos 4, 5 e 6 (não\n"
+"                 deveria existir)\"\n"
+"        default    LUSER\n"
+"        help\n"
+"           Esse é o grupo principal do(a) usuário(a) temporário(a)\n"
+"           criado(a) no capítulo 4. No livro, o nome de grupo é \"lfs\",\n"
+"           mas no jhalfs você consegue escolhê-lo. Ele *não* deveria\n"
+"           existir no sistema e é removido antes de entrar no chroot.\n"
 
 #. type: Plain text
 #: Config.in:399
@@ -1065,12 +1128,15 @@ msgid ""
 "        string\n"
 "        default    \"/home\"\n"
 msgstr ""
+"    config    LHOME\n"
+"        string\n"
+"        default    \"/home\"\n"
 
 #. type: Plain text
 #: Config.in:401
 #, no-wrap
 msgid "    #--- End Set User Account\n"
-msgstr ""
+msgstr "    #--- Fim Configurar Conta de Usuário(a)\n"
 
 #. type: Plain text
 #: Config.in:410
@@ -1085,6 +1151,15 @@ msgid ""
 "            #   here, so ensure this does not conflict with the jhalfs\n"
 "            #   source directory.\n"
 msgstr ""
+"    config BUILDDIR\n"
+"        string \"Diretório da Construção\"\n"
+"        default \"/mnt/build_dir\"\n"
+"        help\n"
+"            #-- O diretório onde o sistema criado estará localizado.\n"
+"            #   OBSERVAÇÃO: Um diretório de trabalho chamado jhalfs "
+"será\n"
+"            #   criado aqui, de modo que certifique-se de que esse não\n"
+"            #   conflite com o diretório do fonte do jhalfs.\n"
 
 #. type: Plain text
 #: Config.in:419
@@ -1101,6 +1176,17 @@ msgid ""
 "            #   first and if necessary retrieves them from the 'net.\n"
 "            #   Files will be transferred to $BUILDDIR/sources.\n"
 msgstr ""
+"    config    GETPKG\n"
+"        bool \"Recuperar arquivos fonte\"\n"
+"        default n\n"
+"        help\n"
+"            #-- Baixar todos os pacotes e remendos exigidos pelo livro\n"
+"            #   selecionado.\n"
+"            #   OBSERVAÇÃO: Procura primeiro os arquivos no arquivamento\n"
+"            #   local definido por SRC_ARCHIVE e, se necessário, "
+"recupera-os\n"
+"            #   a partir da Internet. Os arquivos serão transferidos para\n"
+"            #   $BUILDDIR/sources.\n"
 
 #. type: Plain text
 #: Config.in:428
@@ -1115,6 +1201,16 @@ msgid ""
 "            #   Any missing file will be downloaded and archived here,\n"
 "            #   if the user has the right privileges.\n"
 msgstr ""
+"    config SRC_ARCHIVE\n"
+"        string \"Diretório do Arquivamento de Pacotes\"\n"
+"        default \"$SRC_ARCHIVE\"\n"
+"        depends on GETPKG\n"
+"        help\n"
+"            #-- Um arquivamento local para pacotes/arquivos (não\n"
+"            #   $BUILDDIR/sources). Qualquer arquivo ausente será baixado "
+"e\n"
+"            #   arquivado aqui, se o(a) usuário(a) tiver os privilégios\n"
+"            #   corretos.\n"
 
 #. type: Plain text
 #: Config.in:437
@@ -1129,6 +1225,15 @@ msgid ""
 "           to and not including \"/gnu\", and not including https://\n"
 "           Example: ftp.nluug.nl/pub\n"
 msgstr ""
+"    config GNU_REPLACE\n"
+"        string \"Substituto para ftp.gnu.org\"\n"
+"        default \"ftp.gnu.org\"\n"
+"        depends on GETPKG\n"
+"        help\n"
+"           Nome de um espelho para ftp.gnu.org. Isso deveria ser a URL até "
+"e\n"
+"           não incluindo \"/gnu\"; e não incluindo https://\n"
+"           Exemplo: ftp.nluug.nl/pub\n"
 
 #. type: Plain text
 #: Config.in:446
@@ -1143,6 +1248,14 @@ msgid ""
 "            #   with a 'connection refused' error. This can happen on\n"
 "            #   servers that are overloaded.\n"
 msgstr ""
+"    config RETRYSRCDOWNLOAD\n"
+"        bool \"Retentar na falha 'conexão recusada'\"\n"
+"        default n\n"
+"        depends on GETPKG\n"
+"        help\n"
+"            #-- Tentar baixar novamente um pacote fonte se falhar com um\n"
+"            #   erro de 'conexão recusada'. Isso pode acontecer em\n"
+"            #   servidores que estejam sobrecarregados.\n"
 
 #. type: Plain text
 #: Config.in:453
@@ -1155,6 +1268,12 @@ msgid ""
 "        help\n"
 "            #-- Number of times to retry a failed download.\n"
 msgstr ""
+"    config RETRYDOWNLOADCNT\n"
+"        int \"Número de retentativas nas falhas de transferência\"\n"
+"        default 20\n"
+"        depends on GETPKG\n"
+"        help\n"
+"            #-- Número de vezes a se retentar uma transferência falha.\n"
 
 #. type: Plain text
 #: Config.in:461
@@ -1168,6 +1287,13 @@ msgid ""
 "            #-- Number of seconds to wait for a download to start before\n"
 "            #   timing out.\n"
 msgstr ""
+"    config DOWNLOADTIMEOUT\n"
+"        int \"tempo limite da transferência (em segundos)\"\n"
+"        default 30\n"
+"        depends on GETPKG\n"
+"        help\n"
+"            #-- Número de segundos a se esperar para uma transferência\n"
+"            #   iniciar antes do tempo limite.\n"
 
 #. type: Plain text
 #: Config.in:467
@@ -1179,6 +1305,13 @@ msgid ""
 "        help\n"
 "            #-- Automatically run the makefile once it has been created\n"
 msgstr ""
+"    config    RUNMAKE\n"
+"        bool    \"Executar o makefile\"\n"
+"        default n\n"
+"        help\n"
+"            #-- Executar automaticamente o makefile tão logo ele tenha "
+"sido\n"
+"            #   criado\n"
 
 #. type: Plain text
 #: Config.in:475
@@ -1192,11 +1325,20 @@ msgid ""
 "            #   The directory is cleaned only if it was populated by a\n"
 "            #   previous JHALFS run.\n"
 msgstr ""
+"    config    CLEAN\n"
+"        bool    \"Reconstruir arquivos\"\n"
+"        default    n\n"
+"        help\n"
+"            #-- Limpar o diretório da construção antes de realizar "
+"qualquer\n"
+"            #   outra tarefa. O diretório será limpo somente se foi "
+"povoado\n"
+"            #   por uma execução anterior do JHALFS.\n"
 
 #. type: Plain text
 #: Config.in:478
 msgid "#--- End General Settings endmenu"
-msgstr ""
+msgstr "#--- Fim Configurações Gerais endmenu"
 
 #. type: Plain text
 #: Config.in:481
