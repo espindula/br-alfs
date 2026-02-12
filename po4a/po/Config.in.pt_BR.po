@@ -1343,7 +1343,7 @@ msgstr "#--- Fim Configurações Gerais endmenu"
 #. type: Plain text
 #: Config.in:481
 msgid "menu \"Build Settings\" depends on !BOOK_BLFS"
-msgstr ""
+msgstr "menu \"Configurações da Construção\" depends on !BOOK_BLFS"
 
 #. type: Plain text
 #: Config.in:500
@@ -1375,6 +1375,28 @@ msgid ""
 "number\n"
 "              of cores, defined below.\n"
 msgstr ""
+"    #--- Paralelismo\n"
+"    menu \"Configurações de paralelismo\"\n"
+"    if HAVE_NPROC\n"
+"        config ALL_CORES\n"
+"        bool \"Usar todos os núcleos\"\n"
+"        default y\n"
+"        help\n"
+"              Se você responder y, MAKEFLAGS será configurada como\n"
+"              \"-j$(nproc)\" no início de cada conjunto de comandos\n"
+"              sequenciados de pacote e as instruções do livro não serão\n"
+"              mudadas de outra forma. Isso executará os conjuntos de\n"
+"              comandos sequenciados com as mesmas configurações que as do\n"
+"              livro desde a versão r12.0-87 incluída. Antes dessa "
+"versão,\n"
+"              isso executaria as construções com todos os núcleos, mas\n"
+"              algumas suítes de teste ainda poderiam ser executadas\n"
+"              sequencialmente. Você será solicitado(a) a usar um conjunto\n"
+"              de CPUs, de modo que o número de tarefas ainda possa ser\n"
+"              limitado dessa maneira (útil para medir valores de UPC em\n"
+"              -j4, por exemplo). Se você responder n, então jhalfs\n"
+"              retornará para um número estático de núcleos, definido\n"
+"              abaixo.\n"
 
 #. type: Plain text
 #: Config.in:514
@@ -1396,6 +1418,21 @@ msgid ""
 "                 If not sure, keep the default.\n"
 "        endif\n"
 msgstr ""
+"        if ALL_CORES && HAVE_CGROUP\n"
+"            config CPUSET\n"
+"            string \"Conjunto de CPUs a usar, ou 'all' para todas as CPUs\"\n"
+"            default \"all\"\n"
+"            help\n"
+"                 Veja-se \"Formato de lista\" em cpuset(7). A escolha de\n"
+"                 CPUs depende da topologia de teus processadores. Às "
+"vezes,\n"
+"                 dois hyperthreads no mesmo núcleo são numerados\n"
+"                 consecutivamente. Por exemplo, para usar todos os núcleos\n"
+"                 e nenhum hyperthreading em um Haswell, use \"0,2,4,6\".\n"
+"                 Outras marcas podem ter uma topologia diferente e podem\n"
+"                 exigir, por ex. \"0-3\" para usar os primeiros 4 núcleos.\n"
+"                 Se não tiver certeza, mantenha o padrão.\n"
+"        endif\n"
 
 #. type: Plain text
 #: Config.in:521
@@ -1408,6 +1445,12 @@ msgid ""
 "        default n\n"
 "    endif\n"
 msgstr ""
+"    endif # HAVE_NPROC\n"
+"    if !HAVE_NPROC\n"
+"        config ALL_CORES\n"
+"        bool\n"
+"        default n\n"
+"    endif\n"
 
 #. type: Plain text
 #: Config.in:529
@@ -1421,6 +1464,13 @@ msgid ""
 "            #-- The usual recommandation is (number of CPU cores)+1\n"
 "            #   Do not set for meaningful SBU calculations.\n"
 msgstr ""
+"    config    N_PARALLEL\n"
+"        int \"Número de tarefas paralelas `make'\"\n"
+"        depends on !ALL_CORES\n"
+"        default 1\n"
+"        help\n"
+"            #-- A recomendação usual é (número de núcleos da CPU)+1\n"
+"            #   Não configurar para cálculos significativos de UPC.\n"
 
 #. type: Plain text
 #: Config.in:537
@@ -1434,6 +1484,15 @@ msgid ""
 "           #   get a valid SBU value.\n"
 "    endmenu # parallelism\n"
 msgstr ""
+"    config    REALSBU\n"
+"        bool    \"Construir Binutils passagem 1 sem paralelismo (UPC "
+"Real)\"\n"
+"        default    n\n"
+"        help\n"
+"           #-- Usar -j1 na invocação do make para Binutils passagem 1 "
+"para\n"
+"           #   pbter um valor válido de UPC.\n"
+"    endmenu # parallelism\n"
 
 #. type: Plain text
 #: Config.in:553
@@ -1455,6 +1514,21 @@ msgid ""
 "            #  out. If you select 'n' here, the commented test instructions\n"
 "            #  do not stop on test suite failures.\n"
 msgstr ""
+"    #--- Suítes de Teste\n"
+"    config    CONFIG_TESTS\n"
+"        bool    \"Executar suítes de teste\"\n"
+"        default    y\n"
+"        help\n"
+"            #-- Executar suítes de teste\n"
+"            #  Se você selecionar 'y' aqui:\n"
+"            #  Você terá que selecionar entre:\n"
+"            #  - Somente suítes de teste críticas do sistema final\n"
+"            #  - Todas as suítes de teste do sistema final\n"
+"            #\n"
+"	     #  Observe que, em qualquer caso, todas as instruções de teste\n"
+"	     #  serão geradas. Aqueles que não forem desejados serão\n"
+"	     #  comentados. Se você selecionar 'n' aqui, as instruções de teste\n"
+"	     #  comentadas não param nas falhas da suíte de teste.\n"
 
 #. type: Plain text
 #: Config.in:558
@@ -1465,6 +1539,10 @@ msgid ""
 "        prompt    \"Tests level\"\n"
 "        default    TST_1\n"
 msgstr ""
+"    choice\n"
+"        depends on    CONFIG_TESTS\n"
+"        prompt    \"Nível dos testes\"\n"
+"        default    TST_1\n"
 
 #. type: Plain text
 #: Config.in:566
@@ -1478,6 +1556,13 @@ msgid ""
 "                # testsuites for final system. The others are commented\n"
 "                # out.\n"
 msgstr ""
+"        config  TST_1\n"
+"            bool    \"Somente suítes de teste críticas do sistema final\"\n"
+"            help\n"
+"                #-- Testes críticos:\n"
+"                # Somente suítes de teste da Glibc, Binutils, GMP, MPFR, "
+"MPC e\n"
+"                # GCC para o sistema final. As outras estarão comentadas.\n"
 
 #. type: Plain text
 #: Config.in:573
@@ -1490,6 +1575,12 @@ msgid ""
 "                # Test instructions for the temporary tools (if available)\n"
 "                # are commented out.\n"
 msgstr ""
+"        config    TST_2\n"
+"            bool    \"Todas as suítes de teste do sistema final\"\n"
+"            help\n"
+"                #-- Todas as suítes de teste do sistema final:\n"
+"		 # As instruções de teste para as ferramentas temporárias (se\n"
+"		 # disponíveis) estarão comentadas.\n"
 
 #. type: Plain text
 #: Config.in:582
@@ -1502,6 +1593,12 @@ msgid ""
 "        default    \"2\"    if TST_2\n"
 "    #--- End Test Suites\n"
 msgstr ""
+"    config    TEST\n"
+"        int\n"
+"        default    \"0\"    if !CONFIG_TESTS\n"
+"        default    \"1\"    if TST_1\n"
+"        default    \"2\"    if TST_2\n"
+"    #--- Fim Suítes de Teste\n"
 
 #. type: Plain text
 #: Config.in:604
@@ -1530,6 +1627,32 @@ msgid ""
 "            no use if you are not an editor of the book.\n"
 "    #--- End Test mismatch\n"
 msgstr ""
+"    #--- Manter diretórios no capítulo oito\n"
+"    config KEEPDIR\n"
+"        bool     \"Manter diretórios da construção no capítulo 8\"\n"
+"        default n\n"
+"        help\n"
+"	     Se você marcar essa opção, os diretórios de construção não\n"
+"	     serão removidos depois da instalação dos pacotes no capítulo 8.\n"
+"	     Isso é para poder depurar testes que falharam ou outras falhas\n"
+"	     não fatais. Mas isso consome muito espaço em disco.\n"
+"    #--- Fim Manter diretórios no capítulo oito\n"
+"    #\n"
+"    #--- Testar descorrespondência entre versão do nome do diretório e a "
+"versão\n"
+"    #--- do pacote\n"
+"    config TEST_MISMATCH\n"
+"	bool     \"Testar descorrespondência entre a versão do pacote e o nome\n"
+"                  do diretório\"\n"
+"        default y\n"
+"        help\n"
+" 	     Se você marcar essa opção, a versão do nome do diretório "
+"extraído\n"
+"	     será comparada com a versão do pacote e uma incompatibilidade\n"
+"	     abortará a construção. Isso quase é de nenhum uso se você não "
+"for\n"
+"	     um(a) editor(a) do livro.\n"
+"    #--- Fim Testar descorrespondência\n"
 
 #. type: Plain text
 #: Config.in:634
@@ -1565,6 +1688,34 @@ msgid ""
 "        prompt \"Package management style\"\n"
 "        default PKG_PACK\n"
 msgstr ""
+"    #--- Gerenciamento de Pacotes\n"
+"    config  PKGMNGT\n"
+"        bool    \"Gerenciamento de pacotes\"\n"
+"        depends on BOOK_LFS || BOOK_LFS_SYSD\n"
+"        default n\n"
+"        help\n"
+"            #-- Usar gerenciamento de pacotes\n"
+"            #\n"
+"            #  Se configurado, você terá que escolher entre dois estilos "
+"de\n"
+"	     #  gerenciamento de pacotes:\n"
+"            #  - Construir e instalar:\n"
+"	     #    os pacotes na fase final serão construídos em	um diretório\n"
+"	     #    separado, PKG_DEST. Vocé deveria fornecer uma função do bash\n"
+"	     #    para empacotar e instalar o pacote.\n"
+"            #  - Precarregar uma biblioteca antes de instalar:\n"
+"	     #    Executar as instruções de instalação dentro de um comando\n"
+"	     #    envolucrador, que monitore os arquivos instalados.\n"
+"            #\n"
+"	     #  Além disso, você tem de fornecer as instruções para construir "
+"o\n"
+"	     #  gerenciador de pacotes durante a fase das ferramentas\n"
+"	     #  temporárias, na forma de uma sect1 do livro idêntica a um\n"
+"	     #  pacote sect1. Veja-se README.PACKAGE_MANAGEMENT.\n"
+"    choice\n"
+"        depends on PKGMNGT\n"
+"        prompt \"Estilo do gerenciamento de pacotes\"\n"
+"        default PKG_PACK\n"
 
 #. type: Plain text
 #: Config.in:637
@@ -1573,6 +1724,8 @@ msgid ""
 "        config PKG_PACK\n"
 "            bool \"Build and pack (pacman or dpkg style)\"\n"
 msgstr ""
+"        config PKG_PACK\n"
+"            bool \"Construir e empacotar (estilo pacman ou dpkg)\"\n"
 
 #. type: Plain text
 #: Config.in:641
@@ -1582,6 +1735,10 @@ msgid ""
 "            bool \"Preload a library before installing (porg style)\"\n"
 "    endchoice\n"
 msgstr ""
+"        config LIB_LOAD\n"
+"            bool \"Precarregar uma biblioteca antes de instalar (estilo "
+"porg)\"\n"
+"    endchoice\n"
 
 #. type: Plain text
 #: Config.in:647
@@ -1593,6 +1750,11 @@ msgid ""
 "        default n if PKG_PACK\n"
 "    #--- End package management\n"
 msgstr ""
+"    config WRAP_INSTALL\n"
+"        bool\n"
+"        default y if LIB_LOAD\n"
+"        default n if PKG_PACK\n"
+"    #--- Fim gerenciamento de pacotes\n"
 
 #. type: Plain text
 #: Config.in:655
@@ -1606,12 +1768,20 @@ msgid ""
 "            #-- Select this if you want to create logs of the files\n"
 "            #   installed by each package on the final system.\n"
 msgstr ""
+"    #--- Registros dos arquivos instalados\n"
+"    config    INSTALL_LOG\n"
+"        bool    \"Criar um registro dos arquivos instalados para cada "
+"pacote\"\n"
+"        default    n\n"
+"        help\n"
+"	    #-- Selecione isso se você quiser criar registros dos arquivos\n"
+"	    #   instalados por cada pacote no sistema final.\n"
 
 #. type: Plain text
 #: Config.in:657
 #, no-wrap
 msgid "    #--- End Installed files logs\n"
-msgstr ""
+msgstr "    #--- Fim Registros dos arquivos instalados\n"
 
 #. type: Plain text
 #: Config.in:661
@@ -1621,6 +1791,9 @@ msgid ""
 "        bool \"Strip Installed Binaries/Libraries\"\n"
 "        default n\n"
 msgstr ""
+"    config    STRIP\n"
+"        bool \"Despojar Binários/Bibliotecas Instalados(as)\"\n"
+"        default n\n"
 
 #. type: Plain text
 #: Config.in:668
@@ -1633,11 +1806,18 @@ msgid ""
 "            #-- Do not use the progress bar routine. On slower machines\n"
 "            #   this function consumes precious CPU cycles.\n"
 msgstr ""
+"    config    NO_PROGRESS_BAR\n"
+"        bool \"NÃO usar/exibir barra de progresso\"\n"
+"        default n\n"
+"        help\n"
+"	    #-- Não usar a rotina de barra de progresso. Em máquinas mais "
+"lentas,\n"
+"	    #   essa função consome preciosos ciclios de UCP.\n"
 
 #. type: Plain text
 #: Config.in:671
 msgid "#--- End Build Settings endmenu"
-msgstr ""
+msgstr "#--- Fim Configurações da Construção endmenu"
 
 #. type: Plain text
 #: Config.in:674
@@ -1646,6 +1826,8 @@ msgid ""
 "menu \"System configuration\"\n"
 "    depends on !BOOK_BLFS\n"
 msgstr ""
+"menu \"Configuração do sistema\"\n"
+"    depends on !BOOK_BLFS\n"
 
 #. type: Plain text
 #: Config.in:682
@@ -1659,6 +1841,13 @@ msgid ""
 "            #-- Select this if you have an fstab file with entries\n"
 "            #   for the target system\n"
 msgstr ""
+"    #--- FSTAB\n"
+"    config    HAVE_FSTAB\n"
+"        bool    \"Usar um arquivo personalizado fstab\"\n"
+"        default    n\n"
+"        help\n"
+"	    #-- Selecione isso se você tiver um arquivo fstab com entradas para\n"
+"           #   o sistema alvo\n"
 
 #. type: Plain text
 #: Config.in:690
@@ -1673,6 +1862,13 @@ msgid ""
 "created)\n"
 "    #--- End FSTAB\n"
 msgstr ""
+"    config    FSTAB\n"
+"        string    \"Arquivo fstab (opcional)\"\n"
+"        default    \"***EDIT ME***\"\n"
+"        depends on HAVE_FSTAB\n"
+"        help\n"
+"	    #-- O local do arquivo fstab (se vazio, um modelo será criado)\n"
+"    #--- Fim FSTAB\n"
 
 #. type: Plain text
 #: Config.in:701
@@ -1689,6 +1885,17 @@ msgid ""
 "            #   file. It will be copied to the 'sources' directory and\n"
 "            #   renamed kernel-config\n"
 msgstr ""
+"    #--- Núcleo\n"
+"    config    CONFIG_BUILD_KERNEL\n"
+"        bool    \"Construir o núcleo\"\n"
+"        default    n\n"
+"        help\n"
+"            #-- Selecione essa opção se você desejar construir o "
+"núcleo.\n"
+"            #\n"
+"	     #   Você será solicitado(a) a fornecer o caminho completo para o\n"
+"	     #   arquivo .config. Ele será copiado para o diretório 'sources' e\n"
+"	     #   renomeado como kernel-config\n"
 
 #. type: Plain text
 #: Config.in:718
@@ -1711,6 +1918,26 @@ msgid ""
 "            #   restart the build.\n"
 "    #--- End Kernel\n"
 msgstr ""
+"    config    CONFIG\n"
+"        string    \"Arquivo de configuração do núcleo\"\n"
+"        default    \"***EDIT ME***\"\n"
+"        depends on CONFIG_BUILD_KERNEL\n"
+"        help\n"
+"	     #-- Caminho completamente qualificado para um arquivo de "
+"configuração\n"
+"	     #   do núcleo\n"
+"            #   O arquivo de configuração será copiado para "
+"${BUILD_DIR}/sources\n"
+"            #   e renomeado para 'kernel-config'\n"
+"            #\n"
+"	     #   Importante: se o arquivo de configuração estiver desatualizado\n"
+"	     #   (opção ausente), a construção do kernel atingirá o tempo "
+"limite\n"
+"	     #   em vez de esperar indefinidamente por uma entrada. Isso gerará o\n"
+"	     #   erro 124. Nesse caso, atualize teu arquivo de configuração,\n"
+"	     #   copie-o para $BUILD_DIR/sources/kernel-config e reinicie a\n"
+"	     #   construção.\n"
+"    #--- Fim Núcleo\n"
 
 #. type: Plain text
 #: Config.in:725
@@ -1723,6 +1950,13 @@ msgid ""
 "        help\n"
 "            #-- Install the optional non wide character ncurses5 library\n"
 msgstr ""
+"    config    NCURSES5\n"
+"        bool \"Instalar ncurses de caracteres não largos\"\n"
+"        default n\n"
+"        depends on BOOK_LFS || BOOK_LFS_SYSD\n"
+"        help\n"
+"            #-- Instalar a biblioteca opcional de caracteres não largos "
+"ncurses5\n"
 
 #. type: Plain text
 #: Config.in:732
@@ -1735,6 +1969,12 @@ msgid ""
 "            #-- The timezone as output by tzselect\n"
 "            #   This will be copied to /etc/localtime\n"
 msgstr ""
+"    config    TIMEZONE\n"
+"        string \"TimeZone\"\n"
+"        default \"GMT\"\n"
+"        help\n"
+"            #-- O fuso horário conforme saída gerada pelo tzselect\n"
+"            #   Isso será copiado para /etc/localtime\n"
 
 #. type: Plain text
 #: Config.in:740
@@ -1750,6 +1990,15 @@ msgid ""
 "            #   for values (or the file localedata/SUPPORTED in glibc "
 "tarball)\n"
 msgstr ""
+"    config    LANG\n"
+"        string \"Language\"\n"
+"        default \"$LANG\"\n"
+"        help\n"
+"            #-- Variável LANG configurada no /etc/profile\n"
+"            #   Veja-se "
+"http://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED\n"
+"	     #   para valores (ou o arquivo localedata/SUPPORTED no tarball da\n"
+"	     #   glibc)\n"
 
 #. type: Plain text
 #: Config.in:750
@@ -1765,6 +2014,16 @@ msgid ""
 "            #   together with the locale associated with the\n"
 "            #   LANG you have chosen, if not in the minimal set.\n"
 msgstr ""
+"    config  FULL_LOCALE\n"
+"        bool \"Instalar o conjunto completo das localidades\"\n"
+"        default n\n"
+"        help\n"
+"	     #-- Se configurada como y, o conjunto completo de localidades\n"
+"	     #   suportadas será instalado. Caso contrário, somente o conjunto\n"
+"	     #   mínimo necessário para os testes será instalado, juntamente "
+"com\n"
+"	     #   a localidade associada com a LANG que você tiver escolhido, se\n"
+"	     #   não no conjunto mínimo.\n"
 
 #. type: Plain text
 #: Config.in:757
@@ -1777,6 +2036,12 @@ msgid ""
 "        help\n"
 "            #-- Page definition for groff: letter or A4\n"
 msgstr ""
+"    #--- Página do groff\n"
+"    choice\n"
+"        prompt    \"Tamanho da página do groff\"\n"
+"        default    PAGE_LETTER\n"
+"        help\n"
+"            #-- Definição de página para groff: letter ou A4\n"
 
 #. type: Plain text
 #: Config.in:760
@@ -1785,6 +2050,8 @@ msgid ""
 "        config    PAGE_LETTER\n"
 "            bool    \"letter\"\n"
 msgstr ""
+"        config    PAGE_LETTER\n"
+"            bool    \"letter\"\n"
 
 #. type: Plain text
 #: Config.in:764
@@ -1794,6 +2061,9 @@ msgid ""
 "            bool    \"A4\"\n"
 "    endchoice\n"
 msgstr ""
+"        config    PAGE_A4\n"
+"            bool    \"A4\"\n"
+"    endchoice\n"
 
 #. type: Plain text
 #: Config.in:770
@@ -1805,6 +2075,11 @@ msgid ""
 "        default    \"A4\"        if PAGE_A4\n"
 "    #--- End Groff page\n"
 msgstr ""
+"    config    PAGE\n"
+"        string\n"
+"        default    \"letter\"    if PAGE_LETTER\n"
+"        default    \"A4\"        if PAGE_A4\n"
+"    #--- Fim página do groff\n"
 
 #. type: Plain text
 #: Config.in:782
@@ -1824,6 +2099,18 @@ msgid ""
 "          instead of address on the private network (see RFC 6762 and\n"
 "          https://www.howtogeek.com/167190/).\n"
 msgstr ""
+"    config    HOSTNAME\n"
+"        string \"Nome do dispositivo (veja-se ajuda)\"\n"
+"        default \"**EDITME**\"\n"
+"        help\n"
+"	 # Se você estiver em uma rede pública de intercomunicação, use o nome\n"
+"	 # de dispositivo fornecido pela tua instituição ou empresa, etc. Se\n"
+"	 # tua rede de intercomunicação for privada, ou seja, atrás de um\n"
+"	 # firewall, como uma caixa para se conectar ao teu ISP, você pode\n"
+"	 # escolher o que desejar. Combinado com o nome de domínio \"local\",\n"
+"	 # você tem a possibilidade de acessar teu computador pelo nome em vez\n"
+"	 # de endereço na rede privada de intercomunicação (veja-se RFC 6762 e\n"
+"	 # https://www.howtogeek.com/167190/).\n"
 
 #. type: Plain text
 #: Config.in:800
