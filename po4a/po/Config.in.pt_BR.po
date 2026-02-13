@@ -2135,6 +2135,24 @@ msgid ""
 "              You have to know your network prefix. Then the last figure\n"
 "              may be anything you like.\n"
 msgstr ""
+"       menu \"Configuração de rede de intercomunicação\"\n"
+"        config INTERFACE\n"
+"            string \"Nome da placa de rede de intercomunicação\"\n"
+"            default \"eth0\"\n"
+"            help\n"
+"	       eth0 é usado na maioria dos casos. Interfaces virtuais podem\n"
+"	       obter outros nomes (por exemplo enp0s3 para a pilha de padrão da\n"
+"	       rede de intercomunicação no qemu). O systemd também pode\n"
+"	       renomear interfaces de rede de intercomunicação de acordo com os\n"
+"	       endereços de barramento delas.\n"
+"        config IP_ADDR\n"
+"            string \"Endereço IP Estático\"\n"
+"            default \"10.0.2.9\"\n"
+"            help\n"
+"	       O padrão aqui é para uma interface virtual no qemu. As redes\n"
+"	       privadas tem endereços no intervalo 10.x.x.x ou 192.168.x.x.\n"
+"	       Você tem de saber o teu prefixo de rede. Então a última figura\n"
+"	       pode ser o que você quiser.\n"
 
 #. type: Plain text
 #: Config.in:836
@@ -2178,6 +2196,46 @@ msgid ""
 "            default \"8.8.8.8\"\n"
 "    endmenu # Network configuration\n"
 msgstr ""
+"        config GATEWAY\n"
+"            string \"Gateway\"\n"
+"            default \"10.0.2.2\"\n"
+"            help\n"
+"	       Novamente, esse padrão é para uma pilha de rede de\n"
+"	       intercomunicação do qemu. Normalmente, o gateway é o endereço "
+"do\n"
+"	       teu firewall.\n"
+"        config PREFIX\n"
+"            string \"Prefixo de subrede\"\n"
+"            default \"24\"\n"
+"            help\n"
+"	       Novamente, esse padrão é para uma pilha de rede de\n"
+"	       intercomunicação do qemu, mas também é o mais usado em redes\n"
+"	       privadas de intercomunicação.\n"
+"        config BROADCAST\n"
+"            string \"Endereço de difusão\"\n"
+"            default \"10.0.2.255\"\n"
+"        config DOMAIN\n"
+"            string \"Nome de domínio (veja-se ajuda)\"\n"
+"            default \"local\"\n"
+"            help\n"
+"               Nome de Domínio:\n"
+"	        Nomes de domínio são registrados, de modo que, se teu\n"
+"	        computador estiver em uma rede pública de intercomunicação,\n"
+"	        você não conseguirá usar qualquer nome que quiser. Em uma rede\n"
+"	        pública de intercomunicação, você deveria ter recebido um nome\n"
+"	        de domínio pela tua empresa, instituição, entre outras. Se tua\n"
+"	        rede de intercomunicação for realmente privada, ou seja, atrás\n"
+"	        de um firewall, como uma caixa para conexão com um ISP, você\n"
+"	        consegue escolher qualquer domínio que queira. Você também\n"
+"	        consegue optar por \"local\", veja-se RFC 6762, ou\n"
+"	        \"algumacoisa.teste\", veja-se RFC 6761.\n"
+"        config DNS1\n"
+"            string \"Servidor primário de nomes\"\n"
+"            default \"10.0.2.3\"\n"
+"        config DNS2\n"
+"            string \"Servidor secundário de nomes\"\n"
+"            default \"8.8.8.8\"\n"
+"    endmenu # Network configuration\n"
 
 #. type: Plain text
 #: Config.in:863
@@ -2211,17 +2269,47 @@ msgid ""
 "                noisy too.\n"
 "    endmenu # Console configuration\n"
 msgstr ""
+"    menu \"Configuração do console\"\n"
+"        config FONT\n"
+"            string \"Fonte do console\"\n"
+"            default \"lat0-16\"\n"
+"            help\n"
+"	         O modo Unicode é configurado por padrão. A configuração de\n"
+"	         FONT_MAP, FONT_UNIMAP, entre outras, precisa ser feita\n"
+"	         manualmente.\n"
+"        config KEYMAP\n"
+"            string \"Nome do teclado\"\n"
+"            default \"us\"\n"
+"        config LOCAL\n"
+"            boolean \"Relógio do hardware está configurado para hora "
+"local\"\n"
+"            default n\n"
+"            help\n"
+"	         Se o relógio do harware estiver configurado para hora local,\n"
+"	         responder sim.\n"
+"                Se ele estiver configurado para UTC, responder não.\n"
+"        config LOG_LEVEL\n"
+"            string \"Nível padrão do registro (1-8)\"\n"
+"            default \"4\"\n"
+"            depends on BOOK_LFS\n"
+"            help\n"
+"	         Isso pode ser mudado usando-se dmesg. 1 significa \"sem\n"
+"	         mensagem\", 8 mostra todas as mensagens enviadas pelo núcleo,\n"
+"	         o que é muito barulhento. O padrão no momento da "
+"inicialização\n"
+"	         é 7, o que também é bastante barulhento.\n"
+"    endmenu # Configuração do console\n"
 
 #. type: Plain text
 #: Config.in:865
 #, no-wrap
 msgid "endmenu        #--- System configuration\n"
-msgstr ""
+msgstr "endmenu        #--- Configuração do sistema\n"
 
 #. type: Plain text
 #: Config.in:868
 msgid "menu \"Advanced Features\" depends on !BOOK_BLFS"
-msgstr ""
+msgstr "menu \"Recursos Avançados\" depends on !BOOK_BLFS"
 
 #. type: Plain text
 #: Config.in:883
@@ -2243,6 +2331,22 @@ msgid ""
 "    menu    \"Optimization settings\"\n"
 "        depends on CONFIG_OPTIMIZE\n"
 msgstr ""
+"    #--- Otimizações\n"
+"    config    CONFIG_OPTIMIZE\n"
+"        bool    \"Otimização\"\n"
+"        default    n\n"
+"        help\n"
+"	     #   Abre um menu para várias configurações de otimização:\n"
+"	     #   Os sinalizadores de otimização reais DEVEM ser definidos em\n"
+"	     #   ./optimize/* antes de ativar-se essa opção.\n"
+"            #\n"
+"	     #   AVISO: O uso de otimizações de construção pode causar "
+"problemas\n"
+"	     #   de construção. Se o sistema não funcionar conforme o esperado,\n"
+"	     #   por favor, reconstrua sem otimizações antes de solicitar\n"
+"	     #   suporte.\n"
+"    menu    \"Configurações de otimização\"\n"
+"        depends on CONFIG_OPTIMIZE\n"
 
 #. type: Plain text
 #: Config.in:889
@@ -2254,6 +2358,12 @@ msgid ""
 "        help\n"
 "            #-- Optimization values are set in optimize/* files\n"
 msgstr ""
+"    choice\n"
+"        prompt \"Nível de otimização\"\n"
+"        default OPT_1\n"
+"        help\n"
+"            #-- Valores de otimização são configurados em arquivos "
+"optimize/*\n"
 
 #. type: Plain text
 #: Config.in:892
@@ -2262,6 +2372,8 @@ msgid ""
 "        config    OPT_1\n"
 "            bool    \"Final system only\"\n"
 msgstr ""
+"        config    OPT_1\n"
+"            bool    \"Somente sistema final\"\n"
 
 #. type: Plain text
 #: Config.in:895
@@ -2270,6 +2382,8 @@ msgid ""
 "        config    OPT_2\n"
 "            bool    \"Both temp tools and final system\"\n"
 msgstr ""
+"        config    OPT_2\n"
+"            bool    \"Ambos, ferramentas temporárias e sistema final\"\n"
 
 #. type: Plain text
 #: Config.in:904
@@ -2282,12 +2396,18 @@ msgid ""
 "        default    \"1\"    if OPT_1\n"
 "        default    \"2\"    if OPT_2\n"
 msgstr ""
+"    endmenu # Configurações de otimização\n"
+"    config    OPTIMIZE\n"
+"        int\n"
+"        default    \"0\"    if !CONFIG_OPTIMIZE\n"
+"        default    \"1\"    if OPT_1\n"
+"        default    \"2\"    if OPT_2\n"
 
 #. type: Plain text
 #: Config.in:906
 #, no-wrap
 msgid "    #--- End Optimizations\n"
-msgstr ""
+msgstr "    #--- End Otimizações\n"
 
 #. type: Plain text
 #: Config.in:910
@@ -2297,6 +2417,9 @@ msgid ""
 "        bool \"Create SBU and disk usage report\"\n"
 "        default y\n"
 msgstr ""
+"    config    REPORT\n"
+"        bool \"Criar informe de UPC e de uso de disco\"\n"
+"        default y\n"
 
 #. type: Plain text
 #: Config.in:918
@@ -2310,6 +2433,13 @@ msgid ""
 "            Save the state of jhalfs after finishing building the temporary\n"
 "            system\n"
 msgstr ""
+"    config    SAVE_CH5\n"
+"        bool \"Salvar trabalho do sistema temporário\"\n"
+"        depends on BOOK_LFS || BOOK_LFS_SYSD\n"
+"        default n\n"
+"        help\n"
+"	     Salvar o estado do jhalfs depois de finalizar construção do\n"
+"	     sistema temporário\n"
 
 #. type: Plain text
 #: Config.in:922
@@ -2319,6 +2449,9 @@ msgid ""
 "            saved when chapter 7 is finished. It'll be in a .tar\n"
 "            file in the $BUILD_DIR/jhalfs directory\n"
 msgstr ""
+"	     se você ticar esse item, o diretório $LFS inteiro será salvo\n"
+"	     quando o capítulo 7 estiver finalizado. Ele estará em um arquivo\n"
+"	     .tar no diretório $BUILD_DIR/jhalfs\n"
 
 #. type: Plain text
 #: Config.in:941
@@ -2344,6 +2477,28 @@ msgid ""
 "./extras/*\n"
 "            #\n"
 msgstr ""
+"    #--- ICA\n"
+"    config    COMPARE\n"
+"        bool \"Executar análise comparativa no estágio final\"\n"
+"        default n\n"
+"        help\n"
+"            #-- Deveria uma análise interativa e comparativa ser "
+"realizada?\n"
+"            #\n"
+"            #   A menos que você esteja familiarizado(a) com ICA, não\n"
+"            #   selecione esse opção\n"
+"            #\n"
+"            #   ICA é uma ferramenta de análise para se comparar uma "
+"construção\n"
+"            #   com a próxima.\n"
+"            #   Construções podem diferir de uma iteração para outra "
+"devido à\n"
+"            #   ordem de construção e essa ferramenta tenta descobrir "
+"essas\n"
+"	     #   diferenças examinando os registros de construção armazenados e\n"
+"            #   os arquivos binários. Os conjuntos de comandos sequenciados "
+"são\n"
+"	     #   bem comentados e podem ser encontrados em extras.\n"
 
 #. type: Plain text
 #: Config.in:947
@@ -2355,6 +2510,11 @@ msgid ""
 "        range    2 5\n"
 "        default    3\n"
 msgstr ""
+"    config    ITERATIONS\n"
+"        int    \"Número de execuções de teste (2,3,4,5)\"    if COMPARE\n"
+"        depends on COMPARE\n"
+"        range    2 5\n"
+"        default    3\n"
 
 #. type: Plain text
 #: Config.in:951
@@ -2364,12 +2524,15 @@ msgid ""
 "        bool\n"
 "        default y if COMPARE\n"
 msgstr ""
+"    config    RUN_ICA\n"
+"        bool\n"
+"        default y if COMPARE\n"
 
 #. type: Plain text
 #: Config.in:953
 #, no-wrap
 msgid "    #--- End ICA\n"
-msgstr ""
+msgstr "    #--- End ICA\n"
 
 #. type: Plain text
 #: Config.in:956
@@ -2378,6 +2541,9 @@ msgid ""
 "    #-- Internal Settings\n"
 "    menu \"Internal Settings (WARNING: for jhalfs developers only)\"\n"
 msgstr ""
+"    #-- Configurações Internas\n"
+"    menu \"Configurações Internas (AVISO: somente para desenvolvedores(as) "
+"do jhalfs)\"\n"
 
 #. type: Plain text
 #: Config.in:960
@@ -2387,6 +2553,9 @@ msgid ""
 "            string    \"Scripts root\"\n"
 "            default \"jhalfs\"\n"
 msgstr ""
+"        config    SCRIPT_ROOT\n"
+"            string    \"Raiz dos conjuntos de comandos sequenciados\"\n"
+"            default \"jhalfs\"\n"
 
 #. type: Plain text
 #: Config.in:964
@@ -2396,6 +2565,9 @@ msgid ""
 "            string \"jhalfs directory\"\n"
 "            default \"$BUILDDIR/$SCRIPT_ROOT\"\n"
 msgstr ""
+"        config    JHALFSDIR\n"
+"            string \"Diretório do jhalfs\"\n"
+"            default \"$BUILDDIR/$SCRIPT_ROOT\"\n"
 
 #. type: Plain text
 #: Config.in:968
@@ -2405,6 +2577,10 @@ msgid ""
 "            string \"Build logs directory basename\"\n"
 "            default \"logs\"\n"
 msgstr ""
+"        config    LOGDIRBASE\n"
+"            string \"Nome base do diretório dos registros da "
+"construção\"\n"
+"            default \"logs\"\n"
 
 #. type: Plain text
 #: Config.in:972
@@ -2414,6 +2590,9 @@ msgid ""
 "            string \"Build logs directory\"\n"
 "            default \"$JHALFSDIR/$LOGDIRBASE\"\n"
 msgstr ""
+"        config    LOGDIR\n"
+"            string \"Diretório dos registros da construção\"\n"
+"            default \"$JHALFSDIR/$LOGDIRBASE\"\n"
 
 #. type: Plain text
 #: Config.in:976
@@ -2423,6 +2602,10 @@ msgid ""
 "            string \"Test suites logs directory basename\"\n"
 "            default \"test-logs\"\n"
 msgstr ""
+"        config    TESTLOGDIRBASE\n"
+"            string \"Nome base do diretório dos registros das suítes de "
+"teste\"\n"
+"            default \"test-logs\"\n"
 
 #. type: Plain text
 #: Config.in:980
@@ -2432,6 +2615,9 @@ msgid ""
 "            string \"Test suites logs directory\"\n"
 "            default \"$JHALFSDIR/$TESTLOGDIRBASE\"\n"
 msgstr ""
+"        config    TESTLOGDIR\n"
+"            string \"Diretório dos registros das suítes de teste\"\n"
+"            default \"$JHALFSDIR/$TESTLOGDIRBASE\"\n"
 
 #. type: Plain text
 #: Config.in:984
@@ -2441,6 +2627,10 @@ msgid ""
 "            string \"Installed files logs directory basename\"\n"
 "            default \"installed-files\"\n"
 msgstr ""
+"        config    FILELOGDIRBASE\n"
+"            string \"Nome base do diretório dos registros dos arquivos "
+"instalados\"\n"
+"            default \"installed-files\"\n"
 
 #. type: Plain text
 #: Config.in:988
@@ -2450,6 +2640,9 @@ msgid ""
 "            string \"Installed files logs directory\"\n"
 "            default \"$JHALFSDIR/$FILELOGDIRBASE\"\n"
 msgstr ""
+"        config    FILELOGDIR\n"
+"            string \"Diretório dos registros dos arquivos instalsdos\"\n"
+"            default \"$JHALFSDIR/$FILELOGDIRBASE\"\n"
 
 #. type: Plain text
 #: Config.in:992
@@ -2459,6 +2652,9 @@ msgid ""
 "            string \"ICA logs directory\"\n"
 "            default \"$LOGDIR/ICA\"\n"
 msgstr ""
+"        config    ICALOGDIR\n"
+"            string \"Diretório dos registros da ICA\"\n"
+"            default \"$LOGDIR/ICA\"\n"
 
 #. type: Plain text
 #: Config.in:996
@@ -2468,6 +2664,9 @@ msgid ""
 "            string \"Makefile\"\n"
 "            default \"$JHALFSDIR/Makefile\"\n"
 msgstr ""
+"        config    MKFILE\n"
+"            string \"Makefile\"\n"
+"            default \"$JHALFSDIR/Makefile\"\n"
 
 #. type: Plain text
 #: Config.in:1000
@@ -2477,6 +2676,9 @@ msgid ""
 "            string \"XSL stylesheet\"\n"
 "            default \"lfs.xsl\"\n"
 msgstr ""
+"        config    XSL\n"
+"            string \"Folha de estilo XSL\"\n"
+"            default \"lfs.xsl\"\n"
 
 #. type: Plain text
 #: Config.in:1004
@@ -2486,6 +2688,9 @@ msgid ""
 "            string \"Package contents list\"\n"
 "            default \"unpacked\"\n"
 msgstr ""
+"        config    PKG_LST\n"
+"            string \"Lista do conteúdo do pacote\"\n"
+"            default \"unpacked\"\n"
 
 #. type: Plain text
 #: Config.in:1012
@@ -2500,6 +2705,14 @@ msgid ""
 "                #   \"n\" if you know what you are doing. For a rationale\n"
 "                #   see https://blog.flameeyes.eu/tags/lafiles/\n"
 msgstr ""
+"        config    DEL_LA_FILES\n"
+"            bool \"Remover arquivos .la da libtool\"\n"
+"            default y\n"
+"            help\n"
+"		# Remover arquivos libxxx.la instalados pela libtool. Somente\n"
+"		# configurar para \"n\" se você souber o que está fazendo. Para\n"
+"		# uma justificativa, veja-se\n"
+"		# https://blog.flameeyes.eu/tags/lafiles/\n"
 
 #. type: Plain text
 #: Config.in:1015
@@ -2508,11 +2721,13 @@ msgid ""
 "    #--- End Internal Settings\n"
 "    endmenu\n"
 msgstr ""
+"    #--- End Configurações Internas\n"
+"    endmenu\n"
 
 #. type: Plain text
 #: Config.in:1018
 msgid "#--- End Advanced Features endmenu"
-msgstr ""
+msgstr "#--- End Recursos Avançados endmenu"
 
 #. type: Plain text
 #: Config.in:1032
@@ -2533,3 +2748,21 @@ msgid ""
 "        #   build, and only if you need changing the build scripts order\n"
 "        #   or add a new one.\n"
 msgstr ""
+"config REBUILD_MAKEFILE\n"
+"#    depends on !BOOK_BLFS\n"
+"    bool \"Reconstruir o Makefile (veja-se ajuda)\"\n"
+"    default n\n"
+"    help\n"
+"        #-- Reconstruir o Makefile\n"
+"        #\n"
+"        #-- Essa opção permite reconstruir o Makefile depois de "
+"personalizar\n"
+"	 #   os conjuntos de comandos sequenciados de construção do sistema\n"
+"	 #   base.\n"
+"        #\n"
+"        #   Veja-se LEIAME.PERSONALIZAÇÃO para mais informações acerca "
+"desse\n"
+"	 #   recurso. Observe que você deveria fazer isso depois de configurar\n"
+"	 #   uma construção do jhalfs e somente se precisar mudar a ordem dos\n"
+"	 #   conjuntos de comandos sequenciados de construção ou adicionar um\n"
+"	 #   novo.\n"
